@@ -1,0 +1,201 @@
+<div><app-header></app-header></div>
+
+<div><app-left-panel></app-left-panel></div>
+
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1 class="m-0">Update Leave Type</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <!-- <div class="active tab-pane" id="info"> -->
+                        <form method="post" [formGroup]="editnewleaveType" >
+                            <div class="card card-default">
+                                <!-- <div class="card-header"> -->
+                                    <!-- <h3 class="card-title">
+                                        <strong>New Leave Type</strong>
+                                    </h3> -->
+                                    <div class="card-tools text-right">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                <!-- </div> -->
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="">Name<span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="" placeholder=" Name"
+                                                formControlName="name"
+                                                [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+
+                                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                                <div *ngIf="f.name.errors.required">Name is required
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for="">Type<span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-select" formControlName="type"
+                                                [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                                                <option value="">Select Type</option>
+                                                <option value="Paid">Paid</option>
+                                                <option value="Unpaid">Unpaid</option>
+                                                <option value="On Duty">On Duty</option>
+                                                <option value="Restricted Holiday">Restricted Holiday</option>
+                                            </select>
+                                            <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                                                <div *ngIf="f.type.errors.required"> Type is required
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="">Code</label>
+                                            <input type="text" class="form-control" id="" placeholder="Code"
+                                                formControlName="code">
+                                            <!-- <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                                                <div *ngIf="f.code.errors.required"> Code is required
+                                                </div>
+                                            </div> -->
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <div class="row">
+
+                                                <label for="gender">Unit<span class="text-danger">*</span></label>
+                                                <div class="form-group col-md-6">
+                                                    <input id="Days" type="radio" value="Days" name="unit"
+                                                        formControlName="unit" (change)="changeUnit($event)">
+                                                    <label for="Days">Days</label>
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <input id="Hours" type="radio" value="Hours" name="unit"
+                                                        formControlName="unit" (change)="changeUnit($event)">
+                                                    <label for="Hours">Hours</label>
+                                                </div>
+
+                                                <div *ngIf="f.unit.touched && f.unit.invalid"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="f.unit.errors.required">Unit is required.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <div class="row">
+                                                <label for="gender">Balance based on<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="form-group col-md-6">
+                                                    <input id="fixed_entitlement" type="radio" value="fixed_entitlement"
+                                                        name="balance" formControlName="balance"
+                                                        (change)="changeBalance($event)">
+                                                    <label for="fixed_entitlement">Fixed entitlement</label>
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <input id="leave_grant" type="radio" value="leave_grant"
+                                                        name="balance" formControlName="balance"
+                                                        (change)="changeBalance($event)">
+                                                    <label for="leave_grant">Leave grant</label>
+                                                </div>
+
+                                                <div *ngIf="f.balance.touched && f.balance.invalid"
+                                                    class="alert alert-danger">
+                                                    <div *ngIf="f.balance.errors.required">Balance based is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+
+                                        <div class="form-group col-md-6">
+                                            <div class="row">
+                                                <label for="" class="col-md-12">Validity<span
+                                                        class="text-danger">*</span>
+                                                </label>
+                                                <div class="form-group col-md-6">
+                                                    <input type="date" formControlName="date_from"
+                                                        [(ngModel)]="date_from" class="form-control"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.date_from.errors }"
+                                                        id="inputdate_from" placeholder="date">
+
+                                                    <div *ngIf="submitted && f.date_from.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.date_from.errors.required"> Date is required
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <input type="date" min="{{date_from}}" formControlName="date_to"
+                                                        class="form-control" id="" placeholder="date"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.date_to.errors }">
+
+                                                    <div *ngIf="submitted && f.date_to.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.date_to.errors.required"> Date is required
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="">Reason For Leave
+                                            </label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                formControlName="reason_for_leave"></textarea>
+                                        </div>
+                                        <!-- <div class="container">
+                                            <ul class="nav nav-pills">
+                                                <li class="mr-3">
+                                                    <a href="entitlement.html">Entitlement</a>
+                                                </li>
+                                                <li class="mr-3">
+                                                    <a href="applicable.html">Applicable</a>
+                                                </li>
+                                                <li>
+                                                    <a href="restrictions.html">Restrictions</a>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                        <div class="row">
+                                            <div class="card-body">
+                                                <button type="submit" class="btn btn-primary mb-1" (click)="updateLeave()">Update</button>
+                                                <button type="reset"
+                                                    class="btn border bg-light ml-2 mb-1">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                        <!-- </div> -->
+                    </div>
+                    <!-- <button class="btn btn-primary mb-1" onclick="location.href='leave-type.html';">Add</button>
+                    <button class="btn border ml-2 mb-1" onclick="stepper.next()">Cancel</button> -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div><app-footer></app-footer></div>

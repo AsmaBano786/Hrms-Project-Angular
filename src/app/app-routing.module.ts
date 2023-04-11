@@ -77,16 +77,16 @@ import { AddScheduleViewComponent } from './hr/schedule/add-schedule-view/add-sc
 import { EmpEditApplyLeaveComponent } from './hr/leave/emp-edit-apply-leave/emp-edit-apply-leave.component';
 import { CompanyDetailComponent } from './admin/company-detail/company-detail.component';
 import { CompanyInfoComponent } from './admin/company-info/company-info.component';
-
-
+import { ResetPassComponent } from './Onboaring/reset-pass/reset-pass.component';
+import { NewLeaveTypeComponent } from './hr/leave/new-leave-type/new-leave-type.component';
+import { EditNewLeaveTypeComponent } from './hr/leave/edit-new-leave-type/edit-new-leave-type.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'employee-registration', pathMatch: 'full' },
-
+  { path: '', redirectTo: 'login-Onboarding', pathMatch: 'full' },
 
   {
-path:'login',
-component:LoginComponent
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: 'emp-edit-apply-leave/:ApplyLeaveId',
@@ -111,10 +111,7 @@ component:LoginComponent
     path: 'edit-add-schedule/:AddScheduleId',
     component: EditAddScheduleComponent,
   },
-  {
-    path: 'login-Onboarding',
-    component: LoginOnboaringComponent,
-  },
+
   {
     path: 'department-details',
     component: DepartmentDetailsComponent,
@@ -415,12 +412,27 @@ component:LoginComponent
     path: 'add-company',
 
     component: CompanyInfoComponent,
-  }
-,
-{
-  path:'testing-here',
-  component:TestComponent
-}
+  },
+  {
+    path: 'testing-here',
+    component: TestComponent,
+  },
+  {
+    path: 'reset-password',
+    component: ResetPassComponent,
+  },
+  {
+    path: 'new-leave-type',
+
+    component: NewLeaveTypeComponent,
+  },
+  
+
+  {
+    path: 'edit-new-leave-type/:id',
+
+    component: EditNewLeaveTypeComponent,
+  },
 ];
 
 @NgModule({
