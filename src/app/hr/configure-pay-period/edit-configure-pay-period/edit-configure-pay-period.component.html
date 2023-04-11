@@ -1,0 +1,55 @@
+<div class="wrapper">
+    <div><app-header></app-header></div>
+    <div><app-left-panel></app-left-panel></div>
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h1 class="m-0">Update Configure Pay Period</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body ">
+            <form method="post" [formGroup]="editconfigure" (ngSubmit)="updateperiods()">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <div class="form-group row ">
+                            <label for="" class="col-md-2 pl-5">Period Name <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control col-md-3 " id="" placeholder="Name"
+                                formControlName="PeriodName" [ngClass]="{ 'is-invalid': submitted && f.PeriodName.errors }">
+                            <div *ngIf="submitted && f['PeriodName'].errors" class="invalid-feedback col-md-3" >
+                                <div *ngIf="f['PeriodName'].errors['required']">Period name is
+                                    required.</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row ">
+                            <label for="" class="col-md-2 pl-5 ">Pay Period Cycle <span class="text-danger">*</span>
+                            </label>
+                            <select id="type" class="col-md-3 form-select" formControlName="PayPeriodCycle" [ngClass]="{ 'is-invalid': submitted && f.PayPeriodCycle.errors }">
+                                <option value="" selected="true" >Select here</option>
+                                <option value="Monthly">Monthly</option>
+                                <option value="Weekly">Weekly</option>
+                                <option value="Bi Weekly">Bi Weekly</option>
+                                <option value="Half Monthly">Half Monthly</option>
+                                
+                            </select>
+                            <div *ngIf="submitted && f['PayPeriodCycle'].errors" class="invalid-feedback col-md-3">
+                                <div *ngIf="f['PayPeriodCycle'].errors['required']">Pay period cycle is
+                                    required.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary mb-1" type="submit">Submit</button>
+                <button class="btn border bg-light ml-2 mb-1" type="Cancel"
+                    [routerLink]="['/configure-pay-period-view']">Cancel</button>
+            </form>
+
+        </div>
+    </div>

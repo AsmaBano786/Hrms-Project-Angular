@@ -1,0 +1,532 @@
+<div class="wrapper">
+
+
+    <div><app-header></app-header></div>
+
+    <div><app-onboarding-left-panel></app-onboarding-left-panel></div>
+
+    <div class="content-wrapper" style="height: auto;">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <strong>
+                            <h1 class="m-0">Leave</h1>
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+
+                            <li class="nav-item" style="height: auto">
+                                <a class="nav-link active" href="#summary" data-toggle="tab"
+                                    [ngClass]="{ 'active':activeTab==='summary'}"
+                                    (click)="switchsummary('summary')">Summary</a>
+                            </li>
+
+                            <li class="nav-item" style="height: auto">
+                                <a class="nav-link" href="#info" data-toggle="tab"
+                                    [ngClass]="{ 'active':activeTab==='info'}"
+                                    (click)="switchtabinfo('info', $event)">Apply Leave</a>
+                            </li>
+
+                            <!-- <li class="nav-item" style="height: auto">
+                                <a class="nav-link active" href="#info" data-toggle="tab"
+                                    [ngClass]="{ 'active':activeTab==='info'}" (click)="switchtabinfo('info')">Apply
+                                    Leave</a>
+                            </li> -->
+
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="#attachment" data-toggle="tab"
+                                    [ngClass]="{ 'active':activeTab==='attachment'}"
+                                    (click)="switchattach('attachment', $event)">
+                                    Attachment</a>
+                            </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="#notes" data-toggle="tab"
+                                    [ngClass]="{ 'active':activeTab==='notes'}"
+                                    (click)="switchnotes('notes', $event)">Notes</a>
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <!-- /.tab-pane -->
+                            <div class="active tab-pane" id="summary" [ngClass]="{ 'active':activeTab==='summary'}">
+                                <form [formGroup]="summarydata">
+                                    <div class="container-fluid">
+                                        <div class="card card-default">
+                                            <div class="card-header">
+                                                <h3 class="card-title">Leave Tracker</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row pt-1">
+                                                    <div class="col-md-3">
+                                                        <select class="form-select border-bottom"
+                                                            (change)="search1($event); search();">
+                                                            <option value="">Leave type select</option>
+                                                            <!-- <option *ngFor="let leave of all_leave">
+                                                                {{leave.leave_type}}
+                                                            </option> -->
+                                                            <option value="Casual Leave">Casual Leave</option>
+                                                            <option value="Earned Leave">Earned Leave</option>
+                                                            <option value="Leave Without Pay">Leave Without Pay</option>
+                                                            <option value="Maternity Leave">Maternity Leave</option>
+                                                            <option value="Sabbatical Leave">Sabbatical Leave</option>
+                                                            <option value="Sick Leave">Sick Leave</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-12 text-right">
+                                                        <!-- <a [routerLink]="['/apply-leave']" class="btn btn-primary">+
+                                                            Apply Leave</a> -->
+                                                        <a href="#info" class="btn btn-primary "
+                                                            (click)="switchtabinfo('info',$event)">+ Apply Leave</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body">
+                                                <table id="example2" class="table table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S.No.</th>
+                                                            <th>Leave Type</th>
+                                                            <!-- <th>Employee ID</th> -->
+                                                            <!-- <th>Employee Name</th> -->
+                                                            <th>From Date</th>
+                                                            <th>To Date</th>
+                                                            <th>Reason For Leave</th>
+                                                            <th>Status</th>
+                                                            <th>Status-Reason</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr
+                                                            *ngFor="let all_leaveEach of filteredData||all_leave; let i = index;">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{all_leaveEach.leave_type}}</td>
+                                                            <!-- <td>{{all_leaveEach.employee_id}}</td> -->
+                                                            <!-- <td>{{all_leaveEach.emp_name}}</td> -->
+                                                            <td>{{all_leaveEach.date_from | date}}</td>
+                                                            <td>{{all_leaveEach.date_to | date}}</td>
+                                                            <td>{{all_leaveEach.reason_for_leave}}</td>
+                                                            <td>{{all_leaveEach.Action}}</td>
+                                                            <td>{{all_leaveEach.describe_reason}}</td>
+                                                            <td>
+                                                                <a
+                                                                    [routerLink]="['/employee-edit-apply-leave/'+all_leaveEach.ApplyLeaveId]">
+                                                                    <!-- <a routerLink="edit-apply-leave"> -->
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>&nbsp;&nbsp;
+
+                                                                <a (click)="deleteleave(all_leaveEach.ApplyLeaveId)">
+                                                                    <i class="fa fa-trash"
+                                                                        style="color:rgb(7, 136, 241)"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <!-- </form> -->
+                            <!-- switchattach('attachment', $event) -->
+                            <!-- /.tab-pane -->
+                            <!-- (ngSubmit)="submitData()" -->
+                            <div class="tab-pane" id="info" [ngClass]="{ 'active':activeTab==='info'}">
+                                <form method="post" [formGroup]="Applyleave" (ngSubmit)="submitData();
+                                   ">
+                                    <div class="card card-default">
+                                        <!-- <div class="card-header">
+                                            <h3 class="card-title">Apply Leave</h3>
+                                        </div> -->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Employee Id<span class="text-danger">*</span></label>
+                                                    <input type="text" readonly placeholder="Employee ID"
+                                                        formControlName="employee_id" class="form-control" id="">
+                                                    <div *ngIf="f.employee_id.touched && f.employee_id.invalid"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.employee_id.errors.required">Employee id is
+                                                            required.</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Employee Name<span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" readonly placeholder="Employee Name"
+                                                        formControlName="emp_name" class="form-control" id="">
+                                                    <div *ngIf="f.emp_name.touched && f.emp_name.invalid"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.emp_name.errors.required">Employee name is
+                                                            required.</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Leave Type<span class="text-danger">*</span></label>
+                                                    <select class="form-select" formControlName="leave_type"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.leave_type.errors }"
+                                                        id="inputleave_type4">
+                                                        <option value="">Select here</option>
+                                                        <option value="Casual Leave">Casual Leave</option>
+                                                        <option value="Earned Leave">Earned Leave</option>
+                                                        <option value="Leave Without Pay">Leave Without Pay</option>
+                                                        <option value="Maternity Leave">Maternity Leave</option>
+                                                        <option value="Sabbatical Leave">Sabbatical Leave</option>
+                                                        <option value="Sick Leave">Sick Leave</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                    <div *ngIf="submitted && f.leave_type.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.leave_type.errors.required">Leave type is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="">From Date<span class="text-danger">*</span></label>
+                                                    <input type="date" formControlName="date_from" min="{{current_date}}"
+                                                        [(ngModel)]="date_from" class="form-control"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.date_from.errors }"
+                                                        id="inputdate_from" placeholder="date">
+                                                    <div *ngIf="submitted && f.date_from.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.date_from.errors.required">From date from is
+                                                            required
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="">To Date<span class="text-danger">*</span></label>
+                                                    <input type="date" min="{{date_from}}" formControlName="date_to"
+                                                        class="form-control" id="" placeholder="date"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.date_to.errors }">
+                                                    <div *ngIf="submitted && f.date_to.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.date_to.errors.required">To date
+                                                            is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Reporting Manager<span
+                                                            class="text-danger">*</span></label>
+                                                    <select class="form-select" formControlName="reporting_manager"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.reporting_manager.errors }"
+                                                        id="inputreporting_manager4">
+                                                        <option value="">Select here</option>
+                                                        <option value="Pawas Goyal">Pawas Goyal</option>
+                                                        <option value="Jagarti Thakur">Jagarti Thakur</option>
+                                                    </select>
+                                                    <div *ngIf="submitted && f.reporting_manager.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.reporting_manager.errors.required">Reporting
+                                                            manager is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Email Id<span class="text-danger">*</span></label>
+                                                    <input type="email" class="form-control" class="form-control"
+                                                        id="floatingInput" placeholder="Email Id"
+                                                        formControlName="email" class="form-control"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                                        id="inputemail4" />
+
+                                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.email.errors.required">Email
+                                                            is required
+                                                        </div>
+                                                        <div *ngIf="f.email.errors.pattern">Email must be a valid email
+                                                            address</div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Additional Email Id<span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="email" class="form-control"
+                                                        class="form-control" id="floatingInput"
+                                                        placeholder="Additional Email Id"
+                                                        formControlName="additional_email" class="form-control"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                                        id="inputadditional_email4" />
+
+                                                    <div *ngIf="submitted && f.additional_email.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.additional_email.errors.required">Additional email
+                                                            id is required
+                                                        </div>
+                                                        <div *ngIf="f.additional_email.errors.pattern">Additional email
+                                                            id must be a
+                                                            valid
+                                                            email address</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Reason for leave<span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="floatingInput"
+                                                        formControlName="reason_for_leave"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.reason_for_leave.errors }"
+                                                        id="inputCity4" placeholder="Reason For Leave" />
+                                                    <div *ngIf="submitted && f.reason_for_leave.errors"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.reason_for_leave.errors.required">Reason for leave
+                                                            is required
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label for="">POC(employee) in Absence</label>
+                                                    <input type="text" placeholder="Employee Name"
+                                                        formControlName="poc_employee" class="form-control" id="">
+                                                    <!-- <div *ngIf="f.poc_employee.touched && f.poc_employee.invalid"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.poc_employee.errors.required">Employee id is
+                                                            required.</div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">POC Mobile No.</label>
+                                                    <input type="number" placeholder="Employee Mobile No."
+                                                        formControlName="poc_mobile" class="form-control" id="">
+                                                    <!-- <div *ngIf="f.poc_mobile.touched && f.poc_mobile.invalid"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.poc_mobile.errors.required">Employee id is
+                                                            required.</div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">POC Email Id</label>
+                                                    <input type="email" id="email" name="email"
+                                                        placeholder="Employee Email Id" formControlName="poc_email"
+                                                        class="form-control">
+                                                    <!-- <div *ngIf="f.poc_email.touched && f.poc_email.invalid"
+                                                        class="invalid-feedback">
+                                                        <div *ngIf="f.poc_email.errors.required">Employee id is
+                                                            required.</div>
+                                                    </div> -->
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="card-body">
+                                                        <!-- <div class="form-group col-md-3"> -->
+                                                        <button type="submit" class="btn btn-primary mb-1"> Submit
+                                                        </button>
+                                                        <!-- self-leave-tracker.html -->
+                                                        <!-- </div> -->
+                                                        <!-- <div class="form-group col-md-3"> -->
+                                                        <button type="reset" class="btn border bg-light ml-2 mb-1"
+                                                            (click)="switchsummary('summary')">Cancel</button>
+                                                        <!-- <a href="" class="btn btn-primary btn-block">Cancle</a> -->
+                                                        <!-- </div> -->
+                                                        <!-- <button class="btn btn-primary text-end" type="button" (click)="switchattach('attachment', $event)">Next</button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <!-- </form> -->
+
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="attachment" [ngClass]="{ 'active':activeTab==='attachment'}">
+                                <div class="row">
+                                    <form [formGroup]="attachmentForm" (ngSubmit)="attachment()">
+                                        <!-- <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="">Leave Documents</label>
+                                            </div>
+                                        </div> -->
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <select class="form-control" formControlName="document_name"
+                                                    Placeholder="Select Attachment">
+
+                                                    <option value="">Select Leave Documents</option>
+                                                    <option value="Medical Treatment File">Medical Treatment File
+                                                    </option>
+                                                    <option value="Other">Other</option>
+                                                    <!-- <option value="Project Design">Project Design</option>
+                                                    <option value="Aadhaar Card">Aadhaar Card</option>
+                                                    <option value="Pan Card">Pan Card</option>
+                                                    <option value="Previous organization Appointment letter">Previous
+                                                        organization Appointment letter</option>
+                                                    <option value="last 3 months Salary Slip">last 3 months Salary Slip
+                                                    </option>
+                                                    <option value="Resignation letter">Resignation letter</option> -->
+
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <div class="custom-file">
+                                                    <input type="hidden" formControlName="employee_id" id="employee_id"
+                                                        placeholder="" />
+                                                    <input class="custom-file-label" for="customFile" type="file"
+                                                        (change)="onChange($event)" formControlName="profile"
+                                                        id="profile" class="form-control" />
+                                                    <div class="form-label text-danger"
+                                                        *ngIf="this.selectedattachfile == true">
+                                                        Please select valid file type
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="form-group col-md-9">
+                                                <button class="btn btn-primary" type="submit">
+                                                    <!-- Save and Add -->
+                                                    Add Document
+                                                </button>
+                                            </div>
+                                            <div class="form-group col-md-3 text-end">
+                                                <button class="btn btn-primary text-end" type="button"
+                                                    (click)="switchnotes('notes', $event)">Next</button>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="form-group col-md-12">
+                                                <button class="btn btn-primary" type="submit"> -->
+                                        <!-- Save and Add -->
+                                        <!-- Add Document
+                                                </button>
+                                            </div> -->
+
+
+                                        <hr>
+                                        <div class="form-group col-md-3 container" *ngIf="loading">
+                                            <p>Loading data.............</p>
+                                        </div>
+                                        <div class="overflow-auto p-3 bg-light"
+                                            style="max-width: 60%; max-height: 250px">
+                                            <div class="row" *ngFor="let i of fetchAttachment; let a = index">
+                                                <div class="col-md-12">
+                                                    <label for="">Done
+                                                        {{i.created_at | date : "MMM d, y, hh:mm:ss a" }}
+                                                        | Doctype : {{ i.type }}</label>&nbsp;
+                                                    <span class="pull-right"><a title="Edit">
+
+                                                            <i class="fa fa-download" (click)="download(a)"
+                                                                style="color:rgb(7, 136, 241)"></i>&nbsp;
+                                                        </a>
+
+                                                        <a title="Delete">
+                                                            <i class="fa fa-trash" (click)="deleteAttachment(i.id)"
+                                                                style="color:rgb(7, 136, 241)"></i></a></span>
+
+                                                    <div class="col-md-12">
+                                                        <p>
+
+                                                            <a style="color:rgb(7, 136, 241)">{{ i.originalname }}</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="notes" [ngClass]="{ 'active':activeTab==='notes'}">
+                                <form method="post" [formGroup]="notesForm" (ngSubmit)="notes(data)">
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="">Add Notes<span class="required">*</span></label>
+                                            <textarea class="form-control" placeholder="Notes" id="floatingInput"
+                                                formControlName="add_notes" class="form-control" [ngClass]="{
+              'is-invalid': submitted && n.add_notes.errors
+            }" id="inputadd_notes4"></textarea>
+                                            <br>
+
+                                            <button type="submit" class="btn btn-primary mt-1">
+                                                <!-- {{ editMode ? "Update Notes" : "Save and Add" }} -->
+                                                {{ editMode ? "Update Notes" : "Add Notes" }}
+                                            </button>
+
+                                            <!-- <div class="form-group col-md-3 text-end"> -->
+                                            <!-- <button class="btn btn-primary text-end" type="button" (click)="submitData()">Submit</button> -->
+                                            <!-- </div> -->
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- <div class="form-group col-md-3 text-end"> 
+                                        <button class="btn btn-primary text-end" type="button" >Submit</button>
+                                    </div> -->
+                                    <hr>
+                                    <div class="overflow-auto" style="max-width: 60%; max-height: 250px">
+                                        <div class="row"
+                                            *ngFor="let i of fetchAllNotes || fetchNotes ||fetchAllNotes|| fetchNotes; index as n">
+                                            <div class="col-md-12">
+                                                <label for="">Done {{ i.created_at | date : "medium" }}
+                                                </label>&nbsp;
+                                                <span class="pull-right">
+
+                                                    <a title="Edit" style="color:rgb(7, 136, 241)"><i class="fa fa-edit"
+                                                            (click)="updateNotes(i.id, n)"></i> &nbsp;</a>
+
+                                                    <a title="Delete" style="color:rgb(7, 136, 241)"><i
+                                                            class="fa fa-trash"
+                                                            (click)="deleteNotes(i.id)"></i></a></span>
+                                                <input type="text" class="form-control" placeholder="{{ i.add_notes }}"
+                                                    disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <!-- /.tab-pane -->
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>

@@ -1,0 +1,213 @@
+
+
+
+    <div><app-header></app-header></div>
+      
+    <!-- end header code here............... -->
+    <!-- start leftpanel code here............... -->
+    <div ><app-left-panel></app-left-panel></div>
+    <!-- end leftpanel code here............... -->
+    <div class="content-wrapper" style="height: auto;">
+    <div class="content-header">
+
+        <div class="container-fluid">
+
+            <div class="row mb-2">
+
+                <div class="col-sm-12">
+
+                    <h1 class="m-0">Department Details</h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- /.card-header -->
+
+    <div class="card-body">
+
+        <form method="post" [formGroup]="DepartmentDetails" (ngSubmit)="submitData()">
+
+            <div class="active tab-pane" id="info">
+
+                <div class="card card-default">
+
+                    <div class="card-header">
+
+                        <!-- <div class="form-group row ">
+
+                            <label class="col-md-2">Department Name<span class="text-danger">*</span></label>
+
+                            <div class="col-md-10">
+                            <input type="text" (keypress)="keyPressAlphabet($event)" class="form-control col-md-4" id="text" placeholder="Enter Department Name" formControlName="departmentName"[ngClass]="{ 'is-invalid': submitted && f.departmentName.errors }">
+
+                            <div *ngIf="f.departmentName.touched && f.departmentName.invalid"
+                            class="invalid-feedback">
+                            <div *ngIf="f.departmentName.errors.required"> Department name is
+                                required.</div>
+                        </div>
+          </div>
+
+                        </div> -->
+
+                        <div class="form-group row ">
+
+                            <label class="col-md-2"> Department Name <span class="text-danger">*</span></label>
+                            <div class="col-md-4">
+                            <select class="form-select" id="Department" formControlName="departmentName" placeholder="Enter department name" [ngClass]="{ 'is-invalid': submitted && f.departmentName.errors }">
+
+                                <option value="" disabled [selected]="true" >Select Department Name</option>
+
+                                <option value="HR">HR </option>
+
+                                <option value="Product">Product</option>
+
+                                <option value="Sales">Sales </option>
+
+                                <option value="Servies">Servies </option>
+
+                                <option value="Information Technology">Information Technology</option>
+
+                                <option value="Marketing">Marketing</option>
+
+                            </select>
+
+                            
+                            <div *ngIf="submitted && f.departmentName.errors" class="invalid-feedback">
+                                <div *ngIf="f.departmentName.errors.required">Department name is
+                                    required.</div>
+                            </div>
+              
+</div>
+                        </div>
+
+                        <div class="form-group row ">
+
+                            <label class="col-md-2 ">Mail Alias <span class="text-danger">*</span></label>
+                            <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="Enter Mail Alias" id="fn" formControlName="MailAlias" [ngClass]="{ 'is-invalid': submitted && f.MailAlias.errors }">
+                            <div *ngIf="submitted && f.MailAlias.errors" class="invalid-feedback">
+                            <div *ngIf="f.MailAlias.errors.required"> Email is
+                                required.</div>
+                                <div *ngIf="f.MailAlias.errors?.['pattern']">
+                                  Please enter valid email address.
+                                </div>
+            
+                                
+                        </div></div>
+                    
+
+                        </div>
+
+                        <div class="form-group row ">
+
+                            <label class="col-md-2 ">Department Lead <span class="text-danger">*</span></label>
+                            <div class="col-md-4">
+                            <select class="form-select" id="Department Lead" formControlName="DepartmentLead" [ngClass]="{ 'is-invalid': submitted && f.DepartmentLead.errors }">
+
+                                <option value="" disabled [selected]="true">Select Department Lead</option>
+
+                                <option value="Sayali Ashish Anande 1 "> Sayali Ashish Anande 1 </option>
+
+                                <option value="Allan Francis S1">Allan Francis S1 </option>
+
+                                <option value="Aleo Kirb S2">Aleo Kirb S2 </option>
+
+                                <option value="Austin Mayer S3 ">Austin Mayer S3 </option>
+
+                                <option value="Charles Mavric S4">Charles Mavric S4</option>
+
+                                <option value="Dave Duken S5">Dave Duken S5</option>
+
+                                <option value="George Dwell S6">George Dwell S6</option>
+
+                                <option value="Jennifer Jackson S7">Jennifer Jackson S7</option>
+
+                                <option value="Morgan Finely S8">Morgan Finely S8 </option>
+
+                                <option value="Ruby Richerds S9">Ruby Richerds S9</option>
+
+                                <option value="Tia Burmen S10">Tia Burmen S10</option>
+
+                            </select>
+
+                            <div *ngIf="submitted && f.DepartmentLead.errors" class="invalid-feedback">
+                                <div *ngIf="f.DepartmentLead.errors.required"> Department lead is
+                                    required.</div>
+                            </div>
+              </div>
+
+                        </div>
+
+                        <div class="form-group row ">
+
+                            <label class="col-md-2">Parent Department <span class="text-danger">*</span></label>
+                            <div class="col-md-4">
+                            <!-- <select class=" col-md-4 form-select" id="Parent Department" formControlName="ParentDepartment" [ngClass]="{ 'is-invalid': submitted && f.ParentDepartment.errors }"> -->
+                                <select class="form-select" formControlName="ParentDepartment"
+                                [ngClass]="{ 'is-invalid': submitted && f.ParentDepartment.errors }"
+                                id="Parent Department">
+                                <option value="" disabled [selected]="true">Select Parent Department</option>
+                                <option value="IT services">IT services </option>
+
+                                <option value="Infrastructures">Infrastructures </option>
+
+                                <option value="Sales and marketing (Business development)">Sales and marketing (Business development) </option>
+
+                                <option value="sales Department">sales Department </option>
+
+                                <option value="Information Technology Department">Information Technology Department </option>
+
+                                <option value="Research & Development Department">Research & Development Department</option>
+
+                                <option value="Account Department">Account Department </option>
+
+                                <option value="Dispatch Department">Dispatch Department </option>
+
+                                <option value="Finance Department">Finance Department</option>
+
+                                <option value="Packaging Department">Packaging Department</option>
+                                
+                                <option value="Inspection departmen">Inspection departmen </option>
+
+                                <option value="Quality Department">Quality Department </option>
+
+                                <option value="Procurement Department">Procurement Department </option>
+                            </select>
+
+                            
+                            <div *ngIf="submitted && f.ParentDepartment.errors" class="invalid-feedback">
+                                <div *ngIf="f.ParentDepartment.errors.required">Parent department is
+                                    required.</div>
+                            </div>
+              
+</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mb-1">Submit</button>
+                     
+                        
+                         <!-- <button  type="submit" class="btn btn-primary ml-2 mb-1" [routerLink]="['/department-details']" (click)="exit()">Submit and New</button> -->
+                        <button type="submit" class="btn btn-primary ml-2 mb-1" [routerLink]="['/department/']">Cancel</button>
+                            
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+        </form>
+
+    </div>
+</div>
+
+<!-- start footer code here............... -->
+<div><app-footer></app-footer></div>
+<!-- end footer code here............... -->

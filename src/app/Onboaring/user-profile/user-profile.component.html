@@ -1,0 +1,1835 @@
+<!-- <p>candidate-details works!</p> -->
+<!-- <p>candidate-details works!</p>0 -->
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <!-- Button trigger modal -->
+  
+    <!-- Modal -->
+  
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Please fill the attachment and notes form then the employee form will
+            be submitted
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- ........................ -->
+    <div class="wrapper">
+      <!-- <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="../../../assets/images/logo.png" alt="Logo" height="60" width="60" />
+    </div> -->
+    <div><app-header></app-header></div>
+      
+    <!-- end header code here............... -->
+    <!-- start leftpanel code here............... -->
+    <div ><app-left-panel></app-left-panel></div>
+
+    <!-- end leftpanel code here............... -->
+      <div class="content-wrapper" style="height: auto">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <h1 class="m-0">{{ this.data.a }} {{ this.data.b }}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="content">
+          <div class="container-fluid">
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <!-- <li class="nav-item"><a class="nav-link active" href="#info" data-toggle="tab"[routerLink]="['/candidate']" routerLinkActive="router-link-active">Info</a></li> -->
+                  <!-- <li class="nav-item"><a class="nav-link" href="#attachment" data-toggle="tab" [routerLink]="['/candidate-attachments']" routerLinkActive="router-link-active"(click)="nav2()" >Attachment</a></li> -->
+                  <!-- <li class="nav-item"><a class="nav-link" href="#notes" data-toggle="tab" [routerLink]="['/candidate-notes']" routerLinkActive="router-link-active"  >Notes</a></li> -->
+                  <!-- <li class="nav-item"><a class="nav-link" href="" data-toggle="tab"[routerLink]="['/candidate-notes']" routerLinkActive="router-link-active" (click)="nav()" >Notes</a></li> -->
+  
+                  <li class="nav-item" style="height: auto">
+                    <a class="nav-link active" href="#summary" data-toggle="tab"
+                    [ngClass]="{ 'active':activeTab==='summary'}" 
+                  
+                    (click)="switchsummary('summary')"
+                      >Summary</a
+                    >
+                  </li>
+  
+                  <li class="nav-item" style="height: auto">
+                    <a
+                      class="nav-link"
+                      href="#info"
+                      data-toggle="tab"
+                      [ngClass]="{ 'active':activeTab==='info'}"
+                      (click)="switchtabinfo('info', $event)"
+                      >Info</a
+                    >
+                  </li>
+  
+                  <li class="nav-item">
+                    <!-- <a class="nav-link" href="#attachment" data-toggle="tab"
+                  >Attachment</a> -->
+                    <a
+                      class="nav-link"
+                      href="#attachment"
+                      data-toggle="tab"
+                      (click)="status = !status"
+                     
+  
+                      [ngClass]="{ 'active':activeTab==='attachment'}"
+                      (click)="switchattach('attachment', $event)"
+                    >
+                      Attachment</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <!-- <a class="nav-link" href="#notes" data-toggle="tab">Notes</a> -->
+                    <a class="nav-link" href="#notes" data-toggle="tab" [ngClass]="{ 'active':activeTab==='notes'}"
+                    (click)="switchnotes('notes', $event)">Notes</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                 
+                  <div class="active tab-pane" id="summary"[ngClass]="{ 'active':activeTab==='summary'}">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                              <table
+                                id="example2"
+                                class="table table-bordered table-hover"
+                              >
+                                <thead>
+                                  <tr>
+                                    <th>Employee Id</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>
+                                      Designation<span style="font-size: small">
+                                        (Apply for)</span
+                                      >
+                                    </th>
+                                    <th>Email address</th>
+                                    <th>Phone Number</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let item of sessiondata1 || sessiondata " >
+                                    <td>
+                                      <a href="" (click)="switchtabinfo('info', $event)">{{emp_idD1}}
+                                      </a>
+                                    </td>
+                                    <td>{{ item.first_name }}</td>
+                                    <td>{{ item.last_name }}</td>
+                                    <td>{{ item.designation }}</td>
+                                    <td>{{ item.email }}</td>
+                                    <td>{{ item.phone }}</td>
+                                    <td>
+                                      <span class="pull-right">
+                                        <!-- <a title="Edit" style="color: rgb(7, 11, 241); "><i class="fa fa-edit" (click)="updateNotes(i.Id)" ></i></a> -->
+                                        &nbsp;
+                                        <a
+                                          title="Edit"
+                                          style="color: rgb(7, 116, 241)"
+                                          >
+                                        
+                                          
+                                          <i
+                                            class="fa fa-edit "
+                                            (click)="switchtabinfo('info', $event)"
+                                          ></i
+                                        ></a>
+                                        &nbsp;&nbsp;
+                                        <a
+                                          title="Delete"
+                                          style="color: rgb(7, 116, 241)"
+                                          ><i
+                                            class="fa fa-trash"
+                                            (click)="delete_candidate()"
+                                          ></i></a
+                                      ></span>
+                                    </td>
+                                  </tr>
+  
+                                  <!--<tfoot><tr><th>Rendering engine</th><th>Browser</th><th>Platform(s)</th><th>Engine version</th><th>CSS grade</th></tr></tfoot>-->
+                                </tbody>
+                              </table>
+                            </div>
+                            <!-- /.card-body -->
+                          </div>
+                          <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="tab-pane" id="info" [ngClass]="{ 'active':activeTab==='info'}">
+                    <form
+                      method="post"
+                      [formGroup]="registerForm"
+                      (ngSubmit)="info()"
+                    >
+                      <div class="card card-default">
+                        <div class="card-header">
+                          <h3 class="card-title">
+                            Candidate Details<span class="required">*</span>
+                          </h3>
+                          <div class="card-tools">
+                            <button
+                              type="button"
+                              class="btn btn-tool"
+                              data-card-widget="collapse"
+                            >
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="form-group col-md-6">
+                              <label for="">First Name</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder=""
+                                formControlName="first_name"
+                              />
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="">Last Name</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder=""
+                                formControlName="last_name"
+                              />
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="">Email</label>
+                              <input
+                                type="email"
+                                class="form-control"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="{{ this.data }}"
+                                readonly
+                                (click)="click()"
+                                formControlName="email"
+                                class="form-control"
+                              />
+  
+                              <!-- <input type="text" class="form-control"  name="email" id="exampleModal1Label1"    readonly placeholder={{this.email1}}> -->
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Date of Birth<span class="required"
+                                  >*</span
+                                ></label
+                              >
+  
+                              <!-- <input type="date" class="form-control"  class="form-control" id="floatingInput" placeholder="Date_of_Birth"  formControlName="Date_of_Birth" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Date_of_Birth.errors }"  id="inputDate_of_Birth4"/> -->
+                              <input
+                                type="date"
+                                class="form-control"
+                                placeholder="Date_of_Birth"
+                                formControlName="Date_of_Birth"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    submitted && f.Date_of_Birth.errors
+                                }"
+                                required
+                                (change)="
+                                  validateDOB(
+                                    this.registerForm.value.Date_of_Birth
+                                  )
+                                "
+                              />
+                              <div
+                                *ngIf="age <= 18"
+                                class="form-label text-danger"
+                              >
+                                Please enter valid date
+                              </div>
+                              <div
+                                *ngIf="
+                                  Date_of_Birth.invalid &&
+                                  (Date_of_Birth.dirty || Date_of_Birth.touched)
+                                "
+                                class="form-label text-danger"
+                              >
+                                <div *ngIf="Date_of_Birth.errors?.['required']">
+                                  Date of birth is required.
+                                </div>
+  
+                                <div *ngIf="age_error">
+                                  {{ age_error }}
+                                </div>
+                              </div>
+  
+                              <!--  -->
+                            </div>
+  
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Phone<span class="required">*</span></label
+                              >
+  
+                              <input
+                                type="text"
+                                maxlength="10"
+                                (keypress)="keyPressNumbers($event)"
+                                formControlName="phone"
+                                id="Phone"
+                                class="form-control"
+                                placeholder="Mobile Number"
+                                class="form-control"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.phone.errors
+                                }"
+                                id="inputphone4"
+                                required
+                              />
+  
+                              <div
+                                *ngIf="
+                                  phone.invalid && (phone.dirty || phone.touched)
+                                "
+                                class="form-label text-danger"
+                              >
+                                <div *ngIf="phone.errors?.['required']">
+                                  Mobile number is required.
+                                </div>
+                                <div *ngIf="phone.errors?.['pattern']">
+                                  Please enter 10 digit mobile number.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Official Email<span class="required"
+                                  >*</span
+                                ></label
+                              >
+                              <input
+                                type="email"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="Official Email"
+                                formControlName="official_email"
+                                class="form-control"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    submitted && f.official_email.errors
+                                }"
+                                id="inputofficial_email4"
+                                placeholder="Official Email"
+                                required
+                              />
+  
+                              <div
+                                *ngIf="
+                                  official_email.invalid &&
+                                  (official_email.dirty || official_email.touched)
+                                "
+                                class="form-label text-danger"
+                              >
+                                <div *ngIf="official_email.errors?.['required']">
+                                  Official email is required.
+                                </div>
+                                <div *ngIf="official_email.errors?.['pattern']">
+                                  Please enter valid email.
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--  -->
+                      <!-- <div class="card card-default">
+                      <div class="card-header">
+                        <h3 class="card-title">
+                          Documents<span class="required">*</span>
+                        </h3>
+                        <div class="card-tools">
+                          <a class="btn btn-primary mt-2" (click)="addDocs()"
+                            style="color: white;">+</a
+                          >
+                        </div>
+                      </div>
+                      <form [formGroup]="documentForm">
+                        <div formArrayName="docs">
+                         
+                          <div
+                            *ngFor="let d of docs?.controls; let i = index"
+                            [formGroupName]="i"
+                          >
+                            <header hidden>docs{{ i }}</header>
+                            <div class="card-body">
+                              <div class="row">
+                                <div
+                                  class="form-group col-md-3"
+                                  style="margin-top: 8px"
+                                >
+                                  <select
+                                    class="form-control select2"
+                                    style="width: 100%"
+                                    formControlName="id_type"
+                                    (change)="docselection($event.target)"
+                                  >
+                                    <option
+                                      selected="selected"
+                                      value=""
+                                      disabled
+                                    >
+                                      Select here
+                                    </option>
+                                     
+                                    <option
+                                      *ngFor="let item of docOptions"
+                                      [value]="item"
+                                    >
+                                      {{ item }}
+                                    </option>
+                                  
+                                  </select>
+                                </div>
+                                <div
+                                  class="form-group col-md-3"
+                                  style="margin-top: 8px"
+                                >
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    id=""
+                                    (keyup)="idnum($event.target)" 
+                                    placeholder="Enter id number here"
+                                    formControlName="id_number"
+                                  />
+                                  <div class="form-label text-danger" *ngIf="this.aadharmode==true;">
+                                    {{ docerr1 }}
+                                    
+                                  </div>
+                                  
+                                <div *ngIf="docs.controls[i].get('id_number')?.invalid &&  (docs.controls[i].get('id_number')?.dirty || docs.controls[i].get('id_number')?.touched)">
+                                  <div
+                                    class="text-danger"
+                                    *ngIf="docs.controls[i].get('id_number')?.errors?.['required']"
+                                  >
+                                    Id number is required.
+                                  </div>
+                                 
+                                  </div>
+                                </div>
+  
+  
+                                <div class="form-group col-md-3">
+                                  <button
+                                    class="btn btn-danger mt-2"
+                                    (click)="removeDocs(i)"
+                                  >
+                                    -
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div> -->
+  
+                      <!--  present address-->
+                      <div class="card card-default">
+                        <div class="card-header">
+                          <h3 class="card-title">
+                            Present Address<span class="required">*</span>
+                          </h3>
+                          <div class="card-tools">
+                            <button
+                              type="button"
+                              class="btn btn-tool"
+                              data-card-widget="collapse"
+                            >
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <form [formGroup]="addressForm">
+                          <div formArrayName="address">
+                            <div
+                              *ngFor="
+                                let passengerGroup of address?.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <header hidden>{{ i }}</header>
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="form-group col-md-6">
+                                    <label for="">Country</label>
+                                    <select
+                                      class="form-control"
+                                      (change)="
+                                        onChangeCountry($any($event.target).value)
+                                      "
+                                      class="form-control"
+                                      id="floatingInput1"
+                                      formControlName="country"
+                                      [(ngModel)]="Countryselected"
+                                      name="India"
+                                    >
+                                      <!-- <option value="" disabled>
+                                      Select Country
+                                    </option> -->
+                                      <!--  -->
+  
+                                      <option
+                                        *ngFor="
+                                          let country1 of countryInfo;
+                                          let i = index
+                                        "
+                                        [value]="country1.CountryName"
+                                      >
+                                        {{ country1.CountryName }}
+                                      </option>
+                                    </select>
+                                    <div
+                                      *ngIf="
+                                        address.controls[i].get('country')
+                                          ?.invalid &&
+                                        (address.controls[i].get('country')
+                                          ?.dirty ||
+                                          address.controls[i].get('country')
+                                            ?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="address.controls[i].get('country')?.errors?.['required']"
+                                      >
+                                        Country is required.
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="">State/Province</label>
+                                    <select
+                                      class="form-control"
+                                      (click)="
+                                        onChangeState($any($event.target).value)
+                                      "
+                                      id="floatingInput2"
+                                      formControlName="state"
+                                    >
+                                      <option>Select State</option>
+                                      <option *ngIf="stateInfo == ''" value="-1">
+                                        --Select State--
+                                      </option>
+                                      <option
+                                        *ngFor="
+                                          let state of stateInfo;
+                                          let j = index
+                                        "
+                                        [value]="state.StateName"
+                                      >
+                                        {{ state.StateName }}
+                                      </option>
+                                    </select>
+                                    <div
+                                      *ngIf="
+                                        address.controls[i].get('state')
+                                          ?.invalid &&
+                                        (address.controls[i].get('state')
+                                          ?.dirty ||
+                                          address.controls[i].get('state')
+                                            ?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="address.controls[i].get('state')?.errors?.['required']"
+                                      >
+                                        State is required.
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="">City</label>
+                                    <select
+                                      class="form-control"
+                                      (change)="
+                                        onChangeCity($any($event.target).value)
+                                      "
+                                      id="floatingInput"
+                                      formControlName="city"
+                                    >
+                                      <option>Select City</option>
+                                      <option *ngIf="cityInfo == ''" value="-1">
+                                        --Select CIty--
+                                      </option>
+                                      <!-- <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option> -->
+                                      <option
+                                        *ngFor="
+                                          let city of cityInfo;
+                                          let k = index
+                                        "
+                                        [value]="city"
+                                      >
+                                        {{ city }}
+                                      </option>
+                                    </select>
+                                    <div
+                                      *ngIf="
+                                        address.controls[i].get('city')
+                                          ?.invalid &&
+                                        (address.controls[i].get('city')?.dirty ||
+                                          address.controls[i].get('city')
+                                            ?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="address.controls[i].get('city')?.errors?.['required']"
+                                      >
+                                        City is required.
+                                      </div>
+                                    </div>
+                                  </div>
+  
+                                  <div class="form-group col-md-6" required>
+                                    <label for=""
+                                      >ZIP/PIN Code<span class="required"
+                                        >*</span
+                                      ></label
+                                    >
+  
+                                    <input
+                                      type="text"
+                                      maxlength="6"
+                                      (keypress)="keyPressNumbers($event)"
+                                      class="form-control"
+                                      id="pin_code"
+                                      placeholder="ZIP/PIN Code"
+                                      formControlName="pin_code"
+                                      required
+                                    />
+  
+                                    <div
+                                      *ngIf="
+                                        address.controls[i].get('pin_code')
+                                          ?.invalid &&
+                                        (address.controls[i].get('pin_code')
+                                          ?.dirty ||
+                                          address.controls[i].get('pin_code')
+                                            ?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="address.controls[i].get('pin_code')?.errors?.['required']"
+                                      >
+                                        Pin code is required.
+                                      </div>
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="address.controls[i].get('pin_code')?.errors?.['maxlength']"
+                                      >
+                                        Pin code should have 6 digits.
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--  -->
+  
+                                  <div class="form-group col-md-6">
+                                    <label for=""
+                                      >Street Address<span class="required"
+                                        >*</span
+                                      ></label
+                                    >
+                                    <textarea
+                                      class="form-control"
+                                      id=""
+                                      placeholder="Street Address"
+                                      id="floatingInput"
+                                      formControlName="street_address"
+                                    ></textarea>
+                                    <div
+                                      *ngIf="
+                                        address.controls[i].get('street_address')
+                                          ?.invalid &&
+                                        (address.controls[i].get('street_address')
+                                          ?.dirty ||
+                                          address.controls[i].get(
+                                            'street_address'
+                                          )?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="address.controls[i].get('street_address')?.errors?.['required']"
+                                      >
+                                        Street address is required.
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+  
+                      <!-- end -->
+                      <!-- <button (click)="testaddress()">test</button> -->
+                      <!--  permanent address-->
+  
+                      <div class="card card-default">
+                        <div class="card-header">
+                          <h3 class="card-title">
+                            Permanent Address<span class="required">*</span>
+                          </h3>
+                          <div class="card-tools">
+                            <button
+                              type="button"
+                              class="btn btn-tool"
+                              data-card-widget="collapse"
+                            >
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <form [formGroup]="pAddressForm">
+                          <div formArrayName="pAddress">
+                            <div
+                              *ngFor="
+                                let passengerGroup of pAddress?.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <header hidden>{{ i }}</header>
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="form-group col-md-18">
+                                    <label
+                                      >&nbsp;
+                                      <input
+                                      
+                                        type="checkbox"
+                                        (click)="oncheckAddress($event)"
+                                        formControlName="checkaddress"
+                                      />
+                                      Same as present address
+                                      <span class="text-danger">*</span>
+                                    </label>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="">Country</label>
+                                    <select
+                                      class="form-control"
+                                      (change)="
+                                        PonChangeCountry(
+                                          $any($event.target).value
+                                        )
+                                      "
+                                      class="form-control"
+                                      id="floatingInput1"
+                                      formControlName="pCountry"
+                                      [(ngModel)]="pCountryselected"
+                                      name="India"
+                                    >
+                                      <!-- <option value="" disabled >
+                                      Select Country
+                                    </option> -->
+                                      <!-- <option disabled> Select Country</option>
+                                    <option *ngIf="pcountryInfo == ''" value="-1" >
+                                      -- Select Country--
+                                    </option> -->
+                                      <!--  -->
+  
+                                      <option
+                                        *ngFor="
+                                          let country1 of pcountryInfo;
+                                          let i = index
+                                        "
+                                        [value]="country1.CountryName"
+                                      >
+                                        {{ country1.CountryName }}
+                                      </option>
+                                    </select>
+                                    <div
+                                      *ngIf="
+                                        pAddress.controls[i].get('pCountry')
+                                          ?.invalid &&
+                                        (pAddress.controls[i].get('pCountry')
+                                          ?.dirty ||
+                                          pAddress.controls[i].get('pCountry')
+                                            ?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="pAddress.controls[i].get('pCountry')?.errors?.['required']"
+                                      >
+                                        Country is required.
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="">State/Province</label>
+                                    <select
+                                      class="form-control"
+                                      (click)="
+                                        PonChangeState($any($event.target).value)
+                                      "
+                                      id="floatingInput2"
+                                      formControlName="pState"
+                                      [(ngModel)]="pStateselected"
+                                    >
+                                      <option>Select State</option>
+                                      <option *ngIf="pstateInfo == ''" value="-1">
+                                        --Select State--
+                                      </option>
+                                      <option
+                                        *ngFor="
+                                          let state of pstateInfo;
+                                          let j = index
+                                        "
+                                        [value]="state.StateName"
+                                      >
+                                        {{ state.StateName }}
+                                      </option>
+                                    </select>
+                                    <div
+                                      *ngIf="
+                                        pAddress.controls[i].get('pState')
+                                          ?.invalid &&
+                                        (pAddress.controls[i].get('pState')
+                                          ?.dirty ||
+                                          pAddress.controls[i].get('pState')
+                                            ?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="pAddress.controls[i].get('pState')?.errors?.['required']"
+                                      >
+                                        State is required.
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="">City</label>
+                                    <select
+                                      class="form-control"
+                                      (change)="
+                                        PonChangeCity($any($event.target).value)
+                                      "
+                                      id="floatingInput"
+                                      formControlName="pCity"
+                                      [(ngModel)]="pCityselected"
+                                    >
+                                      <option>Select City</option>
+                                      <option *ngIf="pcityInfo == ''" value="-1">
+                                        --Select CIty--
+                                      </option>
+                                      <!-- <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option> -->
+                                      <option
+                                        *ngFor="
+                                          let city of pcityInfo;
+                                          let k = index
+                                        "
+                                        [value]="city"
+                                      >
+                                        {{ city }}
+                                      </option>
+                                    </select>
+                                    <div
+                                      *ngIf="
+                                        pAddress.controls[i].get('pCity')
+                                          ?.invalid &&
+                                        (pAddress.controls[i].get('pCity')
+                                          ?.dirty ||
+                                          pAddress.controls[i].get('pCity')
+                                            ?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="pAddress.controls[i].get('pCity')?.errors?.['required']"
+                                      >
+                                        City is required.
+                                      </div>
+                                    </div>
+                                  </div>
+  
+                                  <div class="form-group col-md-6" required>
+                                    <label for=""
+                                      >ZIP/PIN Code<span class="required"
+                                        >*</span
+                                      ></label
+                                    >
+  
+                                    <input
+                                      type="text"
+                                      maxlength="6"
+                                      (keypress)="keyPressNumbers($event)"
+                                      class="form-control"
+                                      id="pin_code"
+                                      placeholder="ZIP/PIN Code"
+                                      formControlName="pPin_code"
+                                      required
+                                      [(ngModel)]="pPinselected"
+                                    />
+  
+                                    <div
+                                      *ngIf="
+                                        pAddress.controls[i].get('pPin_code')
+                                          ?.invalid &&
+                                        (pAddress.controls[i].get('pPin_code')
+                                          ?.dirty ||
+                                          pAddress.controls[i].get('pPin_code')
+                                            ?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="pAddress.controls[i].get('pPin_code')?.errors?.['required']"
+                                      >
+                                        Pin code is required.
+                                      </div>
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="pAddress.controls[i].get('pPin_code')?.errors?.['maxlength']"
+                                      >
+                                        Pin code should have 6 digits.
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--  -->
+  
+                                  <div class="form-group col-md-6">
+                                    <label for=""
+                                      >Street Address<span class="required"
+                                        >*</span
+                                      ></label
+                                    >
+                                    <textarea
+                                      class="form-control"
+                                      id=""
+                                      placeholder="Street Address"
+                                      id="floatingInput"
+                                      formControlName="pStreet_address"
+                                      [(ngModel)]="pstreetselected"
+                                    ></textarea>
+                                    <div
+                                      *ngIf="
+                                        pAddress.controls[i].get(
+                                          'pStreet_address'
+                                        )?.invalid &&
+                                        (pAddress.controls[i].get(
+                                          'pStreet_address'
+                                        )?.dirty ||
+                                          pAddress.controls[i].get(
+                                            'pStreet_address'
+                                          )?.touched)
+                                      "
+                                    >
+                                      <div
+                                        class="text-danger"
+                                        *ngIf="pAddress.controls[i].get('pStreet_address')?.errors?.['required']"
+                                      >
+                                        Street address is required.
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                      <!--  -->
+                      <div class="card card-default">
+                        <div class="card-header">
+                          <h3 class="card-title">
+                            Professional Details<span class="required">*</span>
+                          </h3>
+                          <div class="card-tools">
+                            <button
+                              type="button"
+                              class="btn btn-tool"
+                              data-card-widget="collapse"
+                            >
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Experience(In Years)<span class="required"
+                                  >*</span
+                                ></label
+                              >
+                              <!-- <input type="text"class="form-control"  id="floatingInput"formControlName="experience"[ngClass]="{ 'is-invalid': submitted && f.experience.errors }" id="inputexperience4"placeholder="Experience" /> -->
+                              <!-- <div *ngIf="submitted && f.experience.errors" class="invalid-feedback">
+                            <div *ngIf="f.experience.errors.required">Experience is required</div>
+                         </div> -->
+                              <input
+                                type="text"
+                                maxlength="3"
+                                (keypress)="keyPressNumbersDecimal($event)"
+                                class="form-control"
+                                id="floatingInput"
+                                placeholder="Experience"
+                                formControlName="total_experience"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    submitted && f.total_experience.errors
+                                }"
+                                id="inputsalary4"
+                              />
+                              <div
+                                *ngIf="submitted && f.total_experience.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.total_experience.errors.required">
+                                  Experience is required
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Current Salary(In CTC)<span class="required"
+                                  >*</span
+                                ></label
+                              >
+                              <input
+                              maxlength="9"
+                                (keypress)="keyPressNumbersDecimal($event)"
+                                type="text"
+                                class="form-control"
+                                id="floatingInput"
+                                formControlName="salary"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.salary.errors
+                                }"
+                                id="inputsalary4"
+                                placeholder="Current Salary"
+                              />
+                              <div
+                                *ngIf="submitted && f.salary.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.salary.errors.required">
+                                  Salary is required
+                                </div>
+                              </div>
+                            </div>
+                            <!-- <div class="form-group col-md-6">
+                            <label for=""
+                              >Source of Hire<span class="required"
+                                >*</span
+                              ></label
+                            >
+                            <select
+                              class="form-control select2"
+                              style="width: 100%"
+                              class="form-control"
+                              id="floatingInput"
+                              formControlName="source_of_hire"
+                              [ngClass]="{
+                                'is-invalid':
+                                  submitted && f.source_of_hire.errors
+                              }"
+                              id="inputsource_of_hire4"
+                              placeholder="Source of Hire"
+                            >
+                              <option selected="selected" value="" disabled>
+                                Select here
+                              </option>
+                              <option>Direct</option>
+                              <option>Newspaper</option>
+                              <option>Advertisement</option>
+                              <option>Facebook</option>
+                              <option>Twitter</option>
+                              <option>Gapps</option>
+                            </select>
+                            <div
+                              *ngIf="submitted && f.source_of_hire.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="f.source_of_hire.errors.required">
+                                SourceofHire is required
+                              </div>
+                            </div>
+                          </div> -->
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Skill Set<span class="required">*</span></label
+                              >
+  
+                              <!-- <div  class="row p-2" > -->
+                              <br />
+  
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="floatingInput"
+                                formControlName="skill_set"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.skill_set.errors
+                                }"
+                                id="inputskill_set4"
+                                placeholder="Skill Set"
+                              />
+  
+                              <!--  -->
+  
+                              <!--  -->
+  
+                              <div
+                                *ngIf="submitted && f.skill_set.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.skill_set.errors.required">
+                                  SkillSet is required
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Tentative Joining Date<span class="required"
+                                  >*</span
+                                ></label
+                              >
+                              <input
+                                type="date"
+                                class="form-control"
+                                id="floatingInput"
+                                formControlName="tentative_joining_date"
+                                (change)="
+                                  tentativeJoiningDate(
+                                    this.registerForm.value.tentative_joining_date
+                                  )
+                                "
+                                [ngClass]="{
+                                  'is-invalid':
+                                    submitted && f.tentative_joining_date.errors
+                                }"
+                                id="inputtentative_joining_date4"
+                                placeholder="Tentative Joining Date"
+                              />
+                              <div
+                                class="form-label text-danger"
+                                *ngIf="this.joiningMode == true"
+                              >
+                                Please select valid date
+                              </div>
+                              <div
+                                *ngIf="
+                                  submitted && f.tentative_joining_date.errors
+                                "
+                                class="invalid-feedback"
+                              >
+                                <div
+                                  *ngIf="f.tentative_joining_date.errors.required"
+                                >
+                                  Tentative Joining Date is required
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Highest Qualification<span class="required"
+                                  >*</span
+                                ></label
+                              >
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="floatingInput"
+                                formControlName="highest_qualification"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    submitted && f.highest_qualification.errors
+                                }"
+                                id="inputhighest_qualification4"
+                                placeholder="Highest Qualification"
+                              />
+                              <div
+                                *ngIf="
+                                  submitted && f.highest_qualification.errors
+                                "
+                                class="invalid-feedback"
+                              >
+                                <div
+                                  *ngIf="f.highest_qualification.errors.required"
+                                >
+                                  Highest Qualification is required
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Designation<span style="font-size: small">
+                                  (Apply for)</span
+                                ><span class="required">*</span></label
+                              >
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="floatingInput"
+                                formControlName="designation"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.designation.errors
+                                }"
+                                id="inputdesignation4"
+                                placeholder="Designation"
+                              />
+                              <div
+                                *ngIf="submitted && f.designation.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.designation.errors.required">
+                                  Designation is required
+                                </div>
+                              </div>
+                            </div>
+  
+                            <!-- ............. -->
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Source of Hire<span class="required"
+                                  >*</span
+                                ></label
+                              >
+                              <select
+                                class="form-control select2"
+                                style="width: 100%"
+                                class="form-control"
+                                id="floatingInput"
+                                formControlName="source_of_hire"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    submitted && f.source_of_hire.errors
+                                }"
+                                id="inputsource_of_hire4"
+                                placeholder="Source of Hire"
+                                (click)="selected_source($event)"
+                              >
+                                <option selected="selected" value="" disabled>
+                                  Select here
+                                </option>
+                                <option>Naukri</option>
+                                <option>Monster</option>
+                                <option>Linkedin</option>
+                                <option>TimesJob</option>
+                                <option>Shine</option>
+                                <option>References</option>
+  
+                                <option>Others</option>
+                              </select>
+                              <br />
+  
+                              <div
+                                *ngIf="submitted && f.source_of_hire.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.source_of_hire.errors.required">
+                                  SourceofHire is required
+                                </div>
+                              </div>
+  
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="let us know"
+                                *ngIf="selected_source_O == 'Others'"
+                                formControlName="others"
+                              />
+                              <div
+                                *ngIf="
+                                  others.invalid &&
+                                  (others.dirty || others.touched)
+                                "
+                                class="form-label text-danger"
+                              >
+                                <div *ngIf="others.errors?.['required']">
+                                  Field is required.
+                                </div>
+                              </div>
+                            </div>
+                            <!-- ................... -->
+                            <div class="form-group col-md-6">
+                              <label for=""
+                                >Additional information<span class="required"
+                                  >*</span
+                                ></label
+                              >
+                              <input
+                                (click)="otherSource()"
+                                type="text"
+                                class="form-control"
+                                id="floatingInput"
+                                formControlName="additional_information"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    submitted && f.additional_information.errors
+                                }"
+                                id="inputadditional_information4"
+                                placeholder="Additional information"
+                              />
+                              <div
+                                *ngIf="
+                                  submitted && f.additional_information.errors
+                                "
+                                class="invalid-feedback"
+                              >
+                                <div
+                                  *ngIf="f.additional_information.errors.required"
+                                >
+                                  Additional information is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="card card-default">
+                        <div class="card-header">
+                          <h3 class="card-title">
+                            Education<span class="required">*</span>
+                          </h3>
+                          <div class="card-tools">
+                            <a
+                              class="btn btn-primary mt-2"
+                              (click)="addeducation()"
+                              style="color: white"
+                              >+</a
+                            >
+  
+                            <button
+                              type="button"
+                              class="btn btn-tool"
+                              data-card-widget="collapse"
+                            >
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <form [formGroup]="educationForm">
+                          <div formArrayName="education">
+                            <div
+                              *ngFor="
+                                let passengerGroup of education?.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                       
+  
+                              <header hidden>{{ i }}</header>
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="form-group col-md-3">
+                                    <label for="">Institute Name</label>
+  
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Institute Name"
+                                      formControlName="institute_name"
+                                    />
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="">Degree/Diploma</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Degree/Diploma"
+                                      formControlName="degree"
+                                    />
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="">Field(s) of Study</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Field(s) of Study"
+                                      formControlName="field_of_study"
+                                    />
+                                  </div>
+                                  <div class="form-group col-md-2">
+                                    <label for="">Date of Completion</label>
+                                    <input
+                                      type="date"
+                                      class="form-control"
+                                      placeholder="Date of Completion"
+                                      formControlName="date_of_completion"
+                                    />
+                                  </div>
+                                  &nbsp;
+                                  <div class="form-group col-md-1">
+                                    <br />
+                                    <button
+                                      class="btn btn-danger mt-2"
+                                      (click)="removeeducation(i)"
+                                    >
+                                      -
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+  
+                      <!--  new start-->
+                      <div class="card card-default">
+                        <div class="card-header">
+                          <h3 class="card-title">
+                            Experience<span class="required">*</span>
+                          </h3>
+                          <div class="card-tools">
+                            <a
+                              class="btn btn-primary mt-2"
+                              (click)="addexperience()"
+                              style="color: white"
+                              >+</a
+                            >
+  
+                            <button
+                              type="button"
+                              class="btn btn-tool"
+                              data-card-widget="collapse"
+                            >
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <form [formGroup]="experienceForm">
+                          <div formArrayName="experience">
+                            <div
+                              *ngFor="
+                                let passengerGroup of experience?.controls;
+                                let i = index
+                              "
+                              [formGroupName]="i"
+                            >
+                              <header hidden>{{ i }}</header>
+                              <div class="card-body">
+                                <div class="row">
+                                  <div class="form-group col-md-3">
+                                    <label for="">Occupation</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id=""
+                                      placeholder="Occupation"
+                                      formControlName="occupation"
+                                    />
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="">Company</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id=""
+                                      placeholder="Company"
+                                      formControlName="company"
+                                    />
+                                  </div>
+                                  <!-- calender1 -->
+                                  <div class="form-group col-md-3">
+                                    <label for="">From Date</label>
+                                    <input
+                                      type="date"
+                                      class="form-control"
+                                      id=""
+                                      placeholder="From Date"
+                                      formControlName="fromDate"
+                                      (change)="
+                                        fromdate($any($event.target).value)
+                                      "
+                                    />
+                                  </div>
+                                  <!-- calender2 -->
+                                  <div class="form-group col-md-3">
+                                    <label for="">To Date</label>
+                                    <input
+                                      type="date"
+                                      class="form-control"
+                                      id=""
+                                      placeholder="To Date"
+                                      formControlName="toDate"
+                                      (change)="todate($any($event.target).value)"
+                                    (click)="countduration(i)"
+                                      />
+                                  </div>
+                                  <div class="form-group col-md-3" >
+                                    <label for="">Duration(In month/year)</label>
+                                   <p hidden>{{i}}</p>
+                                    <input
+                                    
+                                      (keypress)="keyPressNumbersDecimal($event)"
+                                      type="text"
+                                      class="form-control"
+                                      id=""
+                                 
+                                      formControlName="duration"
+                                      readonly
+                                    />
+                                  </div>
+                                  <div class="form-group col-md-2">
+                                    <label for="">Currently Work Here</label>
+                                    <select
+                                      class="form-control"
+                                      style="width: 100%"
+                                      formControlName="currently_work_here"
+                                    >
+                                      <option
+                                        selected="selected"
+                                        value=""
+                                        disabled
+                                      >
+                                        Select here
+                                      </option>
+                                      <option>Yes</option>
+                                      <option>No</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group col-md-1">
+                                    <br />
+  
+                                    <button
+                                      class="btn btn-danger mt-2"
+                                      (click)="removeexperience(i)"
+                                    >
+                                      -
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+  
+                      <div class="card-default">
+                        <div class="card-body">
+                          <div class="row">
+                            <!-- <button class="btn btn-primary mb-1" onclick="location.href='/preonboarding_complete';">Submit</button> -->
+                            <button
+                              type="submit"
+                              class="btn btn-primary ml-2 mb-1"
+                              style="width: 10%"
+                              [disabled]="!registerForm.valid"
+                            >
+                              Update
+                            </button>
+  
+                            <button
+                              class="btn btn-dark ml-2 mb-1"
+                              style="width: 10%"
+                              type="reset"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- </form> -->
+  
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="attachment" [ngClass]="{ 'active':activeTab==='attachment'}" >
+                    <div class="row">
+                      <form
+                        [formGroup]="attachmentForm"
+                        (ngSubmit)="attachment()"
+                      >
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for=""
+                              >Attachment Information<span class="required"
+                                >*</span
+                              ></label
+                            >
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <select
+                              (change)="selectAttach($event.target)"
+                              class="form-control"
+                              formControlName="select"
+                              Placeholder="Select Attachment"
+                              id="floatingInput1"
+                              [ngClass]="{
+                                'is-invalid': submitted && A.select.errors
+                              }"
+                            >
+                              <option value="" [selected]="true" disabled>
+                                Select Attachment
+                              </option>
+                              
+                              <option *ngFor="let a of attachOptions" [value]="a">
+                                {{ a }}
+                              </option>
+                            </select>
+  
+                            <div
+                              *ngIf="submitted && A.select.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="A.select.errors.required">
+                                Attachment is required
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <div class="custom-file">
+                              <!-- <input class="custom-file-input" id="customFile" type="file"   /> -->
+  
+                              <!-- <label class="custom-file-label" for="customFile">Upload Documents</label> -->
+                              <input
+                                type="hidden"
+                                formControlName="email"
+                                id="email"
+                                placeholder="{{ this.data }}"
+                              />
+                              <input
+                                class="custom-file-label"
+                                for="customFile"
+                                type="file"
+                                (change)="onChange($event)"
+                                formControlName="profile"
+                                id="profile"
+                                class="form-control"
+                                [ngClass]="{
+                                  'is-invalid': submitted && A.profile.errors
+                                }"
+                              />
+                              <div
+                                class="form-label text-danger"
+                                *ngIf="this.selectedattachfile == true"
+                              >
+                                Please select valid file type
+                              </div>
+                              <div
+                                *ngIf="submitted && A.profile.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="A.profile.errors.required">
+                                  File is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+  
+                          <div class="form-group col-md-12">
+                            <!-- <a  class="btn btn-primary">Save and Add</a></div> -->
+                            <!-- <button class="btn btn-primary" (click)="attachment();GetAttachments();"   >Save and Add</button></div> -->
+                            <button class="btn btn-primary" type="submit">
+                              Save and Add
+                            </button>
+                          </div>
+                        </div>
+  
+                        <div
+                          class="form-group col-md-3 container"
+                          *ngIf="loading"
+                        >
+                          <p>Loading data.............</p>
+                        </div>
+  
+                        <hr />
+                        <!-- {{fetchAttachment | json}} -->
+                        <!-- <div class="row" *ngFor="let i of fetchAttachment" > -->
+                        <!-- <div class="row" *ngFor="let i of fetchAttachment; let a=index" >
+                       
+                         {{i | json}}
+                      </div> -->
+  
+                        <!-- <table>
+                        <tr>
+                          <th>
+                         abcd
+                        </th></tr>
+                        <tr *ngFor="let i of fetchAttachment;">
+                          <td>{{i|json}}</td>
+                        </tr> -->
+                        <!-- </table> -->
+                        <div
+                          class="overflow-auto p-3 bg-light"
+                          style="max-width: 60%; max-height: 250px"
+                        >
+                          <div
+                            class="row"
+                            *ngFor="let i of fetchAttachment; let a = index"
+                          >
+                            <div class="col-md-12">
+                              <label for=""
+                                >Done
+                                {{ i.created_at | date : "MMM d, y, hh:mm:ss a" }}
+                                | Doctype : {{ i.type }}</label
+                              >
+                              <span class="pull-right"
+                                ><a title="Edit">
+                                  <!-- <i class="fa fa-download" (click)="downloadAttachment()"> -->
+                                  <i
+                                    class="fa fa-download"
+                                    (click)="download(a)"
+                                    style="color: rgb(7, 11, 241)"
+                                  ></i>
+                                </a>
+                                <a title="Delete">
+                                  <i
+                                    class="fa fa-trash"
+                                    (click)="deleteAttachment(i.id)"
+                                    style="color: rgb(7, 11, 241)"
+                                  ></i></a
+                              ></span>
+                              <div class="col-md-12">
+                                <p>
+                                  •
+                                  <a style="color: blue">{{ i.originalname }}</a>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <hr />
+                      </form>
+                    </div>
+                  </div>
+                  <!-- /.tab-pane -->
+  
+                  <div class="tab-pane" id="notes" [ngClass]="{ 'active':activeTab==='notes'}">
+                    <form
+                      method="post"
+                      [formGroup]="notesForm"
+                      (ngSubmit)="notes(data)"
+                    >
+                      <div class="form-row">
+                        <div class="form-group col-md-12">
+                          <label for=""
+                            >Add Notes<span class="required">*</span></label
+                          >
+                          <textarea
+                            class="form-control"
+                            placeholder="Notes"
+                            id="floatingInput"
+                            formControlName="add_notes"
+                            class="form-control"
+                            [ngClass]="{
+                              'is-invalid': submitted && n.add_notes.errors
+                            }"
+                            id="inputadd_notes4"
+                          ></textarea>
+                          <div
+                            *ngIf="submitted && n.add_notes.errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="n.add_notes.errors.required">
+                              Notes is required
+                            </div>
+                          </div>
+                          <!-- <a class="btn btn-primary mt-1" (click)="notes()">Save and Add</a> -->
+                          <button type="submit" class="btn btn-primary mt-1">
+                            {{ editMode ? "Update Notes" : "Save and Add" }}
+  
+                            <!-- {{editMode! "Save and Add"}} -->
+                          </button>
+                        </div>
+                      </div>
+                      <hr />
+                      <!-- {{ fetchNotes | json }} -->
+                      <div
+                        class="overflow-auto"
+                        style="max-width: 60%; max-height: 250px"
+                      >
+                        <div class="row" *ngFor="let i of fetchNotes; index as n">
+                          <div class="col-md-12">
+                            <label for=""
+                              >Done {{ i.created_at | date : "medium" }}
+                            </label>
+                            <span class="pull-right">
+                              <!-- <a title="Edit" style="color: rgb(7, 11, 241); "><i class="fa fa-edit" (click)="updateNotes(i.Id)" ></i></a> -->
+                              <a title="Edit" style="color: rgb(7, 11, 241)"
+                                ><i
+                                  class="fa fa-edit"
+                                  (click)="updateNotes(i.Id, n)"
+                                ></i
+                              ></a>
+  
+                              <a title="Delete" style="color: rgb(7, 11, 241)"
+                                ><i
+                                  class="fa fa-trash"
+                                  (click)="deleteNotes(i.Id)"
+                                ></i></a
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="{{ i.add_notes }}"
+                              disabled
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+        </section>
+      </div>
+  
+      <div><app-footer></app-footer></div>
+    </div>
+  </body>
+  

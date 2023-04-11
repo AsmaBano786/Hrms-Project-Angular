@@ -1,0 +1,230 @@
+<div><app-header></app-header></div>
+      
+   
+    <div ><app-left-panel></app-left-panel></div>
+   
+<div class="content-wrapper" style="height:auto;">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1 class="m-0">Leave</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <form method="post" [formGroup]="editApplyleave">
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">Update Apply Leave</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="form-group col-md-4">
+                                <label for="">Employee Id<span class="text-danger">*</span></label>
+                                <input type="text" readonly placeholder="Employee Id" formControlName="employee_id"
+                                    class="form-control" id=""
+                                    [ngClass]="{ 'is-invalid': submitted && f.employee_id.errors }">
+                                <div *ngIf="submitted && f['employee_id'].errors" class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['employee_id'].errors['required']">Employee id is
+                                        required.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">Employee Name<span class="text-danger">*</span></label>
+                                <input type="text" readonly placeholder="Employee Name" formControlName="emp_name"
+                                    class="form-control" id=""
+                                    [ngClass]="{ 'is-invalid': submitted && f.emp_name.errors }">
+                                <div *ngIf="submitted && f['emp_name'].errors" class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['emp_name'].errors['required']">Employee name is
+                                        required.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">Leave Type<span class="text-danger">*</span></label>
+                                <select class="form-select" formControlName="leave_type"
+                                    [ngClass]="{ 'is-invalid': submitted && f.leave_type.errors }"
+                                    id="inputleave_type4">
+                                    <option value="">Select here</option>
+                                    <option value="Casual Leave">Casual Leave</option>
+                                    <option value="Earned Leave">Earned Leave</option>
+                                    <option value="Leave Without Pay">Leave Without Pay</option>
+                                    <option value="Maternity Leave">Maternity Leave</option>
+                                    <option value="Sabbatical Leave">Sabbatical Leave</option>
+                                    <option value="Sick Leave">Sick Leave</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div *ngIf="submitted && f['leave_type'].errors" class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['leave_type'].errors['required']">Leave type is
+                                        required.</div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-4">
+                                <label for="">From Date<span class="text-danger">*</span></label>
+                                <input type="date" formControlName="date_from" [(ngModel)]="date_from"
+                                    class="form-control" [ngClass]="{ 'is-invalid': submitted && f.date_from.errors }"
+                                    id="inputdate_from" placeholder="date">
+                                <div *ngIf="submitted && f['date_from'].errors" class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['date_from'].errors['required']">From Date is
+                                        required.</div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-4">
+                                <label for="">To Date<span class="text-danger">*</span></label>
+                                <input type="date" min="{{date_from}}" formControlName="date_to" class="form-control"
+                                    id="" placeholder="date"
+                                    [ngClass]="{ 'is-invalid': submitted && f.date_to.errors }">
+                                <div *ngIf="submitted && f['date_to'].errors" class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['date_to'].errors['required']">To Date is
+                                        required.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">Reporting Manager<span class="text-danger">*</span></label>
+                                <select class="form-select" formControlName="reporting_manager"
+                                    [ngClass]="{ 'is-invalid': submitted && f.reporting_manager.errors }"
+                                    id="inputreporting_manager4">
+                                    <option value="">Select here</option>
+                                    <option value="Pawas Goyal">Pawas Goyal</option>
+                                    <option value="Jagarti Thakur">Jagarti Thakur</option>
+                                </select>
+                                <div *ngIf="submitted && f['reporting_manager'].errors"
+                                    class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['reporting_manager'].errors['required']">Reporting Manager is
+                                        required.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">Email Id<span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" class="form-control" id="floatingInput"
+                                    placeholder="Email Id" formControlName="email" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="inputemail4" />
+
+                                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['email'].errors['required']">Email Id is
+                                        required.</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">Additional Email Id<span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" class="form-control" id="floatingInput"
+                                    placeholder="Additional Email ID" formControlName="additional_email"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.additional_email.errors }"
+                                    id="inputadditional_email4" />
+
+                                <div *ngIf="submitted && f['additional_email'].errors"
+                                    class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['additional_email'].errors['required']">Additional email
+                                        id is required</div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">Reason for leave<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="floatingInput"
+                                    formControlName="reason_for_leave"
+                                    [ngClass]="{ 'is-invalid': submitted && f.reason_for_leave.errors }" id="inputCity4"
+                                    placeholder="Reason for leave" />
+                                <div *ngIf="submitted && f['reason_for_leave'].errors"
+                                    class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['reason_for_leave'].errors['required']">Reason for leave is required
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">POC(employee) in Absence</label>
+                                <input type="text" placeholder="Employee Name" formControlName="poc_employee"
+                                    class="form-control" id="">
+                                <!-- <div *ngIf="f.poc_employee.touched && f.poc_employee.invalid"
+                                    class="invalid-feedback">
+                                    <div *ngIf="f.poc_employee.errors.required">Employee id is
+                                        required.</div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">POC Mobile No.</label>
+                                <input type="number" placeholder="Employee Mobile No." formControlName="poc_mobile"
+                                    class="form-control" id="">
+                                <!-- <div *ngIf="f.poc_mobile.touched && f.poc_mobile.invalid"
+                                    class="invalid-feedback">
+                                    <div *ngIf="f.poc_mobile.errors.required">Employee id is
+                                        required.</div>
+                                </div> -->
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="">POC Email Id</label>
+                                <input type="email" id="email" name="email" placeholder="Employee Email Id"
+                                    formControlName="poc_email" class="form-control">
+                                <!-- <div *ngIf="f.poc_email.touched && f.poc_email.invalid"
+                                    class="invalid-feedback">
+                                    <div *ngIf="f.poc_email.errors.required">Employee id is
+                                        required.</div>
+                                </div> -->
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="">Status<span class="text-danger">*</span></label>
+                                <select class="form-select" formControlName="Action"
+                                    [ngClass]="{ 'is-invalid': submitted && f.Action.errors }"
+                                    id="inputAction4">
+                                    <option value="">Select Status</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="On-Hold">On-Hold</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Reject">Reject</option>
+                                </select>
+                                
+                                <div *ngIf="submitted && f['Action'].errors" class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['Action'].errors['required']">Status is
+                                        required.</div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="form-group col-md-6">
+                                <label for="">Describe Reason</label>
+                                <textarea type="text"  placeholder="Describe Reason" formControlName="describe_reason"
+                                    class="form-control" id=""
+                                    [ngClass]="{ 'is-invalid': submitted && f.describe_reason.errors }"></textarea>
+                                <div *ngIf="submitted && f['describe_reason'].errors" class="invalid-feedback col-md-3">
+                                    <div *ngIf="f['describe_reason'].errors['required']">Describe Reason is
+                                        required.</div>
+                                </div>
+                            </div>
+
+
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-primary mb-1"
+                                    (click)="updateLeave()">Update</button>
+                                <button type="reset" class="btn border bg-light ml-2 mb-1"
+                                    [routerLink]="['/employee-apply-leave']">Cancel</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>
+
+
+<div><app-footer></app-footer></div>

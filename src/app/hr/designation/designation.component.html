@@ -1,0 +1,102 @@
+<!--  -->
+<div class="wrapper">
+
+  <div><app-header></app-header></div>
+
+  <!-- end header code here............... -->
+  <!-- start leftpanel code here............... -->
+  <div><app-left-panel></app-left-panel></div>
+  <!-- end leftpanel code here............... -->
+  <div class="content-wrapper" style="height:auto">
+    <div class="content-header">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <h1 class="m-0">Designation View</h1>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="row pt-1">
+
+                  <div class="col-md-3">
+                    <select class="form-select border-bottom" (change)="search1($event); search(); ">
+                      <option value="">Designation Name</option>
+                      <option *ngFor="let designation of nik">
+                        {{designation.designation_name}}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-12 text-right">
+                    <a class="btn btn-primary" routerLink="designation-details">+ Add Designation Details</a>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <form method="get" [formGroup]="Designation">
+                <div class="card-body">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <!-- <th>
+                          <input class="" type="checkbox" (change)="checkUncheckAll()" [(ngModel)]="masterSelected"
+                            [ngModelOptions]="{standalone: true}">
+                        </th> -->
+                        <th>S No.</th>
+                        <th>Designation Name </th>
+                        <th>Mail Alias</th>
+                        <th>Added By </th>
+                        <th>Added Time</th>
+                        <th>Modified By </th>
+                        <th>Modified Time </th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let pp of filteredData||nik let i = index;">
+                        <!-- <td> <input class="" type="checkbox" (change)="isAllSelected()"
+                            [ngModelOptions]="{standalone: true}" [(ngModel)]="pp.isSelected"></td> -->
+                            <td>{{ i + 1 }}</td>
+                        <td><a [routerLink]="['/edit-designation/'+ pp.id]">{{pp.designation_name}}</a></td>
+                        <!-- {{pp.isSelected|json}} -->
+                        <td>{{pp.mail_alias}}</td>
+                        <!-- <td>{{pp.status}}</td> -->
+                        <td>{{pp.added_by}}</td>
+                        <td>{{pp.added_time | date :'medium'}}</td>
+                        <td>{{pp.modified_by}}</td>
+                        <td>{{pp.modified_time | date :'medium'}}</td>
+                        <td>
+                          <span class="pull-right">
+                            <a [routerLink]="['/edit-designation/'+ pp.id]" title="Edit">
+                              <i class="fa fa-edit" style="color:rgb(7, 136, 241)"></i></a>
+                            &nbsp;
+                            <a title="Delete" (click)="deleteDesig(pp.id)">
+                              <i class="fa fa-trash" style="color:rgb(7, 136, 241)"></i></a>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+
+                    <!--<tfoot><tr><th>Rendering engine</th><th>Browser</th><th>Platform(s)</th><th>Engine version</th><th>CSS grade</th></tr></tfoot>-->
+                  </table>
+                </div>
+              </form>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- start footer code here............... -->
+  <div><app-footer></app-footer></div>
+  <!-- end footer code here............... -->

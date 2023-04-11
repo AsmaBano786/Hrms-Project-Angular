@@ -1,0 +1,354 @@
+<div class="wrapper">
+  <!-- <div class="preloader">
+    <img class="animation__shake" src="dist/img/logo.png" alt="Logo" />
+  </div> -->
+  <!-- start header code here............... -->
+  <div><app-header></app-header></div>
+  <!-- end header code here............... -->
+  <!-- start leftpanel code here............... -->
+  <div><app-left-panel></app-left-panel></div>
+  <!-- end leftpanel code here............... -->
+  <div class="content-wrapper">
+    <div class="content-header">
+      <div class="col-sm-12">
+        <strong> <h3>Company Information</h3></strong>
+      </div>
+      <form [formGroup]="companyDtailForm" (ngSubmit)="submit()">
+
+        <div class="card card-default">
+          <div class="card card-default">
+            <div class="card-header">
+              <h3 class="card-title">
+                <strong> Company Details</strong>
+              </h3>
+            </div>
+
+            <div class="card-body p-5">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for=""
+                      >Company Name <span class="" style="color: red">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id=""
+                      placeholder="Company Name"
+                      id="floatingInput1"
+                      formControlName="company_name"
+                      (keypress)="keyPressAlphabet($event)"
+                    />
+                    <div
+                      *ngIf="
+                        company_name.invalid &&
+                        (company_name.dirty || company_name.touched)
+                      "
+                      class="form-label text-danger"
+                    >
+                      <div *ngIf="company_name.errors?.['required']">
+                        personal email is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for=""
+                      >Company Email <span class="" style="color: red">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="floatingInput2"
+                      placeholder="Company Email"
+                      formControlName="company_email"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for=""
+                      >Contact No <span class="" style="color: red">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="floatingInput3"
+                      placeholder="Contact No"
+                      formControlName="contact_no"
+                    />
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for=""
+                      >Portal Name <span class="" style="color: red">*</span>
+                    </label>
+                    <input
+                      type="url"
+                      class="form-control"
+                      id="floatingInput3"
+                      placeholder="portal"
+                      formControlName="contact_no"
+
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for=""
+                      >Industry <span class="" style="color: red">*</span>
+                    </label>
+                    <select name="" id="floatingInput4" class="form-select form-control" formControlName = "industry">
+                      <option value="">Select Industry</option>
+                      <option value="">Information Technology</option>
+                      <option value="">Maketing</option>
+                      <option value="">BPO</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="" class=""
+                      >Number of Employee
+                      <span class="" style="color: red">*</span>
+                    </label>
+                    <select name="" id="floatingInput5" class="form-select form-control" formControlName = "number_of_employee">
+                      <option value="">select here</option>
+                      <option value="">1-50</option>
+                      <option value="">50-100</option>
+                      <option value="">100-200</option>
+                      <option value="">500-1000</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for=""
+                      >Tax Information
+                      <span class="" style="color: red">*</span>
+                    </label>
+                    <input
+                      type="url"
+                      class="form-control"
+                      id="floatingInput6"
+                      placeholder="Tax Information"
+                      formControlName = "tax_information"
+                    />
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for=""
+                      >Company Logo
+                    </label>
+                    <div class="custom-file">
+                      <input
+                        class="custom-file-input"
+                        id="customFile"
+                        type="file"
+                        formControlName="company_logo"
+                      />
+                      <label class="custom-file-label" for="customFile"
+                        >Upload Company Logo</label
+                      >
+                    </div>
+                  </div>
+                  <!-- <button style="background-color: rgb(84, 84, 224)" >invite user</button> -->
+                  <!-- <div class="form-group row">
+                  <label for="" class="col-md-4 "> or sign in using <span class=""><a href="https://www.facebook.com/cylsyssoftwaresolutionpvtltd" target="_blank"><i class="fab fa-facebook social mr-2"></i></a> <a href="https://www.linkedin.com/company/2310187" target="_blank"><i class="fab fa-linkedin-in social mr-2"></i></a>  <a href="https://www.skype.com/pawasgoyal" target="_blank"><i class="fab fa-skype social mr-2"></i></a> </span>
+                  </label>
+                 
+                </div> -->
+                </div>
+              </div>
+              <br />
+            </div>
+          </div>
+
+          <div class="card card-default">
+            <div class="card-header">
+              <h3 class="card-title">
+                <strong>Address</strong>
+              </h3>
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="">Country</label>
+                  <select
+                    class="form-control"
+                    (change)="
+                      onChangeCountry($any($event.target).value)
+                    "
+                    class="form-control"
+                    id="floatingInput1"
+                    formControlName="country"
+                    [(ngModel)]="Countryselected"
+                    name="India"
+                  >
+                    <!-- <option value="" disabled>
+                      Select Country
+                    </option> -->
+                    <!--  -->
+
+                    <option
+                      *ngFor="
+                        let country1 of countryInfo;
+                        let i = index
+                      "
+                      [value]="country1.CountryName"
+                    >
+                      {{ country1.CountryName }}
+                    </option>
+                  </select>
+
+                  <!-- <div
+                    *ngIf="
+                      address.controls[i].get('country')
+                        ?.invalid &&
+                      (address.controls[i].get('country')
+                        ?.dirty ||
+                        address.controls[i].get('country')
+                          ?.touched)
+                    "
+                  >
+                    <div
+                      class="text-danger"
+                      *ngIf="address.controls[i].get('country')?.errors?.['required']"
+                    >
+                      Country is required.
+                    </div>
+                  </div> -->
+                </div>
+                <div class="col-md-6">
+                  <label for="">State/Province</label>
+                  <select
+                    class="form-control"
+                    (click)="
+                      onChangeState($any($event.target).value)
+                    "
+                    id="floatingInput2"
+                    formControlName="state"
+                  >
+                    <option>Select State</option>
+                    <option *ngIf="stateInfo == ''" value="-1">
+                      --Select State--
+                    </option>
+                    <option
+                      *ngFor="
+                        let state of stateInfo;
+                        let j = index
+                      "
+                      [value]="state.StateName"
+                    >
+                      {{ state.StateName }}
+                    </option>
+                  </select>
+                  <!-- <div
+                    *ngIf="
+                      address.controls[i].get('state')
+                        ?.invalid &&
+                      (address.controls[i].get('state')
+                        ?.dirty ||
+                        address.controls[i].get('state')
+                          ?.touched)
+                    "
+                  >
+                    <div
+                      class="text-danger"
+                      *ngIf="address.controls[i].get('state')?.errors?.['required']"
+                    >
+                      State is required.
+                    </div>
+                  </div> -->
+                </div>
+                <div class="col-md-6">
+                  <label for="">City</label>
+                  <select
+                    class="form-control"
+                    (change)="
+                      onChangeCity($any($event.target).value)
+                    "
+                    id="floatingInput"
+                    formControlName="city"
+                  >
+                    <option>Select City</option>
+                    <option *ngIf="cityInfo == ''" value="-1">
+                      --Select CIty--
+                    </option>
+                    <!-- <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option> -->
+                    <option
+                      *ngFor="
+                        let city of cityInfo;
+                        let k = index
+                      "
+                      [value]="city"
+                    >
+                      {{ city }}
+                    </option>
+                  </select>
+                  <!-- <div
+                    *ngIf="
+                      address.controls[i].get('city')
+                        ?.invalid &&
+                      (address.controls[i].get('city')?.dirty ||
+                        address.controls[i].get('city')
+                          ?.touched)
+                    "
+                  >
+                    <div
+                      class="text-danger"
+                      *ngIf="address.controls[i].get('city')?.errors?.['required']"
+                    >
+                      City is required.
+                    </div>
+                  </div> -->
+                </div>
+                <div class="form-group col-md-6">
+                  <label for=""
+                    >ZIP/PIN Code <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="floatingInput10"
+                    placeholder="ZIP/PIN Code"
+                    formControlName="pin_code"
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="">Street Address</label>
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    id="floatingInput11"
+                    placeholder="Street Address"
+                    formControlName="street_address"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+          <div class="col-md-3">
+            <a>
+              <button type="submit" class="btn btn-primary mb-1">Submit</button></a
+            >
+            <a>
+              <button class="btn border ml-2 mb-1">Cancel</button></a
+            >
+          </div>
+          <br />
+        </div>
+      </form>
+      <!-- <div class="col-md-3">
+        
+          <button type="submit"  class="btn btn-primary mb-1">Submit</button>
+        
+        
+          <button class="btn border ml-2 mb-1">Cancel</button>
+        
+      </div> -->
+    </div>
+  </div>
+</div>

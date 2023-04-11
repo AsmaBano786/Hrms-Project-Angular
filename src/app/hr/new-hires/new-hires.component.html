@@ -1,0 +1,46 @@
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center"> <img class="animation__shake"
+        src="dist/img/logo.png" alt="Logo" height="60" width="60"> </div> -->
+        <div><app-header></app-header></div>
+      
+        <!-- end header code here............... -->
+        <!-- start leftpanel code here............... -->
+        <div ><app-left-panel></app-left-panel></div>
+
+
+
+
+
+
+    <div class="content-wrapper"style="height: auto;">
+      <div class="content-header">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1>New Hires</h1><br><br>
+            <div class="row mb-2">
+              
+            <div class="card mr-5 ml-5" style="width: 20rem;" *ngFor="let i of newHire">
+              <p class="text-center">{{i.joining_date| date:"mediumDate"}} </p>
+              <img class="card-img-top" src="https://hrms-api-47nx.onrender.com/api/v1/newhire/{{i?.name}}" height="250px" alt="Card image cap">
+          
+              <div class="card-body">
+                <h5 class="text-center">{{i.emp_id}}<strong> {{i.emp_name}}</strong></h5>
+                <p class="text-center">{{i.designation}} </p>
+                <p class="text-center"><a href="aleokirb@zylker.com" class="card-link">{{i.company_email_id}}</a></p>
+              </div>
+            </div> 
+
+             
+                
+            </div> 
+          </div>
+        </div>
+       </div>  
+   </div>
+    
+
+   <div><app-footer></app-footer></div>
+   </div>
+   </body>

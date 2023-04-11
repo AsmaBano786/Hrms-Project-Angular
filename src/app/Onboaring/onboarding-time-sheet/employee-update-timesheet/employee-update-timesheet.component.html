@@ -1,0 +1,96 @@
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+    <div><app-header></app-header></div>
+<div><app-onboarding-left-panel></app-onboarding-left-panel></div>
+<!-- end header code here............... -->
+<!-- start leftpanel code here............... -->
+
+  <div class="content-wrapper" style="height: auto;">
+    <div class="content-header">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <h1>Update Timesheet</h1>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <br>
+                <br>
+                <div class="row pt-1"></div>
+
+                <form [formGroup]="EdittimesheetForm" (ngSubmit)="updateTimesheett()">
+                  <div class="row">
+
+                    <div class="col-md-6">
+                      <div class="input-group mb-3">
+                        <input type="date" name="joining_date"  class="form-control" formControlName="Date"
+                          id="date" readonly placeholder="Date">
+                      </div>
+                    </div>
+                   
+                     
+                    <div class="col-md-6">
+                      <div class="input-group mb-3">
+
+                        <input type="text" name="task" formControlName="Clients" class="form-control" id="task" placeholder="Enter Clients">
+                          <!-- <select  name="clintName" id="client" class="form-select" formControlName="Clients" >
+                              <option selected value="" disabled>Select client</option>
+                              <option *ngFor="let client of projectData" [value]="client.client">{{client.client}}</option>
+                        </select> -->
+                      </div>
+                   </div>
+
+                   <div class="col-md-6">
+                      <div class="input-group mb-3">
+
+
+                        <input type="text" name="task" formControlName="Project" class="form-control" id="task" placeholder="Enter Project">
+                          <!-- <select name="projName" id="project" class="form-select" formControlName="Project" >
+                              <option selected value="" disabled>Select Project</option>
+                              <option *ngFor="let project of projectData" [value]="project.project">{{project.project}}</option>
+                                                 
+                          </select>  -->
+                    </div>
+                  </div>
+
+                    <div class="col-md-6">
+                      <div class="input-group mb-3">      
+                          <input type="text" name="Task" formControlName="Task" class="form-control" id="task" placeholder="Enter Task">
+                  &nbsp; &nbsp;
+                      <!-- <button type="button" class="btn btn-light border btn-sm"  formControlName="WorkingHours" >
+                        <a (click)="checkTimeSheet()"  >
+                          {{format(hours) }}:{{ format(minutes) }}:{{ format(seconds) }} <i
+                            class="fas fa-clock"></i></a>
+                      </button> -->
+                    </div>
+                  </div>
+                  </div>
+
+
+
+
+
+               
+
+
+                  <div class="row" class="col-6">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    &nbsp;
+                    <button class="btn btn-primary" type="Cancel"  [routerLink]="['/employee-timesheet']">Cancel</button>
+                  </div>
+                </form>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div><app-footer></app-footer></div>
+</div>
+</body>
+

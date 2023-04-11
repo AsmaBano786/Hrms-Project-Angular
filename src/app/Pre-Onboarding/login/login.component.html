@@ -1,0 +1,103 @@
+<!-- <p>login works!</p> -->
+
+
+<button
+
+routerLink="/login-Onboarding"
+routerLinkActive="active"
+class="btn btn-primary"
+
+>
+On-Boarding & Hr
+</button>
+<body class="hold-transition login-page">
+  
+
+  <div class="login-box text-center">
+    <div class="login-logo">
+      <a href="javascript://"
+        ><img src="../../../assets/dist/img/logo.png" />Cylsys
+        <span class="small">HRMS</span></a
+      >
+    </div>
+    <!-- /.login-logo -->
+    <div class="card pt-3 pb-5 rounded-lg">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Login-PreOnboarding</p>
+        <!-- <form> -->
+        <form
+          method="post"
+          [formGroup]="registerForm"
+          (ngSubmit)="loginProcess()"
+        >
+          <div>
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Email"
+              formControlName="Email"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.Email.errors }"
+              id="inputEmail4"
+            />
+            <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+              <div *ngIf="f.Email.errors.required">Email is required</div>
+              <div *ngIf="f.Email.errors.email">
+                Email must be a valid email address
+              </div>
+            </div>
+
+            <!-- <div class="input-group-append"> -->
+            <!-- <div class="input-group-text"> -->
+            <!-- <span class="fas fa-envelope"></span> -->
+            <!-- <i class="bi bi-envelope-fill"></i> -->
+            <!-- </div> -->
+            <!-- </div> -->
+          </div>
+          <br />
+          <div>
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              formControlName="Password"
+              [ngClass]="{ 'is-invalid': submitted && f.Password.errors }"
+              id="inputPassword4"
+            />
+            <!-- <span class="fas fa-lock"></span> -->
+            <div
+              *ngIf="submitted && f.Password.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.Password.errors.required">Password is required</div>
+
+              <div *ngIf="f.Password.errors.minlength">
+                Password must have 6 digit
+              </div>
+              <!-- <div *ngIf="this.registerForm.invalid">incorrect password</div> -->
+            </div>
+
+            <!-- <div class="input-group-append">  -->
+            <!-- <div class="input-group-text"> -->
+            <!-- <i class="bi bi-lock-fill"></i> -->
+            <!-- <span class="fas fa-lock"></span>  -->
+            <!-- </div> -->
+            <!-- </div>   -->
+          </div>
+          <br />
+          <div class="row" class="col-12">
+            <!-- /.col -->
+            <!-- <div class="col-12"> -->
+            <button type="submit" class="btn btn-primary btn-block">
+              Sign In
+            </button>
+            <!-- </div> -->
+            <!-- /.col -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>

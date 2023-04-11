@@ -1,0 +1,70 @@
+<div class="wrapper">
+    <div><app-header></app-header></div>
+    <div><app-left-panel></app-left-panel></div>
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h1 class="m-0">Knowledge Center</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal" data-whatever="@mdo"> + Add New</button>
+                                </div>
+                            </div>
+
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table class="table table-bordered ">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-1"> Sr. No.</th>
+                                            <th>Title</th>
+                                           <th>Description</th>
+                                            <th class="text-right col-1">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let Knowledge of allknowledgecenter.data; let i = index;">
+                                            <td>{{i+1}}</td>
+                                            <td><img src="assets/dist/img/logo.png" alt=" " class="img-size-50 mr-3 img-circle">  <a href={{Knowledge.Link}}>
+                                                {{Knowledge.Title}}</a></td>
+                                                <td>{{Knowledge.AddDescription}}</td>
+                                              
+                                            <td align="center">
+                                                <a [routerLink]="['/edit/'+Knowledge.employee_id]">
+                                                    <!-- <a routerLink="edit-apply-leave"> -->
+                                                    <i class="fas fa-edit"></i>
+                                                </a>&nbsp;&nbsp;
+
+                                                <a >
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                           
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

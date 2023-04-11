@@ -1,0 +1,72 @@
+<div><app-left-panel></app-left-panel></div>
+<div><app-header></app-header></div>    
+    <div class="content-wrapper" style="height: auto;">
+       
+       
+
+      <div class="content-header">
+       
+       
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1 class="m-0">Holiday</h1>
+          </div>
+        </div>
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row pt-1">
+                    
+                    <div class="col-md-12 text-right"><a [routerLink]="['/add-holiday']" class="btn btn-primary">+ Add
+                        Holiday</a> </div>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <form method="get" [formGroup]="Holiday" >
+                <div class="card-body">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                      <tr >
+                        <th>S No.</th>
+                        <th>Name of holiday</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>HolidayType</th>
+                        <th>No of day</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let pp of nik let i = index;">
+                        <td>{{ i + 1 }}</td>
+                        <td><a [routerLink]="['/edit-holiday/'+pp.HolidayId]"></a>{{pp.Name}}</td>
+                        <td>{{pp.Date}}</td>
+                        <td>{{pp.ApplicableFor}}</td>
+                        <td>{{pp.HolidayType}}</td>
+                        <td>{{pp.No_ofday_before_which_the_reminder_should_be_sent}}</td>
+                        <td>{{pp.Description}}</td>
+                       
+                        <td>
+                          <a [routerLink]="['/edit-holiday/'+pp.HolidayId]" (click)="getdata(pp)">
+                            <i class="fas fa-edit"></i></a> &nbsp;
+                            <a ><i class="fas fa-trash"  (click)="deleteholiday(pp.HolidayId)"></i></a></td>
+                      </tr>
+                    </tbody>
+                  
+                  </table>
+                </div>
+              </form>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+        </div>
+      </div>
+    </div>
+   <div><app-footer></app-footer></div>

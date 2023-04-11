@@ -1,0 +1,39 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>table</title>  
+    <style>  
+        table{  
+            border-collapse: collapse;  
+            width: 100%;   
+        }  
+    th,td{  
+        border: 2px solid green;   
+        padding: 15px;  
+    }  
+               
+    </style>  
+  </head>  
+
+<body style="margin-top: 100px; margin-left:50px; margin-right:50px ">  
+    <div class="col-md-12 text-right">
+        <a [routerLink]="['/test1']" class="btn btn-primary">+ Add details</a>
+    </div>
+    <br>
+  <table>  
+    <tr>  
+        <th>Employee Name</th>  
+        <th>Email</th>  
+        <th>Designation</th>  
+        <th>Mobile No.</th>  
+    </tr>  
+    <tr *ngFor="let i of this.sessiondata"> 
+       <td>{{i.fName}} {{i.lName}}</td>  
+        <td>{{i.Email}}</td> 
+        <td>{{i.Designation}}</td> 
+        <td>{{i.Phone}}</td> 
+    </tr>  
+      
+</table>  
+</body>  
+</html>  

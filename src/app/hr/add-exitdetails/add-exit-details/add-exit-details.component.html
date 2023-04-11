@@ -1,0 +1,328 @@
+<div class="wrapper">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center"> <img class="animation__shake"
+          src="dist/img/logo.png" alt="Logo" height="60" width="60"> </div> -->
+    
+          <div><app-header></app-header></div>
+      
+          <!-- end header code here............... -->
+          <!-- start leftpanel code here............... -->
+          <div ><app-left-panel></app-left-panel></div>
+    
+    <div class="content-wrapper"style="height: auto;">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h1 class="m-0">Add Employee Exit Details</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="tab-content">
+                <form method="post" [formGroup]="AddExitDetails" (ngSubmit)="submitData()">
+                    <div class="active tab-pane" id="info">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title"><strong>Separation </strong></h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"> <i
+                                            class="fas fa-minus"></i> </button>
+                                </div>
+                            </div>
+
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Employee ID<span class="text-danger">*</span></label>
+
+                                      
+                                        <!-- <input (keypress)="keyPressAlphaNumeric($event)" placeholder="Employee ID" type="text"class="form-control"  formControlName="Employee_id"    [ngClass]="{ 'is-invalid': submitted && f.Employee_id.errors }"> -->
+                                        
+                                        <select class="form-control"  formControlName="Employee_id" (change)="changeEmpName($event)"   [ngClass]="{ 'is-invalid': submitted && f.Employee_id.errors }">
+                                            <option selected="selected" value="">Select Employee Id
+                                            </option>
+                                            <option *ngFor="let i of alldata">
+                                                {{i.employee_id}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f.Employee_id.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Employee_id.errors.required"> This field is required.
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Employee Name<span class="text-danger">*</span></label>
+                                        <input (keypress)="keyPressAlphabet($event)"  value={{this.getEmpName}} ngModel={{this.getEmpName}}   placeholder="Employee Name" type="text" class="form-control" formControlName="Employee_Name"    [ngClass]="{ 'is-invalid': submitted && f.Employee_Name.errors }">
+                                        <div *ngIf="submitted && f.Employee_Name.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Employee_Name.errors.required"> This field is required.
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Exit Apply Date<span class="text-danger">*</span></label>
+                                        <input class="form-control" formControlName="Exit_Apply_Date" type="date"
+                                            id="calendar" name="calendar"
+                                            [ngClass]="{ 'is-invalid': submitted && f.Exit_Apply_Date.errors }">
+                                        <div *ngIf="submitted && f.Exit_Apply_Date.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Exit_Apply_Date.errors.required"> This field is required.
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Separation Date<span class="text-danger">*</span></label>
+                                        <input class="form-control" formControlName="Separation_Date" type="date"
+                                            id="calendar" name="calendar"
+                                            [ngClass]="{ 'is-invalid': submitted && f.Separation_Date.errors }">
+                                        <div *ngIf="submitted && f.Separation_Date.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Separation_Date.errors.required"> This field is required.
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="">Interviewer<span class="text-danger">*</span></label>
+                                        <select class="form-select" formControlName="Interviewer"
+                                            [ngClass]="{ 'is-invalid': submitted && f.Interviewer.errors }"
+                                            id="inputInterviewer4">
+                                            <option value="" disabled>Select </option>
+                                            <option value="Sayali Ashish Anande 1 ">Jagrati Thakur</option>
+                                            <option value="Allan Francis S1">Pawas Goyal</option>
+                                            <option value="Aleo Kirb S2">Aparna Pathak</option>
+                                   
+                                        </select>
+                                        <div *ngIf="submitted && f.Interviewer.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Interviewer.errors.required"> This field is required.</div>
+                                        </div>
+                                    </div>
+                                  
+
+                                    <div class="form-group col-md-6">
+                                        <label for="">Reason For Leaving<span class="text-danger">*</span></label>
+                                        <select class="form-select" formControlName="Reason_for_Leaving"
+                                            [ngClass]="{ 'is-invalid': submitted && f.Reason_for_Leaving.errors }"
+                                            id="inputReason_for_Leaving4">
+
+                                            <option value="" disabled>Select </option>
+                                            <option value="Better Employment Conditions"> Better Employment Conditions
+                                            </option>
+                                            <option value="Career Prospect"> Career Prospect </option>
+                                            <option value="Death"> Death </option>
+                                            <option value="Dessertion"> Dessertion </option>
+                                            <option value="Dismissed"> Dismissed </option>
+                                            <option value="Dissatisfaction with the job"> Dissatisfaction with the job
+                                            </option>
+                                            <option value="Emigrating"> Emigrating </option>
+                                            <option value="Health"> Health </option>
+                                            <option value=" Higher Pay"> Higher Pay</option>
+                                            <option value="Personality Conflicts"> Personality Conflicts </option>
+                                            <option value="Retirement"> Retirement </option>
+                                            <option value="Retrenchment"> Retrenchment </option>
+                                        </select>
+                                        <div *ngIf="submitted && f.Reason_for_Leaving.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Reason_for_Leaving.errors.required"> This field is required.</div>
+                                        </div>
+                                    </div>
+                                  
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="card-header">
+                                <h3 class="card-title"> <strong>Questionairre</strong></h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"> <i
+                                            class="fas fa-minus"></i> </button>
+                                </div>
+                            </div><br>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label> Working for this organization again<span class="text-danger">*</span></label>
+                                        <select class="form-select" id="Org"
+                                        [ngClass]="{ 'is-invalid': submitted && f.Working_for_this_organization.errors }"
+                                            formControlName="Working_for_this_organization">
+                                            <option value="" disabled>Select </option>
+                                            <option value="Yes"> Yes </option>
+                                            <option value="No"> No </option>
+                                        </select>
+                                        <div *ngIf="submitted && f.Working_for_this_organization.errors" class="invalid-feedback">
+                                           
+                                            <div *ngIf="f.Working_for_this_organization.errors.required"> This field is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label> What did you like the most of the organization<span class="text-danger">*</span></label>
+                                        <input  (keypress)="keyPressAlphabet($event)" class="form-control" type="text" id="text"
+                                            formControlName="What_did_you_like_the_most_of_the_organization" placeholder="What did you like the most of the organization" [ngClass]="{ 'is-invalid': submitted && f.What_did_you_like_the_most_of_the_organization.errors }">
+                                        <div *ngIf="submitted && f.What_did_you_like_the_most_of_the_organization.errors" class="invalid-feedback"
+                                            class="invalid-feedback">
+                                            <div
+                                                *ngIf="f.What_did_you_like_the_most_of_the_organization.errors.required">
+                                                This field is required.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Think the organization do to improve staff welfare<span class="text-danger">*</span></label>
+                                        <input  (keypress)="keyPressAlphabet($event)" class="form-control" type="text" id="text"
+                                      placeholder="Think the organization do to improve staff welfar"      formControlName="Think_the_organization_do_to_improve_staff_welfare"  [ngClass]="{ 'is-invalid': submitted && f.Think_the_organization_do_to_improve_staff_welfare.errors }">
+                                        <div *ngIf="submitted && f.Think_the_organization_do_to_improve_staff_welfare.errors" class="invalid-feedback"
+                                            class="invalid-feedback">
+                                            <div
+                                                *ngIf="f.Think_the_organization_do_to_improve_staff_welfare.errors.required">
+                                                This field is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label> Anything you wish to share with us<span class="text-danger">*</span></label>
+                                        <input placeholder="Anything you wish to share with us" (keypress)="keyPressAlphabet($event)" class="form-control" type="text" id="text"
+                                            formControlName="Anything_you_wish_to_share_with_us"  [ngClass]="{ 'is-invalid': submitted && f.Anything_you_wish_to_share_with_us.errors }">
+                                        <div *ngIf="submitted && f.Anything_you_wish_to_share_with_us.errors" class="invalid-feedback"
+                                            class="invalid-feedback">
+                                            <div *ngIf="f.Anything_you_wish_to_share_with_us.errors.required">
+                                                This field is required.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card-header">
+                                    <h3 class="card-title"> <strong>Checklist for Exit Interview</strong></h3>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Company Vehicle handed in<span class="text-danger">*</span></label>
+                                        <input placeholder="Company Vehicle handed in" (keypress)="keyPressAlphabet($event)" class="form-control" type="text" id="text"
+                                            formControlName="Company_Vechile_handed_in" [ngClass]="{ 'is-invalid': submitted && f.Company_Vechile_handed_in.errors }">
+                                        <div *ngIf="submitted && f.Company_Vechile_handed_in.errors" 
+                                            class="invalid-feedback">
+                                            <div *ngIf="f.Company_Vechile_handed_in.errors.required">
+                                                This field is  required.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label> All equipments handed in<span class="text-danger">*</span></label>
+                                        <input placeholder="All equipments handed in" (keypress)="keyPressAlphabet($event)"class="form-control" type="text" id="text"
+                                            formControlName="All_equipments_handed_in" [ngClass]="{ 'is-invalid': submitted && f.All_equipments_handed_in.errors }">
+                                        <div *ngIf="submitted && f.All_equipments_handed_in.errors" class="invalid-feedback">
+                                            <div *ngIf="f.All_equipments_handed_in.errors.required">
+                                                This field is  required.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>All library books submitted<span class="text-danger">*</span></label>
+                                        <input placeholder="All library books submitted" (keypress)="keyPressAlphabet($event)" class="form-control" type="text" id="text"
+                                            formControlName="All_library_books_submitted" [ngClass]="{ 'is-invalid': submitted && f.All_library_books_submitted.errors }">
+                                        <div *ngIf="submitted && f.All_library_books_submitted.errors" class="invalid-feedback"
+                                            class="invalid-feedback">
+                                            <div *ngIf="f.All_library_books_submitted.errors.required">
+                                                This field is required.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Security<span class="text-danger">*</span></label>
+                                        <input placeholder="Security" (keypress)="keyPressAlphabet($event)"class="form-control" type="text" id="text" formControlName="Security" [ngClass]="{ 'is-invalid': submitted && f.Security.errors }">
+                                        <div *ngIf="submitted && f.Security.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Security.errors.required">
+                                                This field is required.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Exit interview conducted<span class="text-danger">*</span></label>
+                                        <input placeholder="Exit interview conducted" (keypress)="keyPressAlphabet($event)"class="form-control" type="text" id="text"
+                                            formControlName="Exit_Interview_conducted"  [ngClass]="{ 'is-invalid': submitted && f.Exit_Interview_conducted.errors }">
+                                        <div *ngIf="submitted && f.Exit_Interview_conducted.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Exit_Interview_conducted.errors.required">
+                                            This field is required.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Notice period followed<span class="text-danger">*</span></label>
+                                        <input placeholder="Notice period followed" (keypress)="keyPressAlphabet($event)"class=" form-control" type="text" id="text"
+                                            formControlName="Notice_period_followed" [ngClass]="{ 'is-invalid': submitted && f.Notice_period_followed.errors }">
+                                        <div *ngIf="submitted && f.Notice_period_followed.errors" class="invalid-feedback"
+                                            >
+                                            <div *ngIf="f.Notice_period_followed.errors.required">
+                                                This field is required.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Resignation letter submitted<span class="text-danger">*</span></label>
+                                        <input placeholder="Resignation letter submitted" (keypress)="keyPressAlphabet($event)"class=" form-control" type="text" id="text"
+                                            formControlName="Resignation_letter_submitted" [ngClass]="{ 'is-invalid': submitted && f.Resignation_letter_submitted.errors }">
+                                        <div *ngIf="submitted && f.Resignation_letter_submitted.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Resignation_letter_submitted.errors.required">
+                                                This field is required.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Manager/Supervisor clearance<span class="text-danger">*</span></label>
+                                        <input placeholder="Manager/Supervisor clearance" (keypress)="keyPressAlphabet($event)"class="form-control" id="text" formControlName="Supervisor_clearance" [ngClass]="{ 'is-invalid': submitted && f.Supervisor_clearance.errors }">
+                                        <div *ngIf="submitted && f.Supervisor_clearance.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Supervisor_clearance.errors.required">
+                                                This field is  required.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+                                <div class="card-body">
+
+                                    <button type="submit" class="btn btn-primary mb-1">Submit</button>
+
+                                    <button type="button" (click)="submitDataAndNew()"  class="btn border bg-light ml-2 mb-1">Submit and New</button>
+
+                                    <!-- <button ng-click="save(myForm)" ng-disabled="myForm.$pristine">
+                                        {{buttonText}}
+                                    </button> -->
+
+                                    <button type="reset" class="btn border bg-light ml-2 mb-1" [routerLink]="['/add-exit-view']">Cancel</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div><app-footer></app-footer></div>
+</div>

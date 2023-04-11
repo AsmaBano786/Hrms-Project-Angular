@@ -1,0 +1,149 @@
+
+<div><app-header></app-header></div>
+      
+        <!-- end header code here............... -->
+        <!-- start leftpanel code here............... -->
+        <div ><app-left-panel></app-left-panel></div>
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1 class="m-0">Update Document</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <section class="content">
+        <form method="post" [formGroup]="editdocument" (ngSubmit)="updatedoc()">
+        <div class="tab-content">
+            <div class="active tab-pane" id="info">
+                <div class="card card-default">
+                    <div class="card-header">
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="form-group col-md-6">
+                                    <label for="">Document Type<span class="text-danger">*</span>
+                                    </label>
+
+                                    <select class="custom-select" id="inlineFormCustomSelect"
+                                        formControlName="documenttype"  [ngClass]="{ 'is-invalid': submitted && f.documenttype.errors }">
+                                        <option value="" selected="" disabled>Document Type </option>
+                                        <option value="Address Proof">Address Proof</option>
+                                        <option value="Company documents">Company documents</option>
+                                        <option value="Project Documents">Project Documents</option>
+                                        <div *ngIf="f.documenttype.touched && f.documenttype.invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f.documenttype.errors?.['required']">Document type is required.</div>
+                                    </div>
+                                    </select>                                
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label for="">Document Name <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="" formControlName="documentname" [ngClass]="{ 'is-invalid': submitted && f.documentname.errors }"
+                                        placeholder="Document Name">
+                                        <div *ngIf="f.documentname.touched && f.documentname.invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f.documentname.errors?.['required']">Document name is required.</div>
+                                    </div> <!-- {{documentData.documentname}} -->
+                                </div>
+
+                                <div class="form-group col-md-6">
+
+                                    <label for="">Module <span class="text-danger">*</span></label>
+
+                                    <div style="border: 1px solid #ced4da;">
+
+                                        <ng-multiselect-dropdown
+                                        [placeholder]=getmodule
+                                            formControlName="module"
+                                            [ngClass]="{ 'is-invalid': submitted && f.module.errors }"
+                                            [settings]="dropdownSettings" [data]="dropdownList"
+                                            [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)">
+
+
+                                            
+                                        </ng-multiselect-dropdown>
+                                        <div *ngIf="f.module.touched && f.module.invalid"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f.module.errors?.['required']">Module is required.</div>
+                                    </div>
+                                       
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group col-md-6">
+
+                                    <label for="">File Format <span class="text-danger">*</span></label>
+
+                                    <div style="border: 1px solid #ced4da;">
+                                        <!-- {{documentData.getFormat}} -->
+                                        <ng-multiselect-dropdown 
+                                   
+                                            formControlName="fileformate"
+                                            
+                                            [placeholder]=getFormat
+                                            [ngClass]="{ 'is-invalid': submitted && f.fileformate.errors }"
+                                            [settings]="dropdownSettings1" [data]="dropdownList1"
+                                            [(ngModel)]="selectedItems1" (onSelect)="onItemSelect1($event)"
+                                            (onSelectAll)="onSelectAll($event)">{{getmodule}}
+
+                                            <div *ngIf="f.fileformate.touched && f.fileformate.invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="f.fileformate.errors?.['required']">Fileformate is required.</div>
+                                        </div>
+                                        </ng-multiselect-dropdown>
+                                        
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="">Fiie Size(MB) <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" class="form-control" id="" formControlName="filesize"
+                                        
+                                    placeholder="Fiie Size(MB)" [ngClass]="{ 'is-invalid': submitted && f.filesize.errors }">
+                                    <div *ngIf="f.filesize.touched && f.filesize.invalid"
+                                    class="invalid-feedback">
+                                    <div *ngIf="f.filesize.errors?.['required']">Filesize is required.</div>
+                                </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-2">
+
+                        <button type="submit" class="btn btn-primary btn-block" >Submit</button>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button type="reset" class="btn btn-primary btn-block" [routerLink]="['/document-management']">Cancel</button>
+                    </div>
+                </div>
+            </div>
+       
+        </div>
+    </form>
+    </section>
+</div>
+
+<div><app-footer></app-footer></div>

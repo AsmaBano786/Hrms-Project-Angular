@@ -1,0 +1,98 @@
+<!-- <body class="hold-transition sidebar-mini layout-fixed"> -->
+  <div class="wrapper">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center"> <img class="animation__shake"
+    src="dist/img/logo.png" alt="Logo" height="60" width="60"> </div> -->
+   
+    
+  <div><app-header></app-header></div>
+  
+  <!-- end header code here............... -->
+  <!-- start leftpanel code here............... -->
+  <div ><app-left-panel></app-left-panel></div>
+  <!-- end leftpanel code here............... -->
+    <form method="post" [formGroup]="EditDesignationForm" (ngSubmit)="updateDesignation()">
+<div class="content-wrapper">
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-12">
+        <h1 class="m-0">Update Designation Details</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.card-header -->
+<div class="card-body">
+  <div class="active tab-pane" id="info">
+    <div class="card card-default">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-2 pl-3">
+            <label for="">Designation Name <span class="text-danger">*</span>
+            </label>
+          </div>
+          <div class="col-md-4">
+            <!-- <input type="text" name=""    id="" class="form-control" placeholder="Enter Designation Name" formControlName="designation_name" [ngClass]="{ 'is-invalid': submitted && f.designation_name.errors }"> -->
+            <select class="form-select" (keypress)="keyPressAlphaNumeric($event)" id="Department" formControlName="designation_name" placeholder="Enter designation name" [ngClass]="{ 'is-invalid': submitted && f.designation_name.errors }">
+
+              <option value="" disabled [selected]="true" >Select Designation Name</option>
+
+              <option value="HR">HR </option>
+
+              <option value="Trainee Engineer">Trainee Engineer</option>
+
+              <option value="Software Engineer">Software Engineer </option>
+
+              <option value="Programmer Analyst">Programmer Analyst </option>
+
+              <option value="Senior Software Engineer">Senior Software Engineer</option>
+
+              <option value="System Analyst">System Analyst</option>
+
+              <option value="Project Lead">Project Lead</option>
+
+              <option value="Project Manager">Project Manager</option>
+
+              <option value="Software Developer">Software Developer</option>
+
+          </select>
+          <div *ngIf="submitted && f.designation_name.errors" class="invalid-feedback">
+                            <div *ngIf="f.designation_name.errors.required"> Designation name is
+                                required.</div>
+                        </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-2 pl-3">
+            <label for="">Mail Alias <span class="text-danger">*</span>
+            </label>
+          </div>
+          <div class="col-md-4">
+            <input type="text" name="" id="" class="form-control" placeholder="Enter Mail Alias" formControlName="mail_alias" [ngClass]="{ 'is-invalid': submitted && f.mail_alias.errors }">
+            <div *ngIf="submitted && f.mail_alias.errors" class="invalid-feedback">
+            <div *ngIf="f.mail_alias.errors.required"> Email is
+                required.</div>
+                <div *ngIf="f.mail_alias.errors?.['pattern']">
+                  please enter valid email address.
+                </div>
+
+                
+        </div>
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-primary mb-1" type="submit">Submit</button>
+        <!-- <button class="btn btn-primary ml-2 mb-1" type="submit" [routerLink]="['/designation-details']" (click)="exit()" >Submit and New</button> -->
+        <button class="btn btn-primary ml-2 mb-1" type="Cancel"  [routerLink]="['/designation/']" >Cancel</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+</form>
+
+
+<!-- start footer code here............... -->
+<div><app-footer></app-footer></div>
+<!-- end footer code here............... -->

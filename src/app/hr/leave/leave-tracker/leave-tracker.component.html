@@ -1,0 +1,88 @@
+<div><app-header></app-header></div>
+
+<!-- end header code here............... -->
+<!-- start leftpanel code here............... -->
+<div><app-left-panel></app-left-panel></div>
+<!-- end leftpanel code here............... -->
+
+<div class="content-wrapper" style="height: auto;">
+    <div class="content-header">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1 class="m-0">Leave Tracker</h1>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row pt-1">
+                                <div class="col-md-3">
+                                    <select class="form-select border-bottom" (change)="search1($event); search();">
+                                        <option value="" >Leave type select</option>
+                                        <!-- <option *ngFor="let leave of all_leave">
+                                            {{leave.leave_type}}
+                                        </option> -->
+                                        <option value="Casual Leave">Casual Leave</option>
+                                        <option value="Earned Leave">Earned Leave</option>
+                                        <option value="Leave Without Pay">Leave Without Pay</option>
+                                        <option value="Maternity Leave">Maternity Leave</option>
+                                        <option value="Sabbatical Leave">Sabbatical Leave</option>
+                                        <option value="Sick Leave">Sick Leave</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 text-right">
+                                    <a [routerLink]="['/apply-leave']" class="btn btn-primary">+ Apply Leave</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Employee ID</th>
+                                        <th>Employee Name</th>
+                                        <th>Date From</th>
+                                        <th>Date To</th>
+                                        <th>Leave Type</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr *ngFor="let all_leaveEach of filteredData||all_leave; let i = index;">
+                                        <td>{{i+1}}</td>
+                                        <td>{{all_leaveEach.employee_id}}</td>
+                                        <td>{{all_leaveEach.emp_name}}</td>
+                                        <td>{{all_leaveEach.date_from | date}}</td>
+                                        <td>{{all_leaveEach.date_to | date}}</td>
+                                        <td>{{all_leaveEach.leave_type}}</td>
+                                        <td>{{all_leaveEach.reason_for_leave}}</td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- start footer code here............... -->
+<div><app-footer></app-footer></div>
+<!-- end footer code here............... -->

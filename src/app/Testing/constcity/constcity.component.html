@@ -1,0 +1,75 @@
+
+<div class="card card-default">
+  <div class="card-header">
+    <h3 class="card-title">permanent Address</h3>
+    <div class="card-tools">
+      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="">Country</label>
+        <select class="form-control"  class="form-control"  
+        #country
+        name="country"
+        id="country"
+        (change)="onCountryChange($event)"
+      >
+        <option [value]="null">-- Select Your Country --</option>
+        <option *ngFor="let country of Newcountries" [value]="country | json">
+          {{ country.flag }}&nbsp;&nbsp;{{ country.name }}
+        </option>
+        </select>  
+        
+       
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">State/Province</label>
+        <select class="form-control"   
+        #state
+        name="state"
+        id="state"
+        (change)="onStateChange($event)"
+      >
+        <option [value]="null">-- Select Your State --</option>
+        <option *ngFor="let state of Newstates" [value]="state | json">
+          {{ state.name }}
+        </option>
+        </select>  
+      
+        <!-- <input type="text" class="form-control" id="" placeholder="State/Province" /> -->
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">City</label>
+        <select class="form-control"  
+        #city
+        name="city"
+        id="city"
+        (change)="onCityChange($event)"
+      >
+        <option [value]="null">-- Select Your City --</option>
+        <option *ngFor="let city of Newcities" [value]="city | json">
+          {{ city.name }}
+        </option>
+        <!-- <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option> -->
+      </select> 
+     
+        <!-- <input type="email" class="form-control" id="" placeholder="City" /> -->
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">ZIP/PIN Code</label>
+        <input type="number" class="form-control" id="" placeholder="ZIP/PIN Code" />
+        
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Street Address</label>
+        <textarea class="form-control" id="" placeholder="Street Address"  id="floatingInput"></textarea>
+        <!-- <input type="text" class="form-control" id="" placeholder="Street Address" /> -->
+      </div>
+    
+     
+    
+    </div>
+  </div>
+</div>

@@ -1,0 +1,199 @@
+<body class="hold-transition login-page">
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog " style="margin-top: 15rem;">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel"></h5>
+         <button type="button" class="bi bi-x" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body" >
+           We just received your message. Thank you very much for Registration.
+       </div>
+       <div class="modal-footer">
+         <a> <button type="button" class="btn btn-primary" [routerLink]="['/login-Onboarding']"> SIGN IN </button></a>
+       </div>
+     </div>
+   </div>
+ </div> -->
+  <div class="login-logo">
+    <a href="index2.html">
+      <img src="../../../assets/dist/img/logo.png" />
+      <span class="small">HRMS</span>
+    </a>
+  </div>
+  <!-- /.login-logo -->
+
+  <div class="card card-default" style="width: 40%; height: 65%">
+    <div class="card-header">
+      <h3>Registration Form</h3>
+    </div>
+    <form method="post" [formGroup]="registerForm" (ngSubmit)="inviteProcess()">
+      <div class="card-body p-5">
+        <div class="form-group row">
+          <label for="" class="col-md-4"
+            >Full Name <span class="" style="color: red">*</span>
+          </label>
+          <input
+            type="text"
+            class="form-control col-md-8"
+            id=""
+            (keypress)="keyPressAlphabet($event)"
+            id="floatingInput"
+            placeholder="Full Name"
+            formControlName="emp_name"
+            [ngClass]="{ 'is-invalid': submitted && f.emp_name.errors }"
+          />
+
+          <div *ngIf="submitted && f.emp_name.errors" class="invalid-feedback">
+            <div *ngIf="emp_name.errors?.['required']">
+              Full name is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="" class="col-md-4"
+            >Email <span class="" style="color: red">*</span>
+          </label>
+          <input
+            type="email"
+            class="form-control col-md-8"
+            id=""
+            placeholder="Enter email"
+            formControlName="company_email_id"
+
+            [ngClass]="{ 'is-invalid': submitted && f.company_email_id.errors }"
+          />
+
+          <!-- <div *ngIf="res==msg" class="form-label text-danger">
+            This email is already exist
+          </div> -->
+          <div
+            *ngIf="submitted && f.company_email_id.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="company_email_id.errors?.['required']">
+              Email is required.
+            </div>
+
+            <div *ngIf="company_email_id.errors?.['pattern']">
+              Please entervalid email address.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-md-4"
+            >Password <span class="" style="color: red">*</span>
+          </label>
+          <input
+            type="password"
+            class="form-control col-md-8"
+            id=""
+            placeholder="Password"
+            formControlName="password"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+          />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="password.errors?.['required']">
+              Password is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-md-4"
+            >Confirm Password<span class="" style="color: red">*</span>
+          </label>
+          <input
+            type="password"
+            class="form-control col-md-8"
+            id=""
+            placeholder="Confirm Password"
+            formControlName="confirm_password"
+            [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"
+          />
+          <div *ngIf="original_Password!=confirm_Password" class="form-label text-danger">
+            Please enter correct password
+          </div>
+          <div
+            *ngIf="submitted && f.confirm_password.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="confirm_password.errors?.['required']">
+              Confirm password is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="" class="col-md-4"
+            >Phone Number <span class="" style="color: red">*</span>
+          </label>
+          <input
+            type="text"
+            class="form-control col-md-8"
+            id=""
+            placeholder="Phone Number"
+            formControlName="phone_number"
+            [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"
+          />
+          <div
+            *ngIf="submitted && f.phone_number.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="phone_number.errors?.['required']">
+              Mobile number is required.
+            </div>
+            <div *ngIf="phone_number.errors?.['pattern']">
+              Please enter10digit mobilenumber.
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <input
+            type="checkbox"
+            class="col-md-1"
+            formControlName="checkbox"
+            [ngClass]="{ 'is-invalid': submitted && f.checkbox.errors }"
+          />
+          <label for="" class="col-md-11">
+            i agree to the terms of service and privacy policy.
+            <span class="" style="color: red">*</span>
+            <div
+              *ngIf="submitted && f.checkbox.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="checkbox.errors.required">
+                Please select the checkbox
+              </div>
+            </div>
+          </label>
+        </div>
+        <!-- <button style="background-color: rgb(84, 84, 224)" >invite user</button> -->
+        <div class="row">
+          <div class="form-group col-md-12">
+            <button
+              type="submit"
+              class="btn btn-primary col-md-12"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              SIGN UP
+            </button>
+          </div>
+        </div>
+        <div class="form-group row">
+          <p>
+            Already have an account ?<a [routerLink]="['/login-Onboarding']">
+              Sign In</a
+            >
+          </p>
+        </div>
+        <!-- <div class="form-group row">
+               <label for="" class="col-md-4 "> or sign in using <span class=""><a href="https://www.facebook.com/cylsyssoftwaresolutionpvtltd" target="_blank"><i class="fab fa-facebook social mr-2"></i></a> <a href="https://www.linkedin.com/company/2310187" target="_blank"><i class="fab fa-linkedin-in social mr-2"></i></a>  <a href="https://www.skype.com/pawasgoyal" target="_blank"><i class="fab fa-skype social mr-2"></i></a> </span>
+               </label>
+             
+             </div> -->
+      </div>
+    </form>
+  </div>
+</body>

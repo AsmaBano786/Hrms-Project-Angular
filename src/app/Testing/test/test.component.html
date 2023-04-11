@@ -1,0 +1,95 @@
+
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+  
+  
+  
+      
+      <div class="content-wrapper"style="height: auto; background-color:#F2EDF3" >
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <h1 class="m-0">User Details</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="content">
+          <div class="container-fluid">
+            <div class="card card-default">
+              
+              <div class="card-body">
+                <form method="post" [formGroup]="registerForm" (ngSubmit)="fillDetails()">
+                <div class="form-group row">
+                  <label for="" class="col-md-2 pl-5">First Name <span class="" style="color:red;">*</span>
+                  </label>
+                  <div class="col-md-6">
+                  <input type="text" (keypress)="keyPressAlphabetOnly($event)"  class="form-control col-md-8"  id="floatingInput"placeholder="First Name"formControlName="fName"[ngClass]="{ 'is-invalid': submitted && f.fName.errors }" id="inputfName4">
+                  <div   *ngIf="submitted && f.fName.errors" class="invalid-feedback col-md-6">
+                    <div *ngIf="f.fName.errors.required"  >First Name is required</div>
+                 </div></div>
+                </div>
+                <div class="form-group row">
+                  <label for="" class="col-md-2 pl-5">Last Name <span class="" style="color:red;">*</span>
+                  </label>
+                  <div class="col-md-6">
+                  <input type="text" (keypress)="keyPressAlphabetOnly($event)"  class="form-control col-md-8"  id="floatingInput"placeholder="Last Name"formControlName="lName"[ngClass]="{ 'is-invalid': submitted && f.lName.errors }" id="inputlName4">
+                  <div   *ngIf="submitted && f.lName.errors" class="invalid-feedback col-md-6">
+                    <div *ngIf="f.lName.errors.required"  >Last Name is required</div>
+                 </div></div>
+                </div>
+                <div class="form-group row">
+                  <label for="" class="col-md-2 pl-5">Designation <span class="" style="color:red;">*</span>
+                  </label>
+                  <div class="col-md-6">
+                  <input type="text"  (keypress)="keyPressAlphabet($event)" class="form-control col-md-8"   id="floatingInput" placeholder="Designation"formControlName="Designation"[ngClass]="{ 'is-invalid': submitted && f.Designation.errors }" id="inputDesignation4">
+                  <div *ngIf="submitted && f.Designation.errors" class="invalid-feedback col-md-6">
+                    <div *ngIf="f.Designation.errors.required">Designation is required</div>
+                 </div>
+                </div></div>
+                <div class="form-group row">
+                  <label for="" class="col-md-2 pl-5">Email <span class="" style="color:red;">*</span>
+                  </label>
+                  <div class="col-md-6">
+                  <input type="email" class="form-control col-md-8"  id="floatingInput" placeholder="Email"  formControlName="Email"  [ngClass]="{ 'is-invalid': submitted && f.Email.errors }"  id="inputEmail4">
+                  <div *ngIf="submitted && f.Email.errors" class="invalid-feedback col-md-6">
+                    <div *ngIf="f.Email.errors.required">Email is required</div>
+                    <!-- <div *ngIf="f.Email.errors.email">Email must be a valid email address</div> -->
+                    <div *ngIf="f.Email.errors.pattern">Please enter valid email address</div>
+  
+                  </div></div>
+               
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-md-2 pl-5">Phone <span class="" style="color:red;">*</span>
+                    </label>
+                    <div class="col-md-6">
+                    <input type="text"  maxlength="12" (keypress)="keyPressNumbers($event)" class="form-control col-md-8"   id="floatingInput" placeholder="Phone"formControlName="Phone"[ngClass]="{ 'is-invalid': submitted && f.Phone.errors }" id="inputPhone4">
+                    <div *ngIf="submitted && f.Phone.errors" class="invalid-feedback col-md-6">
+                      <div *ngIf="f.Phone.errors.required">Phone is required</div>
+                      <div *ngIf="f.Phone.errors.pattern">Please enter valid phone number</div>
+  
+                   </div>
+                  </div></div>
+                <!-- <button style="background-color: rgb(84, 84, 224)" >invite user</button> -->
+                <div class="row">
+                  <div class="form-group col-md-2 pl-5 ">
+                    <!-- <a href="invitation-done.html" class="btn btn-primary btn-block">Submit</a> -->
+                    <button type="submit"      class="btn btn-primary btn-block">Submit</button>
+                  </div>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+     
+      </section>
+       
+    </div> 
+    <div><app-footer></app-footer></div>
+   </div>
+    
+  </body>
+  

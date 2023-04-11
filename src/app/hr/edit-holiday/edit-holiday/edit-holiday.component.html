@@ -1,0 +1,141 @@
+<div class="wrapper"> 
+  <div><app-header></app-header></div>
+  
+     <!-- end header code here............... -->
+     <!-- start leftpanel code here............... -->
+     <div><app-left-panel></app-left-panel></div>
+     <div class="content-wrapper" style="height: auto;">
+       <div class="content-header">
+         <div class="row mb-2">
+           <div class="col-sm-12">
+             <h1>Update Holidays</h1>
+             <br>
+           </div>
+         </div>
+         <div class="container-fluid">
+           <div class="row">
+             <div class="col-12">
+               <div class="card">
+                 <div class="card-header">
+  
+                   <!-- <div class="col-md-1  header12 ">
+                     <a [routerLink]="['/department']" class="btn btn-primary">Back</a>
+                   </div> -->
+  
+                   <br>
+                   <form [formGroup]="EditholidayForm" (ngSubmit)="updateholiday()">
+                     <div class="row pt-1">
+                       <div class="col-md-4">
+                         <h5>Name of Holiday<span class="text-danger">*</span></h5>
+                         <input type="text" placeholder="Enter Name of Holiday" class="form-control"
+                           formControlName="Name" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }">
+                           <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback">
+                           <div *ngIf="f['Name'].errors['required']"> Name is
+                               required.</div>
+                       </div>
+                       </div>
+                       <div class="col-md-4">
+                         <h5>Date<span class="text-danger">*</span></h5>
+                         <input type="Date" placeholder="Enter Date" class="form-control"
+                           formControlName="Date" [ngClass]="{ 'is-invalid': submitted && f.Date.errors }">
+                           <div *ngIf="submitted && f['Date'].errors" class="invalid-feedback">
+                           <div *ngIf="f['Date'].errors['required']">Date is
+                               required.</div>
+                       </div>
+                       </div>
+                      
+                      
+                      
+                           <div class="col-md-4">
+                           <h5>Applicable For<span class="text-danger">*</span></h5>
+                           <div class="dropdown">
+                             <ng-multiselect-dropdown
+                               formControlName="ApplicableFor"
+                               [ngClass]="{ 'is-invalid': submitted && f.ApplicableFor.errors }"
+                            
+                               [settings]="dropdownSettings1"
+                               [data]="dropdownList1"
+                               [(ngModel)]=selectedItems1
+                               (onSelect)="onItemSelect1($event)"
+                               (onSelectAll)="onSelectAll($event)"
+                             >
+                             </ng-multiselect-dropdown>
+                             <div *ngIf="submitted && f['ApplicableFor'].errors" class="invalid-feedback">
+                            <div *ngIf="f['ApplicableFor'].errors['required']">ApplicableFor is
+                                required.</div>
+                        </div>
+                           </div>
+                         </div>
+                        
+                         
+ 
+                       <div class="col-md-4">
+                         <h5>Description<span class="text-danger">*</span></h5>
+                         <input type="text" placeholder="Enter Description" class="form-control"
+                           formControlName="Description" [ngClass]="{ 'is-invalid': submitted && f.Description.errors }">
+                           <div *ngIf="submitted && f['Description'].errors" class="invalid-feedback">
+                           <div *ngIf="f['Description'].errors['required']"> Description is
+                               required.</div>
+                       </div>
+                       </div>
+                      
+                      
+                      
+                       <div class="col-md-4">
+                         <h5>HolidayType<span class="text-danger">*</span></h5>
+                         <input type="text" placeholder="Enter Holiday Type" class="form-control"
+                           formControlName="HolidayType" [ngClass]="{ 'is-invalid': submitted && f.HolidayType.errors }">
+                           <div *ngIf="submitted && f['HolidayType'].errors" class="invalid-feedback">
+                           <div *ngIf="f['HolidayType'].errors['required']"> HolidayType is
+                               required.</div> 
+                       </div>
+                          </div>
+                       <div class="col-md-4">
+                         <h5>No of day<span class="text-danger">*</span></h5>
+                        
+                           <select  value="" class="form-control" formControlName="No_ofday_before_which_the_reminder_should_be_sent" name="" id="" [ngClass]="{ 'is-invalid': submitted && f.No_ofday_before_which_the_reminder_should_be_sent.errors }">
+                             <option value="" selected="true" disabled>Select here</option>
+                             <option value="1">1</option>
+                             <option value="2">2</option>
+                             <option value="3">3</option>
+                             <option value="4">4</option>
+                             <option value="5">5</option>
+                             <option value="6">6</option>
+                             <option value="7">7</option>
+                             <option value="8">8</option>
+                             <option value="9">9</option>
+                             <option value="10">10</option>                          
+                             <option value="11">11</option>
+                             <option value="12">12</option>
+                           </select>
+                           <div *ngIf="submitted && f['No_ofday_before_which_the_reminder_should_be_sent'].errors" class="invalid-feedback">
+                           <div *ngIf="f['No_ofday_before_which_the_reminder_should_be_sent'].errors['required']"> No of day is
+                               required.</div>
+                       </div>
+                       </div>
+                      
+                     </div>
+  
+                       <br>
+                     <button type="submit" class="btn btn-primary">Submit</button>
+                     &nbsp;
+                         <button type="submit" class="btn btn-primary" [routerLink]="['/holiday/']">Cancel</button>
+  
+  
+                       <div class="col-md-1  header12 ">
+                        
+                        
+  
+                       </div>
+                      
+                   </form>
+  
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div> 
+     <div><app-footer></app-footer></div>
+  </div>

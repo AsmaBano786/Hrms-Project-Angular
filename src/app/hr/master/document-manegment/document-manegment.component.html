@@ -1,0 +1,178 @@
+<div><app-header></app-header></div>
+      
+        <!-- end header code here............... -->
+        <!-- start leftpanel code here............... -->
+        <div ><app-left-panel></app-left-panel></div>
+
+<div class="content-wrapper" style="height: auto;">
+  <div class="content-header">
+    <div class="row mb-2">
+      <div class="col-sm-12">
+        <h1 class="m-0">Document Management</h1>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+
+              <div class="row ">
+
+                <!-- <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-3" >
+                      <!-- <select  class="custom-select" id="inlineFormCustomSelect">
+                        <option selected="" disabled>All Document Name</option>
+                        <option value="" *ngFor="let alldocument of Document">{{alldocument.documentname}} </option>
+                        
+                        <option value="">Other</option> -->
+                      <!-- </select> -->
+                      <!-- <input class="form-control " type="text" [(ngModel)]="searchText1"  (input)="Searchname()" placeholder="Search By Document Name" /> 
+                    </div>
+                    <div class="col-md-3">
+                      <!-- <select class="custom-select" id="inlineFormCustomSelect" >
+                        <option selected="" disabled>All Module Name</option>
+                        <option value="">Onboarding</option>
+                        <option value="">Preonboarding</option>
+                        <option value="">HR</option>
+                        <option value="">Other</option>
+
+                      </select> -->
+                      <!-- <input class="form-control " type="text" [(ngModel)]="searchText"  (input)="Search()" placeholder="Search By Modules" /> 
+
+                    </div>
+                    <div class="col-md-6 ">
+                      <button class="btn btn-primary" (click)="search">Search</button>  
+                    </div>   -->
+
+                   
+                  <!-- </div> -->
+                <!-- </div> -->
+                <!-- <div class="col-md-6 show">
+                  <!-- <h6><i>please select anyone document and module after that click on search button</i></h6> -->
+                <!-- </div> - -->
+                <div class="col-md-12">
+              
+                    <form [formGroup]="doc" (ngSubmit)="findBysearchData()">
+                      <div class="row">
+                      <div class="col-md-3">
+                          <select class="form-control"  formControlName="documentname" id="inlineFormCustomSelect" >
+                            <option value="" disabled>All Document Name</option>
+                            <option value={{item.documentname}} *ngFor="let item of Document">{{item.documentname}}</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
+                          <select class="form-control"  formControlName="module"  id="inlineFormCustomSelect">
+                            <option value="" disabled>All Module Name</option>
+                            <!-- <option value={{item.module}} *ngFor="let item of Document">{{item.module}}</option> -->
+                            <option value="Onboarding">Onboarding</option>
+                        <option value="Preonboarding">Preonboarding</option>
+                        <option value="HR">HR</option>
+                        <option value="Other">Other</option>
+
+                          </select>
+                        </div>
+                        <div class="col-md-6 ">
+                          <button  type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                      </div>
+                      </form>
+                 
+                
+                </div>
+               <hr>
+                <div class="col-md-2">
+                  <select name="" id="ab" class="form-select">
+                    <option value="" selected disabled>Page Records </option>
+                    <option value="">50</option>
+                    <option value="">100</option>
+                    <option value="">All</option>
+
+
+
+                  </select>
+                </div>
+               
+               
+
+                <div class="col-md-12 text-right">
+                  <a  [routerLink]="['/add-document']" class="btn btn-primary">+ Add Document</a>
+              </div>
+
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example2" class="table table-bordered table-hover">
+
+                <thead>
+                  <tr>
+                    <th>S. NO.</th>
+                    <th>Document Type</th>
+                    <th>Document Name</th>
+                    <th>File Format</th>
+                    <th>Modules</th>
+                    <th>File Size(MB)</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let alldocument of searchData||listOfContacts let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{alldocument.documenttype}}</td>
+                    <td>{{alldocument.documentname}}</td>
+                    <td>{{alldocument.fileformate}}</td>
+                    <td> {{alldocument.module}}</td>
+                    <td> {{alldocument.filesize}}</td>
+                    <!-- <td>
+                    {{getEmployeeName(alldocument.team_member)}}<!--<li *ngFor="let memberEach of alldocument.team_member;"></li>-->
+                    <!-- </td>  -->
+                    <td>
+                      <a [routerLink]="['/edit-document/'+alldocument.documentid]">
+                        <i class="fas fa-edit"></i>
+                      </a>&nbsp;&nbsp;
+                      <a (click)="docdelete(alldocument.documentid)">
+                        <i class="fas fa-trash"></i>
+                      </a>
+                     
+                    </td>
+                  </tr>
+                  <!-- <tr *ngFor="let doc of Document">
+                    
+                    
+                    <td>{{doc.documenttype}}</td>
+                    <td>
+                      {{doc.documentname}}
+                    </td>
+                    <td>{{doc.fileformate}}</td>
+                    <td>{{doc.module}} </td>
+                    <td>{{doc.filesize}}
+                    </td>
+                    <td>
+                      <a [routerLink]="['/edit-apply-leave/'+doc.id]">
+                         <a routerLink="edit-apply-leave"> 
+                        <i class="fas fa-edit"></i>
+                      </a>&nbsp;&nbsp;
+
+                      <a (click)="docdelete(doc.Documentid)">
+                        <i class="fas fa-trash"></i></a>
+                    </td>
+                  </tr> -->
+
+                </tbody>
+
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div><app-footer></app-footer></div>

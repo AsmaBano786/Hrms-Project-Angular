@@ -1,0 +1,124 @@
+
+  <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <!-- <div class="preloader">
+        <img class="animation__shake" src="dist/img/logo.png" alt="Logo" />
+      </div> -->
+      <!-- start header code here............... -->
+      <div><app-header></app-header></div>
+      
+      <!-- end header code here............... -->
+      <!-- start leftpanel code here............... -->
+      <div ><app-left-panel></app-left-panel></div>
+      <!-- end leftpanel code here............... -->
+      <div class="content-wrapper" style="height: auto">
+        <div class="content-header">
+          <div class="row mb-2">
+            <div class="col-sm-12">
+              <h1 class="m-0">Employee Details</h1>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="row pt-1">
+                      <div class="col-md-2">
+                        <select class="custom-select" id="inlineFormCustomSelect" onchange="location = this.options[this.selectedIndex].value;">
+                          <option selected="">Action</option>
+                          <option selected="selected">Employee</option>
+                          <option>Disabled Employee View</option>
+                          <option>Inactive Employee View</option>
+                          <option>Change Password</option>
+                        </select>
+                      </div>
+                      <div class="multiselect form-group col-md-2">
+                        <div class="selectBox form-control" onclick="showCheckboxes()">
+                          <select class="custom-select border-bottom">
+                            <option>Column View</option>
+                          </select>
+                          <div class="overSelect"></div>
+                        </div>
+                        <div id="checkboxes" class="checkstyle">
+                          <label for="one0">
+                            <input type="checkbox" id="one0" /> Select All Options </label>
+                          <label for="two0">
+                            <input type="checkbox" id="two0" /> Employee ID </label>
+                          <label for="two0">
+                            <input type="checkbox" id="two0" /> EmailID </label>
+                          <label for="three0">
+                            <input type="checkbox" id="three0" /> Mobile No. </label>
+                          <label for="five0">
+                            <input type="checkbox" id="five0" /> Designation </label>
+                          <label for="six0">
+                            <input type="checkbox" id="six0" /> Location </label>
+                          <label for="seven0">
+                            <input type="checkbox" id="seven0" /> Lead Vertical </label>
+                          <label for="seven0">
+                            <input type="checkbox" id="seven0" /> Requirement </label>
+                        </div>
+                      </div>
+                      <div class="col-md-8 text-right">
+                        <a routerLink="/invite-user" class="btn btn-primary">+ Invite User</a>
+                        &nbsp;&nbsp; <a routerLink="/employees-info" class="btn btn-primary">+ Add Employee</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <!-- <th>
+                            <input class="" type="checkbox" />
+                          </th> -->
+                          <!-- <th>Photo</th> -->
+                          <th>Employee ID</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Email address</th>
+                          <th>Phone</th>
+                          <th>Designation</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of allemployeedata">
+                          <!-- <td>
+                            <input class="" type="checkbox" />
+                          </td> -->
+                          <!-- <td>
+                            <img src="dist/img/user3-128x128.jpg" width="30%" class="rounded" />
+                          </td> -->
+                          <td >
+                            <a href="" routerLink="/employees-info">{{item.employee_id}}
+                            </a>
+                          </td>
+                          <td>{{ item.first_name}}</td>
+                          <td>{{ item.last_name }}</td>
+                          <td>{{ item.email}}</td>
+                          <td>{{item.phone}}</td>
+                          <td>{{ item.designation }}</td>
+                         
+                        </tr>
+                        
+                        <!--<tfoot><tr><th>Rendering engine</th><th>Browser</th><th>Platform(s)</th><th>Engine version</th><th>CSS grade</th></tr></tfoot>-->
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <!-- /.col -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- start footer code here............... -->
+     
+    <div><app-footer></app-footer></div>
+      <!-- end footer code here............... -->
+    </div>
+   
+  </body>

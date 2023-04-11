@@ -1,0 +1,112 @@
+<div><app-header></app-header></div>
+
+<!-- end header code here............... -->
+<!-- start leftpanel code here............... -->
+<div><app-left-panel></app-left-panel></div>
+<!-- end leftpanel code here............... -->
+<div class="content-wrapper" style="height: auto;">
+
+    <div class="content-header">
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1 class="m-0">Compensatory Request Scheduler</h1>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row pt-1">
+                                <div class="col-md-3">
+                                    <select class="form-select border-bottom" (change)="search1($event); search(); ">
+                                        <option value="">Schedule Name</option>
+                                        <option *ngFor="let department of nik">
+                                            {{department.ScheduleName}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 text-right">
+                                    <a class="btn btn-primary" [routerLink]="['/add-schedule']">+ Add Schedule
+                                        </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.card-header -->
+                        <form method="get" [formGroup]="addscheduleview">
+                            <div class="card-body overflow-auto">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th>
+                                                <input class="" type="checkbox" (change)="checkUncheckAll()"
+                                                    [(ngModel)]="masterSelected" [ngModelOptions]="{standalone: true}">
+                                            </th> -->
+                                            <th>S No.</th>
+                                            <th>Schedule Name</th>
+                                            <th>Time of Schedule</th>
+                                            <th>Leave Type</th>
+                                            <th>Leave ID</th>
+                                            <th>Date</th>
+                                            <th>Added By </th>
+                                            <th>Added Time</th>
+                                            <th>Modified By </th>
+                                            <th>Modified Time </th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        
+                                        <tr *ngFor="let pp of filteredData||nik let i = index;">
+                                            <!-- <td> <input class="" type="checkbox" (change)="isAllSelected()"
+                                                    [ngModelOptions]="{standalone: true}" [(ngModel)]="pp.isSelected">
+                                            </td> -->
+                                            <td>{{ i + 1 }}</td>
+                                            <td><a
+                                                    [routerLink]="['/edit-add-schedule/'+ pp.AddScheduleId]">{{pp.ScheduleName}}</a>
+                                            </td>
+                                            <td>{{pp.TimeofSchedule}}</td>
+                                            <td>{{pp.LeaveType}}</td>
+                                            <td>{{pp.LeaveID}}</td>
+                                            <td>{{pp.Date}}</td>
+                                            <td>{{pp.added_by}}</td>
+                                            <td>{{pp.added_time | date :'medium'}}</td>
+                                            <td>{{pp.modified_by}}</td>
+                                            <td>{{pp.modified_time | date :'medium'}}</td>
+
+                                            <td>
+                                                <span class="pull-right">
+                                                    <a [routerLink]="['/edit-add-schedule/'+ pp.AddScheduleId]"
+                                                        title="Edit" style="color: rgb(7, 136, 241)"><i
+                                                            class="fa fa-edit"></i></a>
+                                                    &nbsp;
+                                                    <a title="Delete" style="color: rgb(7, 136, 241) "><i
+                                                            class="fa fa-trash"
+                                                            (click)="deleteDepart(pp.AddScheduleId)"></i></a></span>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </form>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- start footer code here............... -->
+<div><app-footer></app-footer></div>
+<!-- end footer code here............... -->

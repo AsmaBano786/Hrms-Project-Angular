@@ -1,0 +1,147 @@
+<div class="wrapper" style="height: auto;">
+    <!-- <div class="preloader">
+        <img class="animation__shake" src="dist/img/logo.png" alt="Logo">
+    </div> -->
+    <div><app-header></app-header></div>
+      
+    <!-- end header code here............... -->
+    <!-- start leftpanel code here............... -->
+    <div ><app-left-panel></app-left-panel></div>
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <h1 class="m-0">Add Document</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="content">
+            <div class="tab-content">
+                <div class="active tab-pane" id="info">
+                    <div class="card card-default">
+                        <div class="card-header">
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <form method="post" [formGroup]="AddDocument" (ngSubmit)="submitdata()">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="">Document Type <span class="text-danger">*</span>
+                                        </label>
+
+                                        <select class="custom-select" id="inlineFormCustomSelect"
+                                            formControlName="documenttype"
+                                            [ngClass]="{ 'is-invalid': submitted && f.documenttype.errors }"
+                                            placeholder="Select Document Type">
+                                            <option value="" selected="" disabled>Document Type </option>
+                                            <option value="Address Proof">Address Proof</option>
+                                            <option value="Company documents">Company documents</option>
+                                            <option value="Project Documents">Project Documents</option>
+
+                                        </select>
+                                        <div *ngIf="f.documenttype.touched && f.documenttype.invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="f.documenttype.errors.required">documenttype is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="">Document Name <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="" formControlName="documentname"
+                                            placeholder="Document Name"
+                                            [ngClass]="{ 'is-invalid': submitted && f.documentname.errors }">
+                                        <div *ngIf="f.documentname.touched && f.documentname.invalid"
+                                            class="invalid-feedback">
+                                            <div *ngIf="f.documentname.errors.required">documentname is required.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+
+                                        <label for="">Module <span class="text-danger">*</span></label>
+
+                                        <div style="border: 1px solid #ced4da;">
+
+                                            <ng-multiselect-dropdown [placeholder]="'Select Module'"
+                                                formControlName="module"
+                                                [ngClass]="{ 'is-invalid': submitted && f.module.errors }"
+                                                [settings]="dropdownSettings" [data]="dropdownList"
+                                                [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)">
+                                            </ng-multiselect-dropdown>
+
+                                            <div *ngIf="f.module.touched && f.module.invalid" class="invalid-feedback">
+                                                <div *ngIf="f.module.errors.required">module is required.</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <br><br>
+                                    
+                                    <div class="form-group col-md-6">
+
+                                        <label for="">File Format <span class="text-danger">*</span></label>
+
+                                        <div style="border: 1px solid #ced4da;">
+
+
+
+
+                                            <ng-multiselect-dropdown [placeholder]="'Select File Formate'"
+                                                formControlName="fileformate"
+                                                [ngClass]="{ 'is-invalid': submitted && f.fileformate.errors }"
+                                                [settings]="dropdownSettings1" [data]="dropdownList1"
+                                                [(ngModel)]="selectedItems1" (onSelect)="onItemSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)">
+                                            </ng-multiselect-dropdown>
+
+                                            <div *ngIf="f.fileformate.touched && f.fileformate.invalid"
+                                                class="invalid-feedback">
+                                                <div *ngIf="f.fileformate.errors.required">fileformate is required.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="form-group col-md-6">
+                                        <label for="">Fiie Size(MB) <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="email" class="form-control" id="" formControlName="filesize"
+                                            placeholder="Fiie Size(MB)"
+                                            [ngClass]="{ 'is-invalid': submitted && f.filesize.errors }">
+                                        <div *ngIf="f.filesize.touched && f.filesize.invalid" class="invalid-feedback">
+                                            <div *ngIf="f.filesize.errors.required">filesize is required.</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group col-md-2">
+
+                                    <button type="submit" class="btn btn-primary btn-block">Add</button>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <button type="reset" class="btn btn-primary btn-block" >Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div><app-footer></app-footer></div>

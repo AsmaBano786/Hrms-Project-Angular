@@ -1,0 +1,463 @@
+<style>
+  table { border-collapse: collapse; width: 100%; }
+th, td { background: #fff; padding: 8px 16px; }
+  .tmsheet thead th {
+    position: sticky;
+    top: 0;
+  }
+  
+ 
+</style>
+   
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <!-- <div class="preloader flex-column justify-content-center align-items-center"> <img class="animation__shake"
+          src="assets/dist/img/logo.png" alt="Logo" height="60" width="60"> </div> -->
+    
+        <!-- start header code here............... -->
+        <!-- <div ng-include="includes/header.html"></div> -->
+        <!--  -->
+      
+       
+        <div><app-header></app-header></div>
+        
+        <!-- end header code here............... -->
+        <!-- start leftpanel code here............... -->
+     
+  
+        <div><app-onboarding-left-panel></app-onboarding-left-panel></div>
+        <!-- end leftpanel code here............... -->
+        
+       
+       
+      <div class="content-wrapper index " style="height: auto;">
+        <div class="container-fluid">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                  
+               <h1 class="m-0"> <i class="ion-android-home ab "></i><b> Dashboard</b></h1>
+              </div>
+            </div>
+          </div>
+        </div>
+              
+             
+                  <div class="row">
+                  <div class="col-md-4 ">
+                      <div class="leave">
+                      
+                         <div class="abbb">
+                          <h4>Number of Leave</h4>
+                          <h3>{{TotalLeave}}</h3>
+                        </div>
+                        </div>
+                      
+                  </div>
+                  <div class="col-md-4 ">
+                    <div class="login1">
+                      <div class="abbb">
+                          <h5>Apply for</h5><br>
+                          <!-- <a (click)="start()"> {{ hours }}:{{ minutes }}:{{ seconds }} <i class="fas fa-clock"></i></a> -->
+  
+                          <!-- <h3 class="fas fa-clock" >&nbsp;{{ format(hours) }}:{{ format(minutes) }}:{{ format(seconds) }}</h3><br>
+                         <br> <a class="{{redblue}}" (click)="start()" > {{ editMode ? "Stop timer" : "Start login" }}
+                            </a>
+                            &nbsp; -->
+                          <!-- <a href= "/new-leave-type.html" class="btn btn-info btn-sm">Start login</a> -->
+                          <h3>10.00</h3><br>
+                          
+                          <a routerLink="/employee-timesheet" class="btn btn-primary btn-sm" >Add task</a><br>
+                        </div>
+                        </div> 
+                  </div>
+                  <div class="col-md-4">
+                    <div class="attendence">
+                      <div class="abbb">
+                          <h4>Attendence </h4> 
+                          <h3>{{attendencPcent | number : '1.1-1'}}%</h3>
+                        </div>
+                        </div>   
+                  </div>
+               </div>
+             
+       <div class="row">
+        <div class="markqup">
+        <div class="col-md-12 bg-red">
+          <marquee>Important messages: We look forward to supporting you along the way.</marquee>
+  
+        </div>
+      </div>
+       </div>
+       <br>
+            <!--Fill dashboard-->
+           
+  
+  
+  
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Birthday</h3>
+                   
+                  </div>
+                  <div class="card-body p-0"style="height: 210px;overflow: auto;">
+                    <table class="table table-sm">
+                      <tbody>
+                        <tr *ngFor="let empB of birthday">
+                          <td>
+                            <div class="media"> <img src="assets/dist/img/user1-128x128.jpg" alt="User Avatar"
+                                class="img-size-50 mr-3 img-circle">
+                              <div class="media-body">
+                                <h3 class="dropdown-item-title"> {{ empB.first_name }} {{ empB.last_name }}  </h3>
+                                <!-- <p class="text-sm text-muted">{{ empB.birthday | date: "MMM d" }}</p> -->
+                                <p class="text-sm text-muted">Today</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td align="right">
+                            <a ><span class="badge bg-primary" data-toggle="modal" data-target="#exampleModal1" style="cursor: pointer"  (click)="sndBdayWs(empB)">Send
+                                Wishes</span>
+                               
+                              </a>
+                              
+                              <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModal1Label1">Send Birthday Wish</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #loginform="ngForm" (ngSubmit)=userlogin(loginform.value)>
+            <div class="form-group">
+              <h6 align="left" ><strong>Employee Name </strong></h6>
+              <input type="text" class="form-control"  name="name"   id="exampleModal1Label1" ngModel='{{bdayWsModel?.first_name || "NA" }} {{bdayWsModel?.last_name || "NA" }}'  readonly placeholder='{{bdayWsModel?.first_name || "NA" }} {{bdayWsModel?.last_name || "NA" }}'>
+            </div>
+          <div>
+            <h6 align="left" ><strong>email</strong></h6>
+              <input type="text" class="form-control" ngModel name="email" id="exampleModal1Label1" ngModel='{{bdayWsModel?.email || "NA" }}'   readonly placeholder='{{bdayWsModel?.email || "NA" }}'>
+            </div>
+    
+            <div class="form-group" >
+              <h6 align="left" required><strong>Message</strong></h6>
+              
+              <textarea type="textarea" ngModel name="message" class="form-control"  ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="closeModel" Validators.required >Send</button>
+            <!-- ... -->
+          </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-primary">Send</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+                              
+                              
+                              </td>
+  
+  
+  
+  
+                        </tr>
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">New Hire</h3>
+                    
+                  </div>
+                  <div class="card-body p-0"style="height: 210px;overflow: auto;">
+                    <table class="table table-sm">
+                      <tbody>
+                        <tr *ngFor="let i of newHire" >
+                          <td>
+                            <div class="media"> <img src="assets/dist/img/user1-128x128.jpg" alt="User Avatar"
+                                class="img-size-50 mr-3 img-circle">
+                              <div class="media-body">
+                                <h3 class="dropdown-item-title">{{ i.emp_name }}</h3>
+                                <p class="text-sm text-muted">{{i.designation}}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td align="right"><a ><span class="badge bg-primary"
+                            data-toggle="modal"
+                            data-target="#exampleModal"
+                            style="cursor: pointer"
+                            (click)="goto(i)">Contact</span></a>
+                            <div
+                            class="modal fade"
+                            id="exampleModal"
+                            tabindex="-1"
+                            role="dialog"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                          >
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">
+                                    {{ moddalValues?.emp_name || "NA" }}'s Contact
+                                    Detail
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div>
+                                    <p align="left">
+                                      Name : {{ moddalValues?.emp_name || "NA" }}
+                                    </p>
+                                    <p align="left">
+                                      Email : {{ moddalValues?.company_email_id || "NA" }}
+                                    </p>
+                                    <p align="left">
+                                      Joinning Date :
+                                      {{
+                                        moddalValues?.joining_date
+                                          | date: "MMM d,yyyy"
+                                      }}
+                                    </p>
+                                    <p align="left">
+                                      Contact No :
+                                      {{ moddalValues?.designation || "NA" }}
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                                  >
+                                    Close
+                                  </button>
+                                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </td>
+                        </tr>
+                       
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Knowledge Center
+                      <!--<button type="button" class="btn btn-tool"> <i class="fas fa-plus bg-primary p-1 rounded"></i>
+                      </button>-->
+                    </h3>
+                    <div class="card-tools">
+                      <!-- <a href="knowledge-center.html" class="btn btn-tool">+ Add</a> -->
+                    </div>
+                  </div>
+                  <div class="card-body p-0"style="height: 210px;overflow: auto;">
+                    <table class="table table-sm">
+                      <tbody>
+                        <tr *ngFor="let kn of knCenter">
+                          <td>
+                            <div class="media"> <img src="assets/dist/img/logo.png" alt=" " class="img-size-50 mr-3 img-circle">
+                              <div class="media-body">
+                                <h3 class="dropdown-item-title">{{ kn.Title }}</h3>
+                                <p class="text-sm text-muted"> {{ kn.AddDescription }}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td align="right">
+                            <a href="{{ kn.Link }}" target="_blank"
+                              ><span class="badge bg-primary">Click Here</span></a
+                            >
+                            <!-- <a href="{{ kn.Documentname }}" target="_blank"
+                              ><span class="badge bg-danger">Document</span></a
+                            > -->
+                          </td>
+                        </tr>
+                       
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Approval for Requests</h3>
+                    <div class="card-tools">
+                      <a routerLink="/employee-pending-request" class="btn btn-tool">Pending Requests</a>
+                    </div>
+                  </div>
+                  <div class="card-body p-0"style="height: 210px;overflow: auto;">
+                    <table class="table table-sm">
+                      <tbody>
+                        <tr *ngFor="let apfreq of apFrReq">
+                          <td>
+                            <div class="media small"> <img src="assets/dist/img/logo.png" alt="User Avatar"
+                                class="img-size-50 mr-3 img-circle">
+                              <div class="media-body">
+                                <h3 class="dropdown-item-title"> {{apfreq.emp_name}} | {{apfreq.leave_type}} </h3>
+                                <p class="text-sm text-muted">{{apfreq.date_from | date:'d'}} to {{apfreq.date_to | date:'d'}} {{apfreq.date_from | date:'MMM'}}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td align="right"><span class="badge bg-primary">{{apfreq.Action}}</span></td>
+                        </tr>
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-default">
+                  <div class="card-header">
+                    <h3 class="card-title">Upcoming Holidays</h3>
+                    <div class="card-tools">
+                      <a routerLink="/employee-company-holidays" class="btn btn-tool">View All</a>
+                    </div>
+                  </div>
+                  <div class="card-body p-0"style="height: 210px;overflow: auto;">
+                    <table class="table table-sm">
+                      <tbody>
+                        <tr  *ngFor="let uh of upHday">
+                          <td>
+                            <div class="media"> <img src="assets/dist/img/logo.png" alt="User Avatar"
+                                class="img-size-50 mr-3 img-circle">
+                              <div class="media-body">
+                                <h3 class="dropdown-item-title"> {{ uh.Name }} </h3>
+                                <p class="text-sm text-muted">{{ uh.Date| date: "mediumDate" }}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td align="right"><span class="badge bg-primary">Holiday</span></td>
+                        </tr>
+                      
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card card-default">
+                    <div class="card-header">
+                      <h3 class="card-title">Announcements
+                      
+                      </h3>
+                    
+                    </div>
+                    <div class="card-body p-0"style="height: 210px;overflow: auto;">
+                      <table class="table table-sm">
+                        <tbody>
+                          <tr *ngFor="let anc of announce">
+                            <td>
+                              <div class="media"> <img src="assets/dist/img/logo.png" alt="User Avatar"
+                                  class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                  <h3 class="dropdown-item-title">{{anc.Meeting}}</h3>
+                                  <p class="text-sm text-muted">{{ anc.Date| date: "mediumDate" }}</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td align="right"><span class="badge bg-danger">Today</span></td>
+                          </tr>
+                         
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              <div class="col-md-12 container-fluid">
+                <div class="card card-default">
+                  
+                  <div class="card-body p-0 tmsheet"style="height: 235px;overflow: auto;">
+                    <table class="table table-sm" style="border-collapse: collapse; width: 100%;" > 
+                      <thead>
+                        <tr >
+                          <th><h3 class="card-title"><b> Timesheet</b></h3></th>
+                          <th>
+                            <h3 class="card1"> Project</h3></th>
+                           <th> <h3 class="card2"> Date</h3></th>
+                           <th class="text-right">
+                              <a routerLink="/employee-timesheet" class="btn btn-tool">View All</a>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let tm of timesheetemp">
+                          <td width="25%">
+                            <div class="media"> <img src="assets/dist/img/user1-128x128.jpg" alt="User Avatar"
+                                class="img-size-50 mr-3 img-circle">
+                              <div class="media-body">
+                               
+                              </div>
+                            </div>
+                          </td>
+                          <td width="25%"><br>{{tm.Project}}</td>
+                          <td width="25%"><h3 class="dropdown-item-title"><br>{{tm.Date | date:"MMM d"}}</h3></td>
+                          <td ><br><span class="badge bg-danger">{{tm.WorkingHours}} Submitted Hrs</span>
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                             <!-- <span
+                              class="badge bg-danger">{{tm.WorkingHours}} 
+                              Approved Hours</span>-->
+                            </td>
+                              
+                        </tr>
+                        
+                        
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <!-- </section> -->
+  
+  
+  <!-- start footer code here............... -->
+  <div><app-footer></app-footer></div>
+  <!-- end footer code here............... -->
+  
+      
+  
+    
+  </div>
+  </body>
+   
+   
+   
+  
+  
+  
+  
+  
+  

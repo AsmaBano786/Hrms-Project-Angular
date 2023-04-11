@@ -1,0 +1,153 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { getDate } from 'date-fns';
+import { LeaveService } from '../leaveservice.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Router } from '@angular/router';
+
+
+@Component({
+  selector: 'app-leave-application',
+  templateUrl: './leave-application.component.html',
+  styleUrls: ['./leave-application.component.css']
+})
+export class LeaveApplicationComponent implements OnInit {
+
+
+  leaveForm = new FormGroup({
+    employee_id: new FormControl('', [Validators.required]),
+    employee_name: new FormControl('', [Validators.required]),
+    leave_type: new FormControl('', [Validators.required]),
+    date_from: new FormControl('', [Validators.required]),
+    Days: new FormControl('', [Validators.required]),
+
+  });
+
+  leave_type: any;
+  filteredData: any;
+  status:boolean=false;
+  objAll:any;
+  all_leave: any;
+  allapply: any;
+
+  lName:any;
+
+  constructor(private LeaveService: LeaveService, private ngxService: NgxUiLoaderService, private router: Router) {
+
+    this.LeaveService.Totalleave().subscribe((data: any) => {
+
+      this.allapply = data;
+      console.log(this.allapply);
+
+    });
+
+    this.LeaveService.getleave().subscribe((data) => {
+
+      this.all_leave = data;
+
+    });
+
+  }
+  ngOnInit(): void {
+
+  }
+
+  search1(evt: any) {
+    console.log("Evt", evt.target.value);
+    this.leave_type = evt.target.value;
+    if (evt.target.value == '' || evt.target.value == undefined) {
+
+      console.log('...', evt.target.value);
+
+      this.lName = evt.target.value;
+
+      this.status = true;
+
+    }
+
+  }
+
+  search() {
+
+    console.log(this.leave_type);
+
+    if(this.status==false){
+    let leave_type_val = {
+      leave_type: this.leave_type
+    }
+
+    this.LeaveService.findBySearch(leave_type_val).subscribe((data) => {
+      this.filteredData = data
+      console.log(data);
+    });
+  }
+  else{
+    this.SearchALL();
+  }
+  }
+
+
+
+  // deleteleave(employee_id: any) {
+  //   this.ngxService.start();
+  //   if (confirm("Are you sure to delete this Leave?")) {
+  //     this.LeaveService.deleteleave(employee_id).subscribe((data) => {
+
+  //       // alert('Leave Successfully Deleted.');
+  //       window.location.reload();
+  //       this.ngxService.stop();
+  //     });
+  //   }
+
+  // }
+
+  deleteleave(employee_id: any) {
+
+    this.LeaveService.deleteleave(employee_id).subscribe(res => {
+      console.log("Res", res);
+      alert("Leave Successfully Deleted");
+      setTimeout(() => {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate(['/leave-application']));
+      }, 1000);
+    }, (err) => {
+      console.log("Err", err);
+    })
+  }
+
+
+
+  SearchALL() {
+
+    this.objAll = {
+
+      leave_type:this.lName,
+    };
+
+    this.LeaveService.HrfindAllSearch(this.objAll).subscribe(async (res1: any) => {
+
+      console.log(res1);
+
+      this.filteredData = res1;
+
+     
+
+    });
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

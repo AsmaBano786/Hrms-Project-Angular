@@ -1,0 +1,206 @@
+<body class="hold-transition login-page">
+  <!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog " style="margin-top: 15rem;">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel"></h5>
+         <button type="button" class="bi bi-x" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+           We just received your message. Thank you very much for Registration. 
+       </div>
+       <div class="modal-footer">
+         <a href="login.html"> <button type="button" class="btn btn-primary"> SIGN IN </button></a> 
+       </div>
+     </div>
+   </div>
+ </div> -->
+     <div class="login-logo">
+       <a href="index2.html">
+         <img src="assets/dist/img/logo.png"> <span class="small">HRMS</span>
+       </a>
+     </div>
+     <!-- /.login-logo -->
+   
+         <div class="card card-default" style="width: 45rem; height: 50rem;" >
+          <a routerLink="/dashboard" class="text-right" style="color:grey; margin-right:5px;" ><h5>X</h5></a>
+          <form method="post" [formGroup]="companyinfo" (ngSubmit)="submit(this.companyinfo.value)">
+         
+           <div class="card-body ">
+               <div class="col-md-12">
+               <h3>Company Information</h3> 
+               </div>
+               
+               <hr>
+                   <div class="col-md-12">
+        <div class="row">
+             <div class=" col-md-6 ">
+               <label for="">Company Name <span class="" style="color:red;">*</span>
+               </label>
+               <input type="text" class="form-control"  id="" placeholder="Company Name" formControlName="company_name">
+             </div>
+            
+             <div class=" col-md-6 ">
+               <label for="">Company Email <span class="" style="color:red;">*</span>
+               </label>
+               <input type="email"class="form-control" id="" placeholder="Company Email" formControlName="company_email">
+             </div>
+             <div class=" col-md-6">
+               <label for="">Contact No <span class="" style="color:red;">*</span>
+               </label>
+               <input  max="10"  type="email"class="form-control"  id="" placeholder="Contact No" formControlName="contact_no">
+             </div>
+          
+             <div class="  col-md-6">
+               <label for="" >Portal Name <span class="" style="color:red;">*</span>
+               </label>
+               <input type="url"class="form-control" id="" placeholder="Portal Name" formControlName="portal">
+             </div>
+             <div class=" col-md-6">
+               <label for="" >Industry <span class="" style="color:red;">*</span>
+               </label>
+               <select name="" id="ab" class= "form-select form-control" formControlName="industry">
+                 <option value="">Select Industry </option>
+                 <option value="Information Technology">Information Technology</option>
+                 <option value="Maketing">Maketing</option>
+                 <option value="BPO">BPO</option>
+                
+              
+               </select>
+             </div>
+             <div class=" col-md-6">
+               <label for="" class="">Number of Employee <span class="" style="color:red;">*</span>
+               </label>
+               <select name="" id="ab" class="form-select form-control" formControlName="number_of_employee">
+                 <option value="">select here  </option>
+                 <option value="1-50">1-50</option>
+                 <option value="50-100">50-100</option>
+                 <option value="100-200">100-200</option>
+                 <option value="500-1000">500-1000</option>
+              
+               </select>
+             </div>
+       
+             <div class=" col-md-6">
+               <label for="" >Tax Information <span class="" style="color:red;">*</span>
+               </label>
+               <input type="url"class="form-control" id="" placeholder="Tax Information" formControlName="tax_information">
+             </div>
+             <!-- <div class="col-md-6">
+               <label for="" >Company Logo
+                <span class="" style="color:red;">*</span>
+               </label>
+               <div class="custom-file">
+                 <input class="custom-file-input" id="customFile" type="file" formControlName="company_logo" >
+                 <label class="custom-file-label" for="customFile">Upload Company Logo</label>
+               </div>
+             </div> -->
+             <div class=" col-md-6">
+              <label for="">Country</label><span class="required"
+              style="color: red;">*</span>
+              <select
+                class="form-control"
+                (change)="
+                  onChangeCountry($any($event.target).value)
+                "
+                class="form-control"
+                id="floatingInput1"
+                formControlName="country"
+                [(ngModel)]="Countryselected"
+                name="India"
+              >
+                <!-- <option value="" disabled>
+                  Select Country
+                </option> -->
+                <!--  -->
+
+                <option
+                  *ngFor="
+                    let country1 of countryInfo;
+                    let i = index
+                  "
+                  [value]="country1.CountryName"
+                >
+                  {{ country1.CountryName }}
+                </option>
+              </select>
+             </div>
+             <div class=" col-md-6">
+              <label for="">State/Province</label><span class="required"
+              style="color: red;">*</span>
+                  <select
+                    class="form-control"
+                    (click)="
+                      onChangeState($any($event.target).value)
+                    "
+                    id="floatingInput2"
+                    formControlName="state"
+                  >
+                    <option>Select State</option>
+                    <option *ngIf="stateInfo == ''" value="-1">
+                      --Select State--
+                    </option>
+                    <option
+                      *ngFor="
+                        let state of stateInfo;
+                        let j = index
+                      "
+                      [value]="state.StateName"
+                    >
+                      {{ state.StateName }}
+                    </option>
+                  </select>
+             </div>
+              <div class=" col-md-6">
+                <label for="">City</label><span class="required"
+                style="color: red;">*</span>
+                  <select
+                    class="form-control"
+                    (change)="
+                      onChangeCity($any($event.target).value)
+                    "
+                    id="floatingInput"
+                    formControlName="city"
+                  >
+                    <option>Select City</option>
+                    <option *ngIf="cityInfo == ''" value="-1">
+                      --Select CIty--
+                    </option>
+                    <!-- <option *ngFor="let city of cityInfo; let k = index" value="{{k}}">{{city}}</option> -->
+                    <option
+                      *ngFor="
+                        let city of cityInfo;
+                        let k = index
+                      "
+                      [value]="city"
+                    >
+                      {{ city }}
+                    </option>
+                  </select>
+             </div>
+             <div class=" col-md-6">
+               <label for="">ZIP/PIN Code <span class="required"
+                style="color: red;">*</span>
+               </label>
+               <input type="text" class="form-control" id="" placeholder="ZIP/PIN Code" formControlName="pin_code">
+             </div>
+             <div class=" col-md-6">
+               <label for="">Street Address</label><span class="required"
+               style="color: red;">*</span>
+               <textarea type="text" class="form-control" id="" placeholder="Street Address" formControlName="street_address"></textarea>
+             </div>
+
+           </div>
+       </div><br>
+       <div class=" col-md-12  ">
+           <button type="submit" class="btn btn-primary col-md-12" >
+               Add
+             </button>
+           </div>
+          
+   </div>
+  </form>
+         </div>
+      
+ </body>

@@ -1,0 +1,507 @@
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+    <div><app-header></app-header></div>
+<div><app-onboarding-left-panel></app-onboarding-left-panel></div>
+<!-- end header code here............... -->
+<!-- start leftpanel code here............... -->
+
+<div class="content-wrapper" style="height: auto;">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <strong>
+            <h1 class="m-0">Timesheet</h1>
+          </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header p-2">
+          <ul class="nav nav-pills">
+            <li class="nav-item" style="height: auto">
+              <a
+                class="nav-link active"
+                href="#summary"
+                data-toggle="tab"
+                [ngClass]="{ active: activeTab === 'summary' }"
+                (click)="switchsummary('summary')"
+                >Summary</a
+              >
+            </li>
+
+            <li class="nav-item" style="height: auto">
+              <a
+                class="nav-link"
+                href="#info"
+                data-toggle="tab"
+                [ngClass]="{ active: activeTab === 'info' }"
+                (click)="switchtabinfo('info', $event); switchtabinfo1('info')"
+                >Info</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#attachment"
+                data-toggle="tab"
+                [ngClass]="{ active: activeTab === 'attachment' }"
+                (click)="switchattach('attachment', $event)"
+              >
+                Attachment</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#notes"
+                data-toggle="tab"
+                [ngClass]="{ active: activeTab === 'notes' }"
+                (click)="switchnotes('notes', $event)"
+                >Notes</a
+              >
+            </li>
+          </ul>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="tab-content">
+            <div
+              class="active tab-pane"
+              id="summary"
+              [ngClass]="{ active: activeTab === 'summary' }"
+            >
+              <form method="get" [formGroup]="Timesheet" (ngSubmit)="search()">
+                <!-- <form [formGroup]="Timesheet"   -->
+                <div class="row pt-4">
+                 
+                  <!-- <hr /> -->
+                  <div class="row">
+                   
+                    <div class="row pt-1">
+                    <div class="col-md-12 text-right">
+                      <a 
+                        href="#info" 
+                        class="btn btn-primary"
+                        (click)="switchtabinfo('info', $event);switchtabinfo1('info')"
+                      >
+                        Add
+                      </a></div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <form method="get" [formGroup]="Timesheet"> -->
+                <br /><br />
+                <table class="table table-bordered tableA">
+                  <tr>
+                    <th>S No.</th>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Location</th>
+                    <th>Designation</th>
+                    <th>Month</th>
+                    <th>Action</th>
+                  </tr>
+
+                  <tr *ngFor="let item of sessiondata; let i = index;">
+                    <td>{{ i + 1 }}</td>
+                    <td (click)="switchtabinfo('info', $event);switchtabinfo1('info')">
+                      <a href="">{{ item.emp_id }}</a>
+                    </td>
+                    <td>{{ item.emp_name }}</td>
+                    <td>{{ item.location }}</td>
+                    <td>{{ item.designation }}</td>
+                    <td>{{ item.joining_date | date : "mediumDate" }}</td>
+
+                    <!-- <td *ngIf="(item.Date | date:'yyyy-MM-dd') == (date | date:'yyyy-MM-dd')"> -->
+                    <td>
+                      <!-- <a class="cursor-pointer" (click)="deleteTimesheet(item.id)">
+                              <i class="fas fa-trash"></i>
+                            </a> -->
+                      <a
+                        class="cursor-pointer"
+                        (click)="switchattach('info', $event)"
+                      >
+                      &nbsp;<i class="fas fa-edit"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </form>
+            </div>
+
+            <!-- </form> -->
+
+            <!-- /.tab-pane -->
+
+            <div
+              class="tab-pane"
+              id="info"
+              [ngClass]="{ active: activeTab === 'info' }"
+            >
+              <form method="get" [formGroup]="Timesheet1">
+                <div class="card-header">
+                  <div class="image" style="display: flex">
+                    <div class="class p-1">
+                      <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </div>
+                    &emsp;
+                    <img
+                      class="navimg"
+                      src="https://res.cloudinary.com/crunchbase-production/image/upload/c_thumb,h_256,w_256,f_auto,g_faces,z_0.7,q_auto:eco,dpr_1/kairkvolel5gulu5ejqg"
+                      alt="Bootstrap"
+                      width="40"
+                      height="34"
+                    />&emsp;
+                    <!-- <h5>{{ this.nameByid }} {{ this.findByid }}</h5> -->
+                    <h5>{{this.emp_name}} {{this.emp_id}}</h5>
+                  </div>
+                  <br />
+                  <div class="row"></div>
+
+                  <table class="table tableA">
+                    <tr>
+                      <th>S No.</th>
+                      <th>Date</th>
+                      <th>Clients</th>
+                      <th>Project</th>
+                      <th>Task</th>
+                      <th>Working Hours</th>
+                      <th>Action</th>
+                    </tr>
+
+                    <tr
+                      *ngFor="
+                        let item of timesheetData1 || TSheetData;
+                        let i = index
+                      "
+                    >
+                      <!-- <td>{{item.TimeSheetId}}</td> -->
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ item.Date | date : "mediumDate" }}</td>
+                      <td>{{ item.Clients }}</td>
+                      <td>{{ item.Project }}</td>
+                      <td>{{ item.Task }}</td>
+                      <td>{{ item.WorkingHours }}</td>
+                      <td
+                        *ngIf="
+                          (item.Date | date : 'yyyy-MM-dd') !=
+                          (date | date : 'yyyy-MM-dd')
+                        "
+                      >
+                        Saved
+                      </td>
+                      <td
+                        *ngIf="
+                          (item.Date | date : 'yyyy-MM-dd') ==
+                          (date | date : 'yyyy-MM-dd')
+                        "
+                      >
+                        <a
+                          class="cursor-pointer"
+                          (click)="deleteTimesheet(item.TimeSheetId)"
+                       
+                        >
+                          &nbsp;<i class="fas fa-trash"></i>
+                        </a>
+                        <a class="cursor-pointer" [routerLink]="['/employee-timesheet/edit/'+item.TimeSheetId]"> &nbsp;<i class="fas fa-edit"></i></a>
+                        <!-- <a
+                          class="cursor-pointer"
+                          (click)="editTimesheet(item.TimeSheetId)"
+                        >
+                          <i class="fas fa-edit"></i>
+                        </a> -->
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>5</td>
+                      <td>
+                        <input
+                          type="date"
+                          name="date"
+                          [(ngModel)]="date"
+                          class="form-control"
+                          id="date"
+                          min="2023-03-01"
+                          max="2050-03-01"
+                          placeholder="Date"
+                        />
+                      </td>
+
+                      <td>
+                        <select
+                          name=""
+                          id="ab"
+                          class="form-select"
+                          (change)="clientChanged($event)"
+                        >
+                          <option selected="selected" value="" disabled>
+                            select client
+                          </option>
+                          <option *ngFor="let item of projectData">
+                            {{ item.client_name }}
+                          </option>
+                        </select>
+                      </td>
+
+                      <td>
+                        <select
+                          name=""
+                          id="ab"
+                          class="form-select"
+                          (change)="projectChanged($event)"
+                        >
+                          <option selected="selected" value="" disabled>
+                            select Project
+                          </option>
+                          <option *ngFor="let item of projectData">
+                            {{ item.project_name }}
+                          </option>
+                        </select>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="task"
+                          value=""
+                          [(ngModel)]="Task"
+                          class="form-control"
+                          id="task"
+                          (click)="taskChanged($event)"
+                          placeholder="Enter task"
+                        />
+                        <!-- <div *ngIf="submitted && f.Task.errors" class="invalid-feedback">
+                                      <div *ngIf="f.Task.errors.required">Task is required</div>
+                                  </div> -->
+                      </td>
+                      <td>
+                        <!-- <button
+                          type="button"
+                          class="btn btn-light border btn-sm"
+                        >
+                          <a (click)="checkTimeSheet()">
+                            {{ format(hours) }}:{{ format(minutes) }}:{{
+                              format(seconds)
+                            }}
+                            <i class="fas fa-clock"></i
+                          ></a>
+                        </button> -->
+                        <input
+                        type="text"
+                       
+                        
+                        class="form-control"
+                        
+                        formControlName="WorkingHours"
+                        (click)="checkTimeSheet()"
+                        placeholder="Enter time"
+                      />
+                      </td>
+                      <td>
+                        <a class="cursor-pointer" (click)="createTimeSheet()">
+                          <i class="fas fa-save"></i>
+                        </a>
+                      </td>
+
+                      <td hidden>
+                        <input
+                          type="text"
+                          hidden
+                          value="{{ emp_id }}"
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                   
+                  </table>
+
+                  <div class="col-md-12 row">
+                    <div class="col-md-4">
+                      <h4 class="ml-5">Total Hours:</h4>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                      <button type="button" class="btn btn-lg text-blue btn1 ml-8" style="cursor:pointer; display: inline-block;"
+                      >
+                        <a>
+                          {{this.totalWorkingHrs}}
+                         </a>
+                      </button>
+                    </div>
+                  </div>
+                  <br />
+                </div>
+              </form>
+            </div>
+            <!-- </form> -->
+
+            <!-- /.tab-pane -->
+            <div class="tab-pane" id="attachment" [ngClass]="{ 'active':activeTab==='attachment'}">
+              <div class="row">
+                  <form [formGroup]="attachmentForm" (ngSubmit)="attachment()">
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <label for="">Timesheet File</label>
+                          </div>
+                      </div>
+
+                      <!-- <div class="form-row">
+
+                          <div class="form-group col-md-6">
+                              <select name="" id="ab" class="form-select"
+                                  (change)="projectNamechanged($event); GetAttachments();">
+                                  <option selected="selected" value="" disabled>Select Project
+                                      Name
+                                  </option>
+                                  <option >
+                                    
+                                  </option>
+                              </select>
+                          </div>
+                      </div> -->
+
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <select class="form-control" formControlName="select"
+                              (change)="selectAttach($event.target)" Placeholder="Select Attachment">
+
+
+                                  <option [selected]="true" disabled>Select Timesheet File
+                                  </option>
+                                  <option>Excel TimeSheet</option>
+                                  
+
+                              </select>
+
+                          </div>
+
+                          <div class="form-group col-md-6">
+                              <div class="custom-file">
+                                  <!-- <input type="hidden" formControlName="project_name"
+                                      id="project_name" placeholder="{{ this.employeeId }}" /> -->
+                                  <input class="custom-file-label" for="customFile" type="file"
+                                      (change)="onChange($event)" formControlName="profile"
+                                      id="profile" class="form-control" />
+                                  <div class="form-label text-danger"
+                                      *ngIf="this.selectedattachfile == true">
+                                      Please select valid file type
+                                  </div>
+
+                              </div>
+                          </div>
+
+                          <div class="form-group col-md-12">
+                              <button class="btn btn-primary" type="submit">
+                                  Save and Add
+                              </button>
+                          </div>
+
+                      </div>
+                      <hr>
+                      <div class="form-group col-md-3 container" *ngIf="loading">
+                          <p>Loading data.............</p>
+                      </div>
+                      <div class="overflow-auto p-3 bg-light"
+                          style="max-width: 60%; max-height: 250px">
+                          <div class="row" *ngFor="let i of fetchAttachment; let a = index">
+                              <div class="col-md-12">
+                                  <label for="">Done
+                                      {{i.created_at | date : "MMM d, y, hh:mm:ss a" }}
+                                      | Doctype : {{ i.type }}</label>
+                                  <span class="pull-right"><a title="Edit">
+
+                                          <i class="fa fa-download" (click)="download(a)"
+                                              style="color: rgb(7, 11, 241)"></i>
+                                      </a>
+
+                                      <a title="Delete">
+                                        &nbsp;<i class="fa fa-trash" (click)="deleteAttachment(i.id)"
+                                              style="color: rgb(7, 11, 241)"></i></a></span>
+
+                                  <div class="col-md-12">
+                                      <p>
+
+                                          <a style="color: blue">{{ i.originalname }}</a>
+                                      </p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                  </form>
+              </div>
+          </div>
+
+          <div class="tab-pane" id="notes" [ngClass]="{ 'active':activeTab==='notes'}">
+              <form method="post" [formGroup]="notesForm" (ngSubmit)="notes(data)">
+
+                  <div class="form-row">
+
+                      <!-- <div class="form-group col-md-6">
+
+                          <select name="" id="ab" class="form-select"
+                              (change)="projectNamechanged($event);  Getnotes();">
+                              <option selected="selected" value="" disabled>Select Project Name
+                              </option>
+                              <option *ngFor="let project of allprojects">{{project.project_name}}
+                              </option>
+                          </select>
+
+                      </div> -->
+
+                      <div class="form-group col-md-12">
+                          <label for="">Add Notes<span class="required">*</span></label>
+                          <textarea class="form-control" placeholder="Notes" id="floatingInput"
+                              formControlName="add_notes" class="form-control" [ngClass]="{
+'is-invalid': submitted && n.add_notes.errors
+}" id="inputadd_notes4"></textarea>
+                          <br>
+                          <button type="submit" class="btn btn-primary mt-1">
+                              {{ editMode ? "Update Notes" : "Save and Add" }}
+                          </button>
+                      </div>
+
+                  </div>
+                  <hr>
+                  <div class="overflow-auto" style="max-width: 60%; max-height: 250px">
+                      <div class="row" *ngFor="let i of fetchNotes; index as n">
+                          <div class="col-md-12">
+                              <label for="">Done {{ i.created_at | date : "medium" }}
+                              </label>
+                              <span class="pull-right">
+
+                                  <a title="Edit" style="color: rgb(7, 11, 241)">&nbsp;<i class="fa fa-edit"
+                                          (click)="updateNotes(i.Id, n)"></i></a>
+
+                                  <a title="Delete" style="color: rgb(7, 11, 241)">&nbsp;<i
+                                          class="fa fa-trash"
+                                          (click)="deleteNotes(i.Id)"></i></a></span>
+                              <input type="text" class="form-control" placeholder={{i.add_notes}}
+                                  disabled />
+                          </div>
+                      </div>
+                  </div>
+
+              </form>
+          </div>
+            <!-- /.tab-pane -->
+          </div>
+          <!-- /.tab-content -->
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    <!-- </div> -->
+  </section>
+</div>
+<!-- start footer code here............... -->
+<div><app-footer></app-footer></div>
+<!-- end footer code here............... -->
+</div>
+</body>

@@ -1,0 +1,94 @@
+<div class="wrapper">
+    <div><app-header></app-header></div>
+          
+    <!-- end header code here............... -->
+    <!-- start leftpanel code here............... -->
+    <div ><app-left-panel></app-left-panel>
+    <!-- end leftpanel code here............... -->
+      <div class="content-wrapper"style="height: auto;">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-12">
+                <h1 class="m-0">Approval for Requests</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title"><select class="form-control select2" style="width: 100%;">
+                        <option selected="selected">All Leaves and Holidays</option>
+                        <option>Only Leave</option>
+                        <option>Only Holiday</option>
+                      </select></h3>
+                    <!--<div class="text-right"><a href="apply-leave.html" class="btn btn-primary">+ Apply Leave</a> </div>-->
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <form>
+                    <table class="table table-bordered text-center">
+                      <thead>
+                        <tr>
+                          <th> <input class="" type="checkbox"></th>
+                          <th>Employee ID</th>
+                          <th>Leave Type</th>
+                          <th>Date From</th>
+                          <th>Date To</th>
+                          <th>Reporting Manager</th>
+                          <th>Reason for leave</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                     
+                        <tr *ngFor="let i of apFrReq">
+                          <td> <input class="" type="checkbox"></td>
+                          <td><a href="apply-leave.html">{{i.emp_name}}</a></td>
+                          <td>{{i.leave_type}}</td>
+                          <td>{{i.date_from| date}}</td>
+                          <td>{{i.date_to| date}}</td>
+                          <td>{{i.reporting_manager}}</td>
+                          <td>{{i.reason_for_leave}}</td>
+                          <td><select class="custom-select" #Action 
+                            [value]="i.Action" name="Action" >
+                            <!-- (change)="selectChangeHandler($event)" -->
+                              <option [selected]="i.Action" [value]="i.Action">{{i.Action}}</option>
+                              
+                              <!-- <option  *ngFor="let ac of status" [selected]="ac == i.Action"
+                              [value]="ac" >{{ac}}</option>
+                               -->
+                            </select></td>
+                        </tr>
+                     
+    
+                        
+                       
+                      </tbody>
+                    </table>
+                  </form>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer clearfix">
+                    <ul class="pagination pagination-sm m-0 float-right">
+                      <li class="page-item"><a class="page-link" href="#">«</a></li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">»</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div><app-footer></app-footer></div>
+    </div>

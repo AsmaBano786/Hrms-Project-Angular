@@ -1,0 +1,21 @@
+.alert alert-danger{
+height: 20px;
+}
+.example-chip-list {
+    width: 100%;
+  }
+
+  .inputstyle{
+    width: 500px !important;
+  }
+  label {
+    display: inline-block;
+    /* width: 120px; */
+    vertical-align: top;
+  }
+  .required {
+    color: red;
+  }
+  .showModal {
+    display:block;
+ }
