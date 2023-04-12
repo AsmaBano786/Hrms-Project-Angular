@@ -100,6 +100,11 @@ import { ConfigurePayPeriodViewComponent } from './hr/configure-pay-period/confi
 import { EmpEditApplyLeaveComponent } from './hr/leave/emp-edit-apply-leave/emp-edit-apply-leave.component';
 import { CompanyDetailComponent } from './admin/company-detail/company-detail.component';
 import { CompanyInfoComponent } from './admin/company-info/company-info.component';
+import { ResetPassComponent } from './Onboaring/reset-pass/reset-pass.component';
+import { EditNewLeaveTypeComponent } from './hr/leave/edit-new-leave-type/edit-new-leave-type.component';
+import { NewLeaveTypeComponent } from './hr/leave/new-leave-type/new-leave-type.component';
+import {Ng2TelInputModule} from 'ng2-tel-input';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -192,11 +197,15 @@ import { CompanyInfoComponent } from './admin/company-info/company-info.componen
     ConfigurePayPeriodViewComponent,
     EmpEditApplyLeaveComponent,
     CompanyDetailComponent,
-    CompanyInfoComponent
+    CompanyInfoComponent,
+    ResetPassComponent,
+    EditNewLeaveTypeComponent,
+    NewLeaveTypeComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    Ng2TelInputModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -213,6 +222,7 @@ import { CompanyInfoComponent } from './admin/company-info/company-info.componen
 
     NgMultiSelectDropDownModule.forRoot(),
     ColorSketchModule,
+    NgxIntlTelInputModule
     // FullCalendarModule
   ],
   providers: [ContStateCityService, DatePipe],

@@ -31,7 +31,11 @@ export class LeaveApplicationComponent implements OnInit {
   allapply: any;
 
   lName:any;
-
+  sessiondata: any;
+  emp_name: any;
+  emp_id: any;
+  roll: any;
+  company_id:any;
   constructor(private LeaveService: LeaveService, private ngxService: NgxUiLoaderService, private router: Router) {
 
     this.LeaveService.Totalleave().subscribe((data: any) => {
@@ -49,7 +53,18 @@ export class LeaveApplicationComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.sessiondata = JSON.parse(sessionStorage.getItem('local_storage') || "[]");  //recieve
+    console.log("local_storage data", this.sessiondata);
 
+    for (let i in this.sessiondata) {
+      this.emp_id = this.sessiondata[i].emp_id;
+      this.emp_name = this.sessiondata[i].emp_name;
+      this.roll = this.sessiondata[i].roll_id;
+this.company_id=this.sessiondata[i].company_id;
+
+    }
+
+    console.log("hr session data..", this.emp_id, this.emp_name, this.roll);
   }
 
   search1(evt: any) {
@@ -88,18 +103,6 @@ export class LeaveApplicationComponent implements OnInit {
 
 
 
-  // deleteleave(employee_id: any) {
-  //   this.ngxService.start();
-  //   if (confirm("Are you sure to delete this Leave?")) {
-  //     this.LeaveService.deleteleave(employee_id).subscribe((data) => {
-
-  //       // alert('Leave Successfully Deleted.');
-  //       window.location.reload();
-  //       this.ngxService.stop();
-  //     });
-  //   }
-
-  // }
 
   deleteleave(employee_id: any) {
 
