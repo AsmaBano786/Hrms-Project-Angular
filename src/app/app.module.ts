@@ -100,6 +100,8 @@ import { ConfigurePayPeriodViewComponent } from './hr/configure-pay-period/confi
 import { EmpEditApplyLeaveComponent } from './hr/leave/emp-edit-apply-leave/emp-edit-apply-leave.component';
 import { CompanyDetailComponent } from './admin/company-detail/company-detail.component';
 import { CompanyInfoComponent } from './admin/company-info/company-info.component';
+import { SettingComponent } from './Setting/setting/setting.component';
+import { UserViewComponent } from './hr/user-view/user-view.component';
 import { ResetPassComponent } from './Onboaring/reset-pass/reset-pass.component';
 import { EditNewLeaveTypeComponent } from './hr/leave/edit-new-leave-type/edit-new-leave-type.component';
 import { NewLeaveTypeComponent } from './hr/leave/new-leave-type/new-leave-type.component';
@@ -137,7 +139,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     LeftPanelComponent,
 
     RestrictcharComponent,
-
+UserViewComponent,
     UserComponent,
     PendingReportComponent,
     NewHiresComponent,
@@ -198,6 +200,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     EmpEditApplyLeaveComponent,
     CompanyDetailComponent,
     CompanyInfoComponent,
+    SettingComponent,
     ResetPassComponent,
     EditNewLeaveTypeComponent,
     NewLeaveTypeComponent
