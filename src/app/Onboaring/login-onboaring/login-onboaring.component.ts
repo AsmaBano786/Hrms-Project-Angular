@@ -54,9 +54,9 @@ if(this.submitted && this.registerForm.valid)
 {
  // alert("Great, You are logged in!!");
   console.log(this.registerForm.value)
-//  this.ngxService.start();
+ this.ngxService.start();
   this.authService.onboarding_login(this.registerForm.value).subscribe(async result => {
-    // this.ngxService.stop();
+    this.ngxService.stop();
   // console.log(this.registerForm.value);
     if(result.success) {
       

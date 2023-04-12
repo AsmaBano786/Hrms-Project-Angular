@@ -24,7 +24,7 @@
   </div>
   <!-- /.login-logo -->
 
-  <div class="card card-default" style="width: 40%; height: 65%">
+  <div class="card card-default" style="width: 40%; height: auto">
     <div class="card-header">
       <h3>Registration Form</h3>
     </div>
@@ -62,7 +62,6 @@
             id=""
             placeholder="Enter email"
             formControlName="company_email_id"
-
             [ngClass]="{ 'is-invalid': submitted && f.company_email_id.errors }"
           />
 
@@ -112,7 +111,10 @@
             formControlName="confirm_password"
             [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"
           />
-          <div *ngIf="original_Password!=confirm_Password" class="form-label text-danger">
+          <div
+            *ngIf="original_Password != confirm_Password"
+            class="form-label text-danger"
+          >
             Please enter correct password
           </div>
           <div
@@ -128,14 +130,42 @@
           <label for="" class="col-md-4"
             >Phone Number <span class="" style="color: red">*</span>
           </label>
-          <input
+
+          <ngx-intl-tel-input
+          style="width: 50%;"
+        [cssClass]="'custom'"
+        [preferredCountries]="preferredCountries"
+        [enableAutoCountrySelect]="true"
+        [enablePlaceholder]="true"
+        [searchCountryFlag]="true"
+        [searchCountryField]="[
+          SearchCountryField.Iso2,
+          SearchCountryField.Name
+        ]"
+        [selectFirstCountry]="false"
+        [selectedCountryISO]="CountryISO.India"
+        [maxLength]="15"
+        [phoneValidation]="true"
+        [separateDialCode]="separateDialCode"
+        [numberFormat]="PhoneNumberFormat.National"
+        name="phone"
+        formControlName="phone_number"
+        class="col-md-8"
+      >
+      </ngx-intl-tel-input>
+          <!-- <input
             type="text"
             class="form-control col-md-8"
-            id=""
-            placeholder="Phone Number"
+            id=""          
             formControlName="phone_number"
+            ng2TelInput
+            (haaError)="hasError($event)"
+            (ng2TelOutput)="getNumber($event)"
+            (intlaTelInputObject)="telInputObject($event)"
+            (countryChange)="onCountryChange($event)"
+            placeholder="Phone Number"
             [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"
-          />
+          /> -->
           <div
             *ngIf="submitted && f.phone_number.errors"
             class="invalid-feedback"
@@ -149,24 +179,35 @@
           </div>
         </div>
         <div class="form-group row">
-          <input
-            type="checkbox"
-            class="col-md-1"
-            formControlName="checkbox"
-            [ngClass]="{ 'is-invalid': submitted && f.checkbox.errors }"
-          />
-          <label for="" class="col-md-11">
-            i agree to the terms of service and privacy policy.
-            <span class="" style="color: red">*</span>
-            <div
-              *ngIf="submitted && f.checkbox.errors"
-              class="invalid-feedback"
-            >
-              <div *ngIf="checkbox.errors.required">
-                Please select the checkbox
+          <div class="col-md-1">
+            <input
+              type="checkbox"
+              formControlName="checkbox"
+              [ngClass]="{ 'is-invalid': submitted && f.checkbox.errors }"
+            />
+          </div>
+          <div class="col-md-10" style="margin-left: -20px">
+            <label>
+              I have read and agree to the<a
+                href="https://www.cylsys.com/Terms-of-Use.html"
+              >
+                Privacy Policy</a
+              >
+              and<a href="https://www.cylsys.com/Terms-of-Use.html">
+                Terms of Use.</a
+              >
+
+              <span class="" style="color: red">*</span>
+              <div
+                *ngIf="submitted && f.checkbox.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="checkbox.errors.required">
+                  Please select the checkbox
+                </div>
               </div>
-            </div>
-          </label>
+            </label>
+          </div>
         </div>
         <!-- <button style="background-color: rgb(84, 84, 224)" >invite user</button> -->
         <div class="row">

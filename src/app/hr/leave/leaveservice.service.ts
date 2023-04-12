@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -75,6 +76,30 @@ export class LeaveService {
     return this.http.post(`${this.apiUrl}/api/v1/leaves/searchAll`, edata);
 
   }
+///////// new leave type ////////////
+  
+  newleaveTypeadd(cdata: any): Observable<any> {
+    console.log('check', cdata);
+    return this.http.post(`${this.apiUrl}/api/v1/newleavetype/create`, cdata);
+  }
 
+  deleteNewleaveTypeadd(pdata: any) {
+    console.log('check', pdata);
+    console.log(pdata);
+    return this.http.delete(`${this.apiUrl}/api/v1/newleavetype/` + pdata);
+  }
+
+  UpdateNewleaveType(data: any) {
+    console.log('check', data);
+    return this.http.put(`${this.apiUrl}/api/v1/newleavetype/`, data);
+  }
+
+  getByIdNewleaveType(id: any) {
+    return this.http.get(`${this.apiUrl}/api/v1/newleavetype/` + id);
+  }
+
+  getAllnewleavetype() {
+    return this.http.get(`${this.apiUrl}/api/v1/newleavetype/getAll`);
+  }
 
 }

@@ -212,7 +212,7 @@ inum:any;
   Vcountry: any;
   Vstate: any;
   Vcity: any;
-
+  company_id:any;
   //.......................................................
   DateofCompletion: any;
   data: any;
@@ -248,6 +248,7 @@ attachmentValid:boolean=false;
         this.emp_idD1= this.sessiondataD1[i].emp_id;
         this.emp_nameD1=this.sessiondataD1[i].emp_name;
 this.rollD1=this.sessiondataD1[i].roll_id;
+this.company_id=this.sessiondataD1[i].company_id;
 
       }
       
@@ -1981,7 +1982,7 @@ switchattach(activeTab: string, $event: MouseEvent): void{
 }
 
 getdetail() {
-  this.authService.getAllJoiners().subscribe((data: any): void => {
+  this.authService.getAllJoiners(this.company_id).subscribe((data: any): void => {
     this.allemployeedata = data;
   
     console.log("getdetail.............", this.allemployeedata);

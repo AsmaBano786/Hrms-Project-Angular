@@ -145,9 +145,10 @@ updateCandidate(email:any,body:any){
     return this.httpClient.get(`${this.apiUrl}/api/v1/companyMailing/getAll`);
   
   }
-  getAllJoiners(){
+  getAllJoiners(company_id:any){
+console.log(`${this.apiUrl}/api/v1/employees/getAll/`+company_id);
 
-    return this.httpClient.get(`${this.apiUrl}/api/v1/employees/getAll`);
+    return this.httpClient.get(`${this.apiUrl}/api/v1/employees/getAll/`+company_id);
   }
 
 
