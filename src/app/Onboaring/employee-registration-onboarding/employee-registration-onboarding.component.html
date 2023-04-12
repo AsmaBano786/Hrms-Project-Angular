@@ -130,7 +130,30 @@
           <label for="" class="col-md-4"
             >Phone Number <span class="" style="color: red">*</span>
           </label>
-          <input
+
+          <ngx-intl-tel-input
+          style="width: 50%;"
+        [cssClass]="'custom'"
+        [preferredCountries]="preferredCountries"
+        [enableAutoCountrySelect]="true"
+        [enablePlaceholder]="true"
+        [searchCountryFlag]="true"
+        [searchCountryField]="[
+          SearchCountryField.Iso2,
+          SearchCountryField.Name
+        ]"
+        [selectFirstCountry]="false"
+        [selectedCountryISO]="CountryISO.India"
+        [maxLength]="15"
+        [phoneValidation]="true"
+        [separateDialCode]="separateDialCode"
+        [numberFormat]="PhoneNumberFormat.National"
+        name="phone"
+        formControlName="phone_number"
+        class="col-md-8"
+      >
+      </ngx-intl-tel-input>
+          <!-- <input
             type="text"
             class="form-control col-md-8"
             id=""          
@@ -142,7 +165,7 @@
             (countryChange)="onCountryChange($event)"
             placeholder="Phone Number"
             [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"
-          />
+          /> -->
           <div
             *ngIf="submitted && f.phone_number.errors"
             class="invalid-feedback"

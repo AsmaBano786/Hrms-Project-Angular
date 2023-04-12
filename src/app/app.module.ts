@@ -104,6 +104,8 @@ import { ResetPassComponent } from './Onboaring/reset-pass/reset-pass.component'
 import { EditNewLeaveTypeComponent } from './hr/leave/edit-new-leave-type/edit-new-leave-type.component';
 import { NewLeaveTypeComponent } from './hr/leave/new-leave-type/new-leave-type.component';
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+
 @NgModule({
   declarations: [
     AddScheduleComponent,
@@ -220,6 +222,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
 
     NgMultiSelectDropDownModule.forRoot(),
     ColorSketchModule,
+    NgxIntlTelInputModule
     // FullCalendarModule
   ],
   providers: [ContStateCityService, DatePipe],

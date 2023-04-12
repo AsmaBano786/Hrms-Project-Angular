@@ -25,6 +25,7 @@ export class LeaveTrackerComponent implements OnInit {
   roll: any;
   eName: any;
   objAll: any;
+  company_id:any;
   constructor(private LeaveService: LeaveService, private ngxService: NgxUiLoaderService, private router: Router) {
 
 
@@ -39,7 +40,7 @@ export class LeaveTrackerComponent implements OnInit {
       this.emp_id = this.sessiondata[i].emp_id;
       this.emp_name = this.sessiondata[i].emp_name;
       this.roll = this.sessiondata[i].roll_id;
-
+this.company_id=this.sessiondata[i].company_id;
 
     }
 

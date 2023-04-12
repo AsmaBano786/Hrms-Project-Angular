@@ -9,7 +9,8 @@ import { ServicesService } from 'src/app/Onboaring/onboarding-services/services.
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import {Ng2TelInputModule} from 'ng2-tel-input';
+import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
+
 @Component({
   selector: 'app-employee-registration-onboarding',
   templateUrl: './employee-registration-onboarding.component.html',
@@ -29,13 +30,18 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
   yearDate: any;
   confirm_Password: any;
   original_Password: any;
+  separateDialCode = false;
+	SearchCountryField = SearchCountryField;
+	CountryISO = CountryISO;
+  PhoneNumberFormat = PhoneNumberFormat;
+	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
   // CustomValidators:any
   constructor(
     private formBuilder: FormBuilder,
     private ngxService: NgxUiLoaderService,
     private authService: ServicesService,
     private router: Router,
-    private avhty:Ng2TelInputModule,
+
     private datePipe: DatePipe
   ) {}
   //Add user form actions
@@ -96,6 +102,9 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
       });
   }
 
+  changePreferredCountries() {
+		this.preferredCountries = [CountryISO.India];
+	}
   get employee_type() {
     return this.registerForm.get('employee_type');
   }

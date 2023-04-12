@@ -53,6 +53,7 @@
     "ng2-tel-input": "^2.3.0",
     "ngx-chips": "^3.0.0",
     "ngx-color": "^8.0.3",
+    "ngx-intl-tel-input": "^3.2.0",
     "ngx-ui-loader": "^13.0.0",
     "rxjs": "~7.5.0",
     "rxjs-compat": "^6.6.7",
