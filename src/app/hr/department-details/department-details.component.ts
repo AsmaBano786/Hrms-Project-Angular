@@ -29,6 +29,7 @@ export class DepartmentDetailsComponent implements OnInit {
   DepartmentDetails: any = FormGroup;
 
   submitted = false;
+  company_id: any;
 
 
 
@@ -53,6 +54,7 @@ export class DepartmentDetailsComponent implements OnInit {
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
+this.company_id =this.sessiondata[i].company_id;
 
       }
       
@@ -115,11 +117,15 @@ this.roll=this.sessiondata[i].roll_id;
 
 
 
-      console.log(this.DepartmentDetails.value)
+     
 
-
+let reqBody = {
+  ...this.DepartmentDetails.value,
+  company_id:this.company_id
+}
+console.log("DepartmentDetails",reqBody)
       
-        this.dashService.DepartmentDetails(this.DepartmentDetails.value).subscribe(result => {
+        this.dashService.DepartmentDetails(reqBody).subscribe(result => {
 
           
           // this.router.navigate(['/department']);

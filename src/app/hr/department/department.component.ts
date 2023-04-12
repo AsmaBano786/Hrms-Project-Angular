@@ -24,7 +24,7 @@ export class DepartmentComponent implements OnInit {
   searchedByNameId: any;
   eName: any;
   eId: any;
-
+company_id:any;
   DashboardService: any;
   masterSelected: boolean;
   checklist: any;
@@ -57,10 +57,24 @@ export class DepartmentComponent implements OnInit {
     this.masterSelected = false;
   }
   ngOnInit(): void {
-    this.getdetail();
+    
+    let sessiondata=JSON.parse(sessionStorage.getItem('local_storage')|| "[]");  //recieve
+    //  console.log("local_storage data",sessiondata);
+    
+      for(let i in sessiondata){
+      let emp_id= sessiondata[i].emp_id;
+      let emp_name =sessiondata[i].emp_name;
+      let roll =sessiondata[i].roll_id;
+          //  console.log("company_id..........",sessiondata[i].company_id);
+
+      this.company_id=sessiondata[i].company_id;
+      }
+      this.getdetail();
   }
   getdetail() {
-    this.dash.Department().subscribe((data: any): void => {
+    console.log(this.company_id);
+    
+    this.dash.Department(this.company_id).subscribe((data: any): void => {
       this.alldata = data;
 
       this.getpenrepo = data;
@@ -71,6 +85,9 @@ export class DepartmentComponent implements OnInit {
       console.log('getdetail... this.nik ', this.nik);
     });
   }
+  // company_id(company_id: any) {
+  //   throw new Error('Method not implemented.');
+  // }
 
   deleteDepart(j: any) {
     console.log(j);

@@ -19,6 +19,7 @@ export class DesignationDetailsComponent implements OnInit {
   emp_name:any;
   emp_id:any;
   roll:any;
+  company_id: any;
   constructor(private formBuilder: FormBuilder, private dashService: DashboardService, private router: Router) {
       
 
@@ -37,6 +38,7 @@ export class DesignationDetailsComponent implements OnInit {
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
+this.company_id =this.sessiondata[i].company_id;
       }
       
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
@@ -65,9 +67,14 @@ this.roll=this.sessiondata[i].roll_id;
     //True if all the fields are filled
     if (this.submitted && this.DesignationDetails.valid) {
 
-      console.log('valid data', this.DesignationDetails.value)
+
+      let reqBody = {
+        ...this.DesignationDetails.value,
+        company_id:this.company_id
+      }
+      console.log('valid data', reqBody)
      
-      this.dashService.DesignationDetails(this.DesignationDetails.value).subscribe(result => {
+      this.dashService.DesignationDetails(reqBody).subscribe(result => {
    
   
      

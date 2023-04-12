@@ -92,8 +92,11 @@ export class DashboardService {
     return this.http.post(`${this.apiUrl}/send_email`, data);
   }
 
-  Department() {
-    return this.http.get(`${this.apiUrl}/api/v1/departmentdetails/getAll`);
+  Department(company_id:any) {
+    console.log("service",`${this.apiUrl}/api/v1/departmentdetails/getAll/`+company_id);
+    
+    return this.http.get(`${this.apiUrl}/api/v1/departmentdetails/getAll/`+company_id);
+
   }
 
   DepartmentDetails(cdata: any): Observable<any> {
@@ -117,8 +120,8 @@ export class DashboardService {
     return this.http.delete(`${this.apiUrl}/api/v1/departmentdetails/` + id);
   }
 
-  Designations() {
-    return this.http.get(`${this.apiUrl}/api/v1/designation/getAll`);
+  Designations(company_id:any) {
+    return this.http.get(`${this.apiUrl}/api/v1/designation/getAll/`+company_id);
   }
 
   DesignationDetails(Fdata: any): Observable<any> {

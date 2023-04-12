@@ -222,6 +222,7 @@ noteValid:boolean=false;
 attachmentValid:boolean=false;
 usermailid1:any;
 pass1:any
+company_id:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -240,6 +241,19 @@ pass1:any
 
   ngOnInit(): void {
 
+    let sessiondata=JSON.parse(sessionStorage.getItem('local_storage')|| "[]");  //recieve
+    //  console.log("local_storage data",sessiondata);
+    
+      for(let i in sessiondata){
+      let emp_id= sessiondata[i].emp_id;
+      let emp_name =sessiondata[i].emp_name;
+      let roll =sessiondata[i].roll_id;
+          //  console.log("company_id..........",sessiondata[i].company_id);
+
+      this.company_id=sessiondata[i].company_id;
+      }
+    //  console.log("company_id..........",this.company_id);
+    
     this.btndisable=false;
 
    
@@ -558,9 +572,9 @@ this.credentials = this.formBuilder.group({
         const note= this.noteValid;
         // this.registerForm && this.attachmentForm && this.notesForm;
 
-      // console.log('valid', valid);
+    
       if (this.age <= 21) {
-        // console.log('age', this.age);
+     
         this.age_error = 'invalid age';
       }
 
@@ -569,24 +583,12 @@ this.credentials = this.formBuilder.group({
       // document.getElementById("ModalClose")?.click();
       this.GetAttachments();
         this.Getnotes();
-        // alert("Great, You are in!!");
-        // console.log(this.registerForm.value);
-        // console.log('educationsubmit', this.educationForm.value);
-        // console.log('experiencesubmit', this.experienceForm.value);
-        // console.log('addressubmit', this.addressForm.value);
-        // console.log('documentsubmit', this.documentForm.value);
-        // console.log('notes-submit', this.notesForm.value);
-        //..........candidate details
-        // let reqBody = {
-          // for(let i of this.pAddress.value)
-          // {
-          //   this.permanent_address_arr.push({country:i.pCountry,state:i.pState,city:i.pCity,pin_code:i.pPin_code,street_address:i.pStreet_address})
-          // }
-          // console.log("new array permanent address",this.permanent_address_arr[0]);
+        
         this.reqBody = {
           ...this.registerForm.value,
           official_email:this.officialEmail,
           password:this.officialPassword,
+          company_id:this.company_id,
           // ...this.documentForm.value,
           ...this.addressForm.value,
           ...this.pAddressForm.value,
@@ -596,7 +598,7 @@ this.credentials = this.formBuilder.group({
         };
 
        
-        console.log(this.reqBody);
+        console.log("this.reqBody.....",this.reqBody);
         
 
 
