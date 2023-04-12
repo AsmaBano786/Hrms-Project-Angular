@@ -48,19 +48,29 @@ export class DesignationComponent implements OnInit {
   alldata: any;
   //  allEmployees: any;  
   getpenrepo: any
-
+  company_id:any;
   constructor(private dash: DashboardService, private ngxService: NgxUiLoaderService, private router: Router) {
     this.masterSelected = false;
   }
   ngOnInit(): void {
 
+    let sessiondata=JSON.parse(sessionStorage.getItem('local_storage')|| "[]");  //recieve
+    //  console.log("local_storage data",sessiondata);
+    
+      for(let i in sessiondata){
+      let emp_id= sessiondata[i].emp_id;
+      let emp_name =sessiondata[i].emp_name;
+      let roll =sessiondata[i].roll_id;
+          //  console.log("company_id..........",sessiondata[i].company_id);
 
+      this.company_id=sessiondata[i].company_id;
+      }
 
 
     this.getdetail();
   }
   getdetail() {
-    this.dash.Designations().subscribe((data: any): void => {
+    this.dash.Designations(this.company_id).subscribe((data: any): void => {
       this.alldata = data;
 
       this.getpenrepo = data;

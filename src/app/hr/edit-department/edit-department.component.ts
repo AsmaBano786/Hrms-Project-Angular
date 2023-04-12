@@ -20,9 +20,10 @@ export class EditDepartmentComponent implements OnInit {
   departId:any;
   EditDepartmentForm:any;
   submitted:any
+  company_id: any;
   constructor(private activatedRoute: ActivatedRoute, private dashService:DashboardService, private router: Router) {
     
-    this.dashService.Department().subscribe((data) => {
+    this.dashService.Department(this.company_id).subscribe((data) => {
       this.allEmployees = data;
       // console.log("allEmployees", data);
     });
@@ -34,7 +35,7 @@ export class EditDepartmentComponent implements OnInit {
      
       console.log("..........id",this.departId);
     });
-    this.dashService.Department().subscribe((data:any) => {  
+    this.dashService.Department(this.company_id).subscribe((data:any) => {  
       console.log(data);  
       // this.departData = data;
       console.log("arr length",data.length);
@@ -71,6 +72,7 @@ get f() { return this.EditDepartmentForm.controls; }
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
+this.company_id = this.sessiondata[i].company_id;
       }
       
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);

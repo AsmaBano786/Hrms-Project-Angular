@@ -21,10 +21,11 @@ export class EditDesignationComponent implements OnInit {
   departId:any;
   EditDesignationForm:any;
   submitted:any
+  company_id:any;
   constructor(private activatedRoute: ActivatedRoute, 
     private datePipe:DatePipe,private dashService:DashboardService, private router: Router) {
 
-    this.dashService.Designations().subscribe((data) => {
+    this.dashService.Designations( this.company_id).subscribe((data) => {
       this.allEmployees = data;
       console.log("allEmployees", data);
     });
@@ -36,7 +37,7 @@ export class EditDesignationComponent implements OnInit {
      
       console.log("..........idk",this.departId);
     });
-    this.dashService.Designations().subscribe((data:any) => {    
+    this.dashService.Designations(this.company_id).subscribe((data:any) => {    
       // this.departData = data[0];
       // for(let i in data){
       //   console.log("check data",data.id);
@@ -77,6 +78,7 @@ get f() { return this.EditDesignationForm.controls; }
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
+this.company_id = this.sessiondata[i].roll_id;
       }
       
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
