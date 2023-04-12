@@ -11,8 +11,8 @@ export class LeaveService {
 
   constructor(private http: HttpClient) { }
 
-  getleave() {
-    return this.http.get(`${this.apiUrl}/api/v1/leaves/getAll`);
+  getleave(company_id:any) {
+    return this.http.get(`${this.apiUrl}/api/v1/leaves/getAll/`+company_id);
   }
 
   Totalleave() {

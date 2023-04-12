@@ -45,9 +45,10 @@ export class LeaveApplicationComponent implements OnInit {
 
     });
 
-    this.LeaveService.getleave().subscribe((data) => {
+    this.LeaveService.getleave(this.company_id).subscribe((data) => {
 
       this.all_leave = data;
+      console.log("leave applications",this.all_leave)
 
     });
 

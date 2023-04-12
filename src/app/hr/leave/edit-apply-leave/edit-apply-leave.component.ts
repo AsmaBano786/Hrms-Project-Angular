@@ -28,7 +28,7 @@ export class EditApplyLeaveComponent implements OnInit {
   ApplyLeaveId: any;
   editApplyleave: any;
 
-
+  company_id:any;
   // editApplyleave = new FormGroup({
   //   employee_id: new FormControl(''),
   //   emp_name: new FormControl(''),
@@ -51,7 +51,7 @@ export class EditApplyLeaveComponent implements OnInit {
     //   console.log("allEmployees", data);
     // });
 
-    this.LeaveService.getleave().subscribe((data) => {
+    this.LeaveService.getleave(this.company_id).subscribe((data) => {
       this.allleave = data;
       console.log("allEmployees", data);
     });
@@ -62,7 +62,7 @@ export class EditApplyLeaveComponent implements OnInit {
       console.log(this.ApplyLeaveId);
     });
 
-    this.LeaveService.getleave().subscribe((data: any) => {
+    this.LeaveService.getleave(this.company_id).subscribe((data: any) => {
       // console.log(data);
       this.leaveData = data;
 
@@ -140,7 +140,7 @@ export class EditApplyLeaveComponent implements OnInit {
       this.emp_name = this.sessiondata[i].emp_name;
       this.roll = this.sessiondata[i].roll_id;
       this.company_email_id = this.sessiondata[i].company_email_id;
-
+      this.company_id=this.sessiondata[i].company_id;
     }
 
     // this.LeaveService.getById_emp(this.emp_id).subscribe((data: any) => {
