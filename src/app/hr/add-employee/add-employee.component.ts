@@ -222,6 +222,7 @@ noteValid:boolean=false;
 attachmentValid:boolean=false;
 usermailid1:any;
 pass1:any
+company_id:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -240,6 +241,19 @@ pass1:any
 
   ngOnInit(): void {
 
+    let sessiondata=JSON.parse(sessionStorage.getItem('local_storage')|| "[]");  //recieve
+    //  console.log("local_storage data",sessiondata);
+    
+      for(let i in sessiondata){
+      let emp_id= sessiondata[i].emp_id;
+      let emp_name =sessiondata[i].emp_name;
+      let roll =sessiondata[i].roll_id;
+          //  console.log("company_id..........",sessiondata[i].company_id);
+
+      this.company_id=sessiondata[i].company_id;
+      }
+    //  console.log("company_id..........",this.company_id);
+    
     this.btndisable=false;
 
    
@@ -297,25 +311,7 @@ this.usermailid1=result.data.companyOfficialEmail,
 this.pass1=result.data.password
 console.log("......IN.......",this.usermailid1);
 
-this.credentials = this.formBuilder.group({
-  usermailid:this.usermailid1,
-  pass:this.pass1,
-  emp_name:['null'],
-  emp_id:['null'],
-  joining_date:['null'],
-  location:['null'],
-  roll_id:['Employee'],
-  designation:['null'],
-  company_email_id:[this.officialEmail],
-  password: [this.officialPassword],
-  confirm_password: ['null'],
 
-  phone_number: ['null'],
-  checkbox: [0],
-  personal_email_id: ['null'],
- 
-  created_by:['Admin']
-});
 }})
  
 
@@ -558,9 +554,9 @@ this.credentials = this.formBuilder.group({
         const note= this.noteValid;
         // this.registerForm && this.attachmentForm && this.notesForm;
 
-      // console.log('valid', valid);
+    
       if (this.age <= 21) {
-        // console.log('age', this.age);
+     
         this.age_error = 'invalid age';
       }
 
@@ -569,24 +565,13 @@ this.credentials = this.formBuilder.group({
       // document.getElementById("ModalClose")?.click();
       this.GetAttachments();
         this.Getnotes();
-        // alert("Great, You are in!!");
-        // console.log(this.registerForm.value);
-        // console.log('educationsubmit', this.educationForm.value);
-        // console.log('experiencesubmit', this.experienceForm.value);
-        // console.log('addressubmit', this.addressForm.value);
-        // console.log('documentsubmit', this.documentForm.value);
-        // console.log('notes-submit', this.notesForm.value);
-        //..........candidate details
-        // let reqBody = {
-          // for(let i of this.pAddress.value)
-          // {
-          //   this.permanent_address_arr.push({country:i.pCountry,state:i.pState,city:i.pCity,pin_code:i.pPin_code,street_address:i.pStreet_address})
-          // }
-          // console.log("new array permanent address",this.permanent_address_arr[0]);
+        
         this.reqBody = {
           ...this.registerForm.value,
-          official_email:this.officialEmail,
-          password:this.officialPassword,
+
+          official_email:this.registerForm.value.official_email,
+          password:this.registerForm.value.password,
+
           // ...this.documentForm.value,
           ...this.addressForm.value,
           ...this.pAddressForm.value,
@@ -596,66 +581,68 @@ this.credentials = this.formBuilder.group({
         };
 
        
-        console.log(this.reqBody);
+        console.log("this.reqBody.....",this.reqBody);
         
 
 
-     this.credentialObj={
-      usermailid:this.usermailid1,
-      pass:this.pass1,
-      emp_name:this.registerForm.value.first_name+" "+this.registerForm.value.last_name,
-      emp_id:this.registerForm.value.employee_id,
-      joining_date:this.registerForm.value.Date_of_joining,
-      location:this.registerForm.value.work_location,
-      roll_id:'Employee',
-      designation:'null',
-      company_email_id:this.officialEmail,
-      password:this.officialPassword,
-      confirm_password:this.officialPassword,
-    
-      phone_number:this.registerForm.value.phone,
-      checkbox: 0,
-      personal_email_id:this.registerForm.value.email,
-     
-      created_by:'Admin'
-     }
-
-console.log("onboarding.............",this.credentialObj);
-
-        this.authServiceOnbaording.onboarding_registeration(this.credentialObj).subscribe(async (result:any) => {
-          console.log(this.credentialObj);
-            if(result) {
-          console.log(result);
-          console.log(result.message);
-          console.log("onboarding called");
-          
-          }
-          else{
-            console.log("error");
-           
-             
-        
-          }
-        })
+  
 
         
-        // this.ngxService.start();
+        this.ngxService.start();
         this.authService
           .CandidateDetails(this.reqBody)
           .subscribe(async (result) => {
-            // this.ngxService.stop();
+           
             if (result) {
-              alert("Candidate Details Saved Successfully")
+              
               // console.log('CandidateDetails...saved...........', result);
               console.log(result.message);
+              this.credentialObj={
+                usermailid:this.usermailid1,
+                pass:this.pass1,
+                emp_name:this.registerForm.value.first_name+" "+this.registerForm.value.last_name,
+                emp_id:this.registerForm.value.employee_id,
+                joining_date:this.registerForm.value.Date_of_joining,
+                location:this.registerForm.value.work_location,
+                roll_id:'Employee',
+                designation:'null',
+                company_email_id:this.registerForm.value.official_email,
+                password:this.registerForm.value.password,
+                confirm_password:this.registerForm.value.password,
+                phone_number:this.registerForm.value.phone,
+                checkbox: 0,
+                personal_email_id:this.registerForm.value.email,
+                created_by:'Admin'
+               }
+          
+          console.log("onboarding.............",this.credentialObj);
+          
+                  this.authServiceOnbaording.onboarding_registeration(this.credentialObj).subscribe(async (result:any) => {
+                    console.log(this.credentialObj);
+                      if(result) {
+                         this.ngxService.stop();
+                    console.log(result);
+                    console.log(result.message);
+                    console.log("onboarding called");
+                    alert("Employee Details Added Successfully")
+
+                    }
+                    else{
+                      console.log("error");
+                     
+                       
+                  
+                    }
+                  })
               // console.log(result.data);
               // this.alert=true;
               // this.reqBody.reset({});
               // document.getElementById("ModalClose")?.click();
               // this.router.navigateByUrl('/preonboarding_complete');
-            } else {
+            } 
+            else {
               // console.log(result);
-              console.log(result.message);
+              console.log("error");
             }
 
             // this.alert = true;
@@ -690,13 +677,13 @@ console.log("onboarding.............",this.credentialObj);
     if (valid) {
       if (this.editMode) {
         let note = { add_notes: value.add_notes };
-        // this.ngxService.start();
+        this.ngxService.start();
         //  console.log('http://localhost:5000/api/v1/notes/'+this.editNotesId+'.json')
         // this.httpClient.put(`${this.apiUrl}/api/v1/notes/`+this.editNotesId,note).subscribe(async (result) =>
         this.authService
           .updateNotes(this.editNotesId, note)
           .subscribe(async (result) => {
-            // this.ngxService.stop();
+            this.ngxService.stop();
             alert("Notes Updated successfully");
             // console.log('saved');
             this.notesForm.reset();
@@ -712,9 +699,9 @@ console.log("onboarding.............",this.credentialObj);
         };
         // console.log(reqBody2);
         // console.log(this.email1);
-        // this.ngxService.start();
+        this.ngxService.start();
         this.authService.CandidateNotes(reqBody2).subscribe(async (result) => {
-          // this.ngxService.stop();
+          this.ngxService.stop();
           alert("Notes Added successfully");
           this.Getnotes();
           
@@ -759,11 +746,11 @@ console.log("onboarding.............",this.credentialObj);
 
   deleteNotes(j: any) {
     // console.log(j);
-    // this.ngxService.start();
+    this.ngxService.start();
 
     this.authService.DeleteNotes(j).subscribe(async (result) => {
       alert("Notes Deleted successfully")
-      // this.ngxService.stop();
+      this.ngxService.stop();
       // console.log('deleted successfully');
       this.Getnotes();
     });
@@ -897,7 +884,7 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
     // console.log('testing', this.attachmentForm.value.fileSource);
     if (valid) {
       const formData = new FormData();
-      // this.ngxService.start();
+      this.ngxService.start();
       // formData.append('profile',this.attachmentForm.get('fileSource').value);
       formData.append('profile', this.attachmentForm.get('fileSource').value);
       formData.append('email',this.getEmail);
@@ -908,8 +895,9 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
       this.httpClient
         .post(`${this.apiUrl}/api/v1/file/document`, formData)
         .subscribe((result) => {
+         
+          this.ngxService.stop();
           alert("Attachment Uploaded successfully")
-          // this.ngxService.stop();
           // console.log(result);
           // console.log('successfully uploaded');
           this.GetAttachments();
@@ -966,21 +954,21 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
 
   deleteAttachment(j: any) {
     // console.log(j);
-    // this.ngxService.start();
+    this.ngxService.start();
     this.authService.DeleteAttachment(j).subscribe(async (result) => {
       alert("Attachment Deleted successfully")
       this.GetAttachments();
-      // this.ngxService.stop();
+      this.ngxService.stop();
       // console.log(' Attachment deleted successfully');
       // this.GetAttachments();
     });
   }
 
   downloadAttachment() {
-    // this.ngxService.start();
+    this.ngxService.start();
     this.authService.DownloadAttachment().subscribe(async (result:any) => {
       // console.log();
-      // this.ngxService.stop();
+      this.ngxService.stop();
       this.GetAttachments();
       this.fetchAttachment = result;
 
@@ -989,7 +977,7 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
   }
 
   download(index: any) {
-    // this.ngxService.start();
+    this.ngxService.start();
     var filename = this.fetchAttachment[index].name;
 
     this.authService.downloadFile(filename).subscribe(
@@ -998,7 +986,7 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
     
       
     );
-    // this.ngxService.stop();
+    this.ngxService.stop();
     alert("Attachment Downloaded successfully");
     this.GetAttachments();
   }
@@ -1728,8 +1716,10 @@ get(){
   }
 
   clickEventEmail(evnt:any) {
-   
-    this.getEmail = evnt.target.value
+   let e=evnt.target.value
+    this.getEmail = this.registerForm.value.email
+    console.log("event",e);
+    
     console.log(this.getEmail);
     
   }
@@ -1757,13 +1747,13 @@ click2(e:any){
   this.officialEmail=e.target.value;
  
   console.log(this.officialEmail);
-console.log(this.credentials.value.company_email_id);
+console.log(this.registerForm.value.official_email);
 
 
 }
   click3(e:any){
     this.officialPassword=e.target.value;
     console.log(this.officialPassword)
-    console.log(this.credentials.value.password);
+    console.log(this.registerForm.value.password);
   }
 }

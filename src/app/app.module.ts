@@ -102,6 +102,12 @@ import { CompanyDetailComponent } from './admin/company-detail/company-detail.co
 import { CompanyInfoComponent } from './admin/company-info/company-info.component';
 import { SettingComponent } from './Setting/setting/setting.component';
 import { UserViewComponent } from './hr/user-view/user-view.component';
+import { ResetPassComponent } from './Onboaring/reset-pass/reset-pass.component';
+import { EditNewLeaveTypeComponent } from './hr/leave/edit-new-leave-type/edit-new-leave-type.component';
+import { NewLeaveTypeComponent } from './hr/leave/new-leave-type/new-leave-type.component';
+import {Ng2TelInputModule} from 'ng2-tel-input';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+
 @NgModule({
   declarations: [
     AddScheduleComponent,
@@ -194,11 +200,15 @@ UserViewComponent,
     EmpEditApplyLeaveComponent,
     CompanyDetailComponent,
     CompanyInfoComponent,
-    SettingComponent
+    SettingComponent,
+    ResetPassComponent,
+    EditNewLeaveTypeComponent,
+    NewLeaveTypeComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    Ng2TelInputModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -215,6 +225,7 @@ UserViewComponent,
 
     NgMultiSelectDropDownModule.forRoot(),
     ColorSketchModule,
+    NgxIntlTelInputModule
     // FullCalendarModule
   ],
   providers: [ContStateCityService, DatePipe],
