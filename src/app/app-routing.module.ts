@@ -77,16 +77,22 @@ import { AddScheduleViewComponent } from './hr/schedule/add-schedule-view/add-sc
 import { EmpEditApplyLeaveComponent } from './hr/leave/emp-edit-apply-leave/emp-edit-apply-leave.component';
 import { CompanyDetailComponent } from './admin/company-detail/company-detail.component';
 import { CompanyInfoComponent } from './admin/company-info/company-info.component';
-
-
-
+import { UserViewComponent } from './hr/user-view/user-view.component';
+import { SettingComponent } from './Setting/setting/setting.component';
 const routes: Routes = [
   { path: '', redirectTo: 'employee-registration', pathMatch: 'full' },
 
-
   {
-path:'login',
-component:LoginComponent
+    path: 'user-view',
+    component: UserViewComponent,
+  },
+  {
+    path: 'setting',
+    component: SettingComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: 'emp-edit-apply-leave/:ApplyLeaveId',
@@ -415,12 +421,11 @@ component:LoginComponent
     path: 'add-company',
 
     component: CompanyInfoComponent,
-  }
-,
-{
-  path:'testing-here',
-  component:TestComponent
-}
+  },
+  {
+    path: 'testing-here',
+    component: TestComponent,
+  },
 ];
 
 @NgModule({

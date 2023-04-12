@@ -100,7 +100,8 @@ import { ConfigurePayPeriodViewComponent } from './hr/configure-pay-period/confi
 import { EmpEditApplyLeaveComponent } from './hr/leave/emp-edit-apply-leave/emp-edit-apply-leave.component';
 import { CompanyDetailComponent } from './admin/company-detail/company-detail.component';
 import { CompanyInfoComponent } from './admin/company-info/company-info.component';
-
+import { SettingComponent } from './Setting/setting/setting.component';
+import { UserViewComponent } from './hr/user-view/user-view.component';
 @NgModule({
   declarations: [
     AddScheduleComponent,
@@ -132,7 +133,7 @@ import { CompanyInfoComponent } from './admin/company-info/company-info.componen
     LeftPanelComponent,
 
     RestrictcharComponent,
-
+UserViewComponent,
     UserComponent,
     PendingReportComponent,
     NewHiresComponent,
@@ -192,7 +193,8 @@ import { CompanyInfoComponent } from './admin/company-info/company-info.componen
     ConfigurePayPeriodViewComponent,
     EmpEditApplyLeaveComponent,
     CompanyDetailComponent,
-    CompanyInfoComponent
+    CompanyInfoComponent,
+    SettingComponent
   ],
   imports: [
     CommonModule,
