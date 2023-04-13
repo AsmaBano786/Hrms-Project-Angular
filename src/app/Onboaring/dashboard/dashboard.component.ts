@@ -13,6 +13,7 @@ import{TimesheetService} from '../time-sheet/services/timesheet.service';
 // import { Observable } from 'rxjs';
 // import { map } from 'rxjs/operators';
 
+var $:any
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
@@ -40,9 +41,9 @@ export class DashboardComponent implements OnInit {
   editMode: boolean = false;
   date: any;
   redblue = "btn btn-info btn-sm";
-
+  company_id:any;
   startTimer: boolean = false;
-
+ company_modal: boolean = false;
   timer = 0; // seconds
   intervalId : any = 0;
   ticks =0;
@@ -50,6 +51,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(private dashServ: DashboardService,private router:ActivatedRoute,private timesheetService : TimesheetService) {
     
+    // $('#MymodalPreventHTML').modal('show');
+ 
+
+    // this.company_modal = true
     this.dashServ.leaves().subscribe((data:any) => {
       // this.leaves=totalLeav;
      
@@ -159,8 +164,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
+ 
     
-  
     
     this.sessiondata=JSON.parse(sessionStorage.getItem('local_storage')|| "[]");  //recieve
     console.log("local_storage data",this.sessiondata);
@@ -169,9 +174,16 @@ export class DashboardComponent implements OnInit {
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
+this.company_id=this.sessiondata[i].company_id;
 
       }
+      console.log("this.company_id",this.company_id);
       
+      if(this.company_id==='null'){
+        console.log("this.company_id==='null'");
+        
+        document.getElementById("MybtnPreventHTML")?.click();
+      }
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
     this.getTotalLeave();
 
