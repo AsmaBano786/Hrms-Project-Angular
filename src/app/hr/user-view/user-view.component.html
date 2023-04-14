@@ -28,49 +28,54 @@
                     <h3 class="m-0">Total Users:</h3>
                   </div>
                 <div class="form-group col-md-2  ">
-                    <a href="invite-user.html" class="btn btn-primary btn-block">Add <i class="fa fa-angle-down"></i></a>
+                    <a [routerLink]="['/invite-user']" routerLinkActive="router-link-active"  class="btn btn-primary btn-block">Add <i class="fa fa-angle-down"></i></a>
                   </div>
                 </div>
               </div>
            
               <div class="card-body">
                 <table id="example2" class="table table-hover">
-                    <thead>
+                    <thead >
                       <tr>
+                        <!-- <th>S.no.</th> -->
                         <th>
-                          <input class="" type="checkbox" /> Basic Information
+                           Basic Information
                         </th>
-                        <th>Date of Joining</th>
+                        <th>Email </th>
                         <th>Role</th>
-                        <th>Location</th>
-                        <th>Enployee Status</th>
-                        <th>Account Status</th>
+                        <!-- <th>Location</th>
+                        <th>Enployee Status</th> -->
+                        <!-- <th>Account Status</th> -->
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <!-- {{sessiondata|json}} -->
+                      <tr   >
+                        <!-- <td>{{i+1}}</td> -->
                         <td>
                          
-                          &emsp; <input class="" type="checkbox" /> 
+                          &emsp; 
                       <img class="navimg"
                           src="https://res.cloudinary.com/crunchbase-production/image/upload/c_thumb,h_256,w_256,f_auto,g_faces,z_0.7,q_auto:eco,dpr_1/kairkvolel5gulu5ejqg"
                           alt="Bootstrap" width="40" height="34">
-                   <strong>Asma bano</strong>&emsp; <p>
-                   ab224@gmail.com</p>
+                   <strong>{{emp_name}}</strong>&emsp;
+                    
                         </td>
-                        <td></td>
-                        <td>Admin</td>
-                        <td>Raisen
-                        </td>
-                        <td>Active</td>
-                        <td>Login Enablrd</td>
-                        <td> <a href="add-holiday.html">
-                            <i class="fas fa-trash"></i>
-                          </a>
+                        <td>{{company_email_id}}</td>
+                        <td>{{roll}}</td>
+                        <!-- <td>Raisen
+                        </td> -->
+                        <!-- <td>Active</td> -->
+                        <!-- <td>Login Enabled</td> -->
+                        <td> 
                           <a href="">
                             <i class="fas fa-edit"></i>
-                          </a></td>
+                          </a>&nbsp;&nbsp;
+                          <a href="add-holiday.html">
+                            <i class="fas fa-trash"></i>
+                          </a>
+                         </td>
                       </tr>
                  
                     </tbody>

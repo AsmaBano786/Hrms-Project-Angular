@@ -19,8 +19,8 @@ export class LeaveService {
     return this.http.get(`${this.apiUrl}/api/v1/leaves/day`);
   }
 
-  getById(employee_id: any) {
-    return this.http.get(`${this.apiUrl}/api/v1/leaves/` + employee_id);
+  getById(employee_id: any,company_id:any) {
+    return this.http.get(`${this.apiUrl}/api/v1/leaves/` + employee_id +`/` +company_id);
   }
 
   getEmployees() {

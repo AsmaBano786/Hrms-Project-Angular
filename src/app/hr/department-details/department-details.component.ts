@@ -5,7 +5,7 @@ import { FormControl, FormGroup, FormControlName, FormBuilder, Validators } from
 import { Router } from '@angular/router';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
-// import { AuthServiceService } from 'src/app/auth-service.service';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 
 
@@ -20,8 +20,8 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 })
 
 export class DepartmentDetailsComponent implements OnInit {
-
-
+  alldata:any;
+  allemployeedata:any;
   sessiondata:any;
   emp_name:any;
   emp_id:any;
@@ -33,7 +33,8 @@ export class DepartmentDetailsComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder, private dashService: DashboardService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private dashService: DashboardService, private router: Router,    private authService: AuthServiceService,
+    ) { }
 
   //Add user form actions
 
@@ -59,17 +60,19 @@ this.company_id =this.sessiondata[i].company_id;
       }
       
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
+      
+  this.getdetail()
     this.DepartmentDetails = this.formBuilder.group({
 
 
 
       departmentName: ['', [Validators.required]],
 
-      MailAlias:  ['', [Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      MailAlias:  ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
 
-      DepartmentLead: ['', [Validators.required]],
+      DepartmentLead: [''],
 
-      ParentDepartment: ['', [Validators.required]],
+      ParentDepartment: [''],
 
       added_by:this.roll+'-'+this.emp_name
 
@@ -123,7 +126,7 @@ let reqBody = {
   ...this.DepartmentDetails.value,
   company_id:this.company_id
 }
-console.log("DepartmentDetails",reqBody)
+console.log("DepartmentDetails......",reqBody)
       
         this.dashService.DepartmentDetails(reqBody).subscribe(result => {
 
@@ -186,6 +189,28 @@ keyPressAlphabet(event:any){
    }
   }
 
+
+  getdetail() {
+    this.authService.getAllJoiners(this.company_id).subscribe((data: any): void => {
+      this.allemployeedata = data;
+    
+      console.log("getdetail.............", this.allemployeedata);
+      
+    });
 }
 
 
+getdetailDepartment() {
+  console.log(this.company_id);
+  
+  this.dashService.Department(this.company_id).subscribe((data: any): void => {
+    this.alldata = data;
+
+   
+    console.log('getPR+++', this.alldata);
+
+   
+  });
+}
+
+}

@@ -16,11 +16,12 @@
      </div>
    </div>
  </div> -->
+
   <div class="login-logo">
-    <a href="index2.html">
-      <img src="../../../assets/dist/img/logo.png" />
-      <span class="small">HRMS</span>
-    </a>
+    <a style="cursor:pointer"
+    ><img src="../../../assets/dist/img/logo.png" />Cylsys
+    <span class="small">HRMS</span></a
+  >
   </div>
   <!-- /.login-logo -->
 
@@ -39,7 +40,7 @@
             class="form-control col-md-8"
             id=""
             (keypress)="keyPressAlphabet($event)"
-            id="floatingInput"
+           
             placeholder="Full Name"
             formControlName="emp_name"
             [ngClass]="{ 'is-invalid': submitted && f.emp_name.errors }"
@@ -151,6 +152,7 @@
         name="phone"
         formControlName="phone_number"
         class="col-md-8"
+        [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"
       >
       </ngx-intl-tel-input>
           <!-- <input
@@ -166,17 +168,17 @@
             placeholder="Phone Number"
             [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"
           /> -->
-          <div
+           <div
             *ngIf="submitted && f.phone_number.errors"
             class="invalid-feedback"
           >
             <div *ngIf="phone_number.errors?.['required']">
               Mobile number is required.
             </div>
-            <div *ngIf="phone_number.errors?.['pattern']">
+            <!-- <div *ngIf="phone_number.errors?.['pattern']">
               Please enter10digit mobilenumber.
-            </div>
-          </div>
+            </div> -->
+          </div> 
         </div>
         <div class="form-group row">
           <div class="col-md-1">
@@ -188,14 +190,13 @@
           </div>
           <div class="col-md-10" style="margin-left: -20px">
             <label>
-              I have read and agree to the<a
+              I agree to the<a
                 href="https://www.cylsys.com/Terms-of-Use.html"
-              >
-                Privacy Policy</a
-              >
-              and<a href="https://www.cylsys.com/Terms-of-Use.html">
-                Terms of Use.</a
-              >
+               target="_blank">Terms of Service</a>
+
+               and <a href="https://www.cylsys.com/Terms-of-Use.html" target="_blank">Privacy Policy.</a>
+              
+       
 
               <span class="" style="color: red">*</span>
               <div
@@ -237,4 +238,5 @@
       </div>
     </form>
   </div>
+
 </body>

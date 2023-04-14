@@ -2279,6 +2279,7 @@ this.authService.GetAllNotes(this.CEmail).subscribe(async (result) => {
 value1event(evt:any){
   console.log("Evt", evt.target.value);
   this.obj={
+    "company_id":this.company_id,
     "employee_id":evt.target.value,
     "first_name":""||undefined||null,
     "last_name":""||undefined||null
@@ -2301,6 +2302,7 @@ var fullName = evt.target.value.split(' ')
 //     console.log(firstName);
 //     console.log(lastName);
   this.obj={
+    "company_id":this.company_id,
     "employee_id":""||undefined||null,
     "first_name":this.firstName,
     "last_name":this.lastName
@@ -2330,6 +2332,7 @@ SearchALLData(){
 
 
   this.objAll={
+    "company_id":this.company_id,
     "employee_id":this.eId,
     "first_name":this.eName,
     "last_name":this.eName

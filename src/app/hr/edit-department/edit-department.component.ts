@@ -80,7 +80,7 @@ this.company_id = this.sessiondata[i].company_id;
       this.EditDepartmentForm = new FormGroup({
         // departmentId:new FormControl(''),
         departmentName: new FormControl('',[Validators.required]),
-        MailAlias: new FormControl('',[Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+        MailAlias: new FormControl('',[Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
         
         DepartmentLead: new FormControl('',[Validators.required]),
         ParentDepartment: new FormControl('',[Validators.required]),

@@ -45,7 +45,7 @@ this.company_id=this.sessiondata[i].company_id;
     }
 
     console.log("hr session data..", this.emp_id, this.emp_name, this.roll);
-    this.LeaveService.getById(this.emp_id).subscribe((data) => {
+    this.LeaveService.getById(this.emp_id,this.company_id).subscribe((data) => {
 
       this.all_leave = data;
 
@@ -73,7 +73,7 @@ this.company_id=this.sessiondata[i].company_id;
 
     console.log("FindAll", this.emp_id);
 
-    this.LeaveService.getById(this.emp_id).subscribe((data) => {
+    this.LeaveService.getById(this.emp_id,this.company_id).subscribe((data) => {
 
       this.all_leave = data;
 
