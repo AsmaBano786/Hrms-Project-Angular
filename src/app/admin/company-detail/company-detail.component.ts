@@ -7,7 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 // import { Router } from '@angular/router';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+// import { companyServiceService } from 'src/app/services/auth-service.service';
+import { CompanyDetailService } from '../admin-service/company-detail.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import {
@@ -29,8 +30,8 @@ import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { environment } from '../../../environments/environment';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { DashboardService } from 'src/app/services/dashboard.service'
-import { CompanyDetailService } from '../admin-service/company-detail.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
+// import { CompanyDetailService } from '../admin-service/company-detail.service';
 var $: any;
 @Component({
   selector: 'app-company-detail',
@@ -38,6 +39,21 @@ var $: any;
   styleUrls: ['./company-detail.component.css'],
 })
 export class CompanyDetailComponent implements OnInit {
+  ////////////
+  sessiondata:any;
+  emp_name:any;
+  emp_id:any;
+  roll:any;
+  nik:any
+  id:any
+  moddalValues:any
+  departData: any;
+  allEmployees: any;
+  company_id:any;
+  data:any
+  submitted:any
+  // company_id:any; 
+  //////////////
   permanent_address_arr: any = [];
   open_Modal: boolean = false;
   selected_source_O: any;
@@ -54,7 +70,6 @@ export class CompanyDetailComponent implements OnInit {
   z: any;
   y: any;
 
-
   // @ViewChild('country')
   // countryNew!: ElementRef;
 
@@ -68,10 +83,9 @@ export class CompanyDetailComponent implements OnInit {
   countries = Country.getAllCountries();
   // states:any;
   // cities:any;
-  selectedCountry:any;
-  selectedState:any;
-  selectedCity:any;
-
+  selectedCountry: any;
+  selectedState: any;
+  selectedCity: any;
 
   stateInfo: any = [];
   countryInfo: any = [];
@@ -86,33 +100,48 @@ export class CompanyDetailComponent implements OnInit {
   Vcountry: any;
   Vstate: any;
   Vcity: any;
-  submitted: boolean;
+  // submitted: boolean;
   state: any;
 
   //.......................................................
 
-
   //.......................................................
-
-
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthServiceService,
+    // private companyService: CompanyDetailService,
     private router: Router,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute, 
+    // private route: ActivatedRoute,
     private country: ContStateCityService,
     private httpClient: HttpClient,
     private ngxService: NgxUiLoaderService,
-    private dashServ:DashboardService,
-    private companyService :CompanyDetailService
-    
+    private dashServ: DashboardService,
+    private companyService: CompanyDetailService
   ) {
-    this.submitted=false;
-  }
+   }
 
+
+
+
+
+  get f() { return this.companyDtailForm.controls; }
   ngOnInit(): void {
 
+
+    this.sessiondata=JSON.parse(sessionStorage.getItem('local_storage')|| "[]");  //recieve
+    console.log("local_storage data",this.sessiondata);
+    
+      for(let i in this.sessiondata){
+        this.company_id= this.sessiondata[i].company_id;
+        this.emp_id= this.sessiondata[i].emp_id;
+        this.emp_name=this.sessiondata[i].emp_name;
+this.roll=this.sessiondata[i].roll_id;
+
+      }
+      
+
+      this.getData();
     this.getCountries();
 
     this.x;
@@ -125,34 +154,48 @@ export class CompanyDetailComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
       ]),
-      contact_no: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[0-9]*$'),
-      ]),
+      // contact_no: new FormControl('', [
+      //   Validators.required,
+      //   Validators.pattern('^[0-9]*$'),
+      // ]),
       portal: new FormControl('', [Validators.required]),
       industry: new FormControl('', [Validators.required]),
-      number_of_employee: new FormControl('', [Validators.required,Validators.minLength(2),Validators.maxLength(7)]),
-      tax_information: new FormControl('', [Validators.required]),
-      company_logo: new FormControl('', [Validators.required]),
-      country: new FormControl('', [Validators.required]),
-      state: new FormControl('', [Validators.required]),
-      city: new FormControl('', [Validators.required]),
-      pin_code: new FormControl('', [
+      number_of_employee: new FormControl('', [
         Validators.required,
-        Validators.maxLength(6),
-        Validators.pattern('^[0-9]*$'),
+        Validators.minLength(2),
+        Validators.maxLength(7),
       ]),
-      street_address: new FormControl('', [Validators.required]),
-      status: new FormControl('1',[Validators.required]),
+      tax_information: new FormControl(''),
+      company_logo: new FormControl('null'),
+      country: new FormControl(''),
+      state: new FormControl(''),
+      city: new FormControl(''),
+      pin_code: new FormControl(''),
+      street_address: new FormControl(''),
+      status: new FormControl('1'),
     });
+
+  
   }
 
-  get company_name() {return this.companyDtailForm.get('company_name'); }
-  get company_email() {return this.companyDtailForm.get('company_name'); }
-  get tax_information() {return this.companyDtailForm.get('company_name'); }
-  get contact_no() {return this.companyDtailForm.get('company_name'); }
-  get portal() {return this.companyDtailForm.get('company_name'); }
-  get industry() {return this.companyDtailForm.get('company_name'); }
+  get company_name() {
+    return this.companyDtailForm.get('company_name');
+  }
+  get company_email() {
+    return this.companyDtailForm.get('company_name');
+  }
+  get tax_information() {
+    return this.companyDtailForm.get('company_name');
+  }
+  get contact_no() {
+    return this.companyDtailForm.get('company_name');
+  }
+  get portal() {
+    return this.companyDtailForm.get('company_name');
+  }
+  get industry() {
+    return this.companyDtailForm.get('company_name');
+  }
   // get country() {return this.companyDtailForm.get('company_name'); }
   getCountries() {
     this.country.allCountries().subscribe(
@@ -165,7 +208,6 @@ export class CompanyDetailComponent implements OnInit {
     );
   }
 
-
   onChangeCountry(countryValue: any) {
     // console.log(countryValue);
     // console.log(countryI)
@@ -176,14 +218,6 @@ export class CompanyDetailComponent implements OnInit {
     this.Vcountry = countryValue;
 
     console.log(this.stateInfo);
-    // console.log('address1.....................', JSON.stringify(this.address));
-
-    // this.cityInfo=this.stateInfo[0].Cities;
-    // console.log('address2.....................', JSON.stringify(this.address));
-
-    //   console.log("....country...",this.countryInfo[countryValue]?.CountryName || 'NA');
-    //  this.Vcountry= this.countryInfo[countryValue]?.CountryName || 'NA';
-    //  console.log(this.Vcountry)
   }
 
   onChangeState(stateValue: any) {
@@ -219,39 +253,137 @@ export class CompanyDetailComponent implements OnInit {
     this.Vcity = cityValue;
   }
 
-
-  keyPressAlphabet(event:any){
-    var input = String.fromCharCode(event.keyCode)
+  keyPressAlphabet(event: any) {
+    var input = String.fromCharCode(event.keyCode);
     if (/[a-z A-Z]/.test(input)) {
-    return true;
+      return true;
     } else {
-   event.preventDefault();
-    return false;
-     }
+      event.preventDefault();
+      return false;
     }
-    submit(){
+  }
 
-       console.log(this.companyDtailForm.value);
-      this.submitted = true;
 
-      if (this.companyDtailForm.invalid) {
-        return alert('Invalid Details');
-        this.submitted = false;
+
+  keyPressNumbers (event: any){
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // submit() {
+  //   console.log(this.companyDtailForm.value);
+  //   this.submitted = true;
+
+  //   if (this.companyDtailForm.invalid) {
+  //     return alert('Invalid Details');
+  //     this.submitted = false;
+  //   }
+  //   if (this.submitted) {
+  //     const { value, valid } = this.companyDtailForm;
+
+  //     this.reqBody = {
+  //       ...this.companyDtailForm.value,
+  //     };
+  //     console.log(this.reqBody);
+  //   }
+  // }
+
+  updatecompany(){
+
+    console.log("adddepart", this.companyDtailForm.value);
+
+   
+    
+    
+    let departData = {
+      company_id : this.company_id,
+      // designation_name : this.companyDtailForm.value.designation_name,
+      // mail_alias : this.companyDtailForm.value.mail_alias,
+      // modified_by:this.roll+'-'+this.emp_name,
+      company_name: this.companyDtailForm.value.company_name,
+      company_email: this.companyDtailForm.value.company_email,
+      
+      portal: this.companyDtailForm.value.portal,
+      industry: this.companyDtailForm.value.industry,
+      number_of_employee: this.companyDtailForm.value.number_of_employee,
+      tax_information: this.companyDtailForm.value.tax_information,
+      company_logo: this.companyDtailForm.value.company_logo,
+      country: this.companyDtailForm.value.country,
+      state: this.companyDtailForm.value.state,
+      city: this.companyDtailForm.value.city,
+      pin_code: this.companyDtailForm.value.pin_code,
+      street_address: this.companyDtailForm.value.street_address,
+      
+    }
+
+    this.submitted = true;
+
+    // stop here if form is invalid
+
+    if (this.companyDtailForm.invalid) {
+
+      console.log("Invalid Details");
+
+    }
+
+
+
+
+    if (this.submitted && this.companyDtailForm.valid) {
+console.log(this.company_id,this.companyDtailForm.value);
+
+    this.companyService.updateCompanyDetails(this.company_id,this.companyDtailForm.value).subscribe((data) => {
+      console.log("getdepart" , departData);
+      alert("Company details updated successfully");
+      this.router.navigate(['company-detail']);
+    });
+  }
+  }
+
+
+  getData(){
+    this.companyService.getDetails( this.company_id).subscribe((data) => {
+      this.allEmployees = data;
+      console.log("allEmployees", data);
+    });
+
+    console.log("this.company_id",this.company_id)
+    this.companyService.getDetails(this.company_id).subscribe((data:any) => {    
+      
+      console.log(data);
+      for(let i of data){
+        console.log(i.company_name);
+        this.companyDtailForm.patchValue({
+          // 'id': this.company_id,  
+          'company_name':i.company_name,
+          'company_email': i.company_email,
+          // 'contact_no': i.contact_no,
+          'portal': i.portal,
+          'industry': i.industry,
+          'number_of_employee': i.number_of_employee,
+          'tax_information': i.tax_information,
+          'company_logo': i.company_logo,
+          'country': i.country,
+          'state': i.state,
+          'city': i.city,
+          'pin_code': i.pin_code,
+          'street_address': i.street_address,
+          
+    
+         
+        });
+         
       }
-    if (this.submitted) {
-        const { value, valid} =
-        this.companyDtailForm ;
-  
-  this.reqBody = {
-            ...this.companyDtailForm.value,
-           
-          };
-          console.log(this.reqBody);
-    }
+      
+     
+  });
 
 
+  }
 }
- 
-}
-
-

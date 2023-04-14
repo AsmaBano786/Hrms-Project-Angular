@@ -24,6 +24,7 @@ export class CompanyDetailService {
   }
 
   getDetails(company_id:any): Observable<any> {
+  console.log(`${this.apiUrl2}/company/`+company_id);
   
     return this.httpClient.get(`${this.apiUrl2}/company/`+company_id);
   }

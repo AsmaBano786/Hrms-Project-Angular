@@ -5,6 +5,9 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import { ViewChild, ComponentFactoryResolver, ApplicationRef, Injector, OnDestroy } from '@angular/core';
+import {CdkPortal,DomPortalHost} from '@angular/cdk/portal';
+
 import { ServicesService } from 'src/app/Onboaring/onboarding-services/services.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -17,6 +20,15 @@ import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-
   styleUrls: ['./employee-registration-onboarding.component.css'],
 })
 export class EmployeeRegistrationOnboardingComponent implements OnInit {
+
+  
+
+  // STEP 1: get a reference to the portal
+  @ViewChild(CdkPortal) portal: CdkPortal | undefined;
+ 
+  // STEP 2: save a reference to the window so we can close it
+  private externalWindow = null;
+
   pass1: any;
   usermailid1: any;
   res: any;
@@ -36,13 +48,19 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
   PhoneNumberFormat = PhoneNumberFormat;
 	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
   // CustomValidators:any
+
+
+
   constructor(
     private formBuilder: FormBuilder,
     private ngxService: NgxUiLoaderService,
     private authService: ServicesService,
     private router: Router,
 
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private applicationRef: ApplicationRef,
+    private injector: Injector
   ) {}
   //Add user form actions
 
@@ -100,6 +118,19 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
           });
         }
       });
+
+      this.registerForm = window.open('', '', 'width=400,height=600,left=-200,top=200');
+
+      // STEP 5: create a PortalHost with the body of the new window document    
+      const host = new DomPortalHost(
+        this.registerForm.document.body,
+        this.componentFactoryResolver,
+        this.applicationRef,
+        this.injector
+        );
+  
+      // STEP 6: Attach the portal
+      host.attach(this.portal);
   }
 
   changePreferredCountries() {
@@ -323,13 +354,12 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
     this.registerForm.get('gender').clearValidators();
     this.registerForm.get('created_by').clearValidators();
   }
-  onCountryChange(event: any) {
-    alert(event.dialCode);
+
+
+
+
+  ngOnDestroy(){
+    // STEP 7: close the window when this component destroyed
+    this.registerForm.close()
   }
-
-  hasError(event: any) {}
-
-  getNumber(event: any) {}
-
-  telInputObject(event: any) {}
 }
