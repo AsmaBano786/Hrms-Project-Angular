@@ -25,10 +25,12 @@ export class EditDesignationComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, 
     private datePipe:DatePipe,private dashService:DashboardService, private router: Router) {
 
-    this.dashService.Designations( this.company_id).subscribe((data) => {
-      this.allEmployees = data;
-      console.log("allEmployees", data);
-    });
+    
+      
+    // this.dashService.Designations(this.company_id).subscribe((data) => {
+    //   this.allEmployees = data;
+    //   console.log("allEmployees", data);
+    // });
 
     this.activatedRoute.paramMap.subscribe(x => {
       this.departId = x.get('id');
@@ -37,32 +39,7 @@ export class EditDesignationComponent implements OnInit {
      
       console.log("..........idk",this.departId);
     });
-    this.dashService.Designations(this.company_id).subscribe((data:any) => {    
-      // this.departData = data[0];
-      // for(let i in data){
-      //   console.log("check data",data.id);
-       
-      // }
-      console.log("arr length",data.length);
-      let n=data.length;
-      let limit=1;
-     
-
-      for(let i in data){
-        if(limit<=n && data[i].id==this.departId){
-        console.log("check data",data[i].id);  
-        this.departData = data[i];
-        }  
-        limit++;
-      }
-    this.EditDesignationForm.patchValue({
-      // 'id': this.departId,  
-      'designation_name': this.departData.designation_name,
-      'mail_alias': this.departData.mail_alias,  
-     
-    });
-     
-  });
+    
 
 }
 
@@ -78,14 +55,14 @@ get f() { return this.EditDesignationForm.controls; }
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
-this.company_id = this.sessiondata[i].roll_id;
+this.company_id=this.sessiondata[i].company_id;
       }
-      
+      this.getdesig();
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
       this.EditDesignationForm = new FormGroup({
         // id:new FormControl(''),
         designation_name: new FormControl('',[Validators.required]),
-        mail_alias: new FormControl('',[Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+        mail_alias: new FormControl('',[Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
         modified_by:new FormControl(this.roll+'-'+this.emp_name),
        
     
@@ -144,5 +121,38 @@ this.company_id = this.sessiondata[i].roll_id;
    event.preventDefault();
     return false;
      }
+    }
+
+
+    getdesig(){
+      console.log(this.company_id);
+    this.dashService.Designations(this.company_id).subscribe((data:any) => {    
+
+      console.log("desig data",data);
+      
+      // this.departData = data[0];
+      // for(let i in data){
+      //   console.log("check data",data.id);
+       
+      // }
+      console.log("arr length",data.length);
+      let n=data.length;
+      let limit=1;
+     
+for(let i of data)
+{
+  console.log(i.designation_name);
+  console.log(i.mail_alias);
+  this.EditDesignationForm.patchValue({
+   
+    'designation_name':i.designation_name,
+    'mail_alias':i.mail_alias,  
+   
+  });
+}
+
+    
+     
+  });
     }
 }

@@ -36,7 +36,7 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
   PhoneNumberFormat = PhoneNumberFormat;
 	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
   // CustomValidators:any
-  
+  CompanyId:any;
   constructor(
     private formBuilder: FormBuilder,
     private ngxService: NgxUiLoaderService,
@@ -201,6 +201,7 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
 
 let req={
   ...this.registerForm.value,
+  company_id:"null",
   phone_number:this.registerForm.value.phone_number.internationalNumber
 }
 
