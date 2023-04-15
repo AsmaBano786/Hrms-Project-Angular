@@ -68,14 +68,16 @@
                         </td> -->
                         <!-- <td>Active</td> -->
                         <!-- <td>Login Enabled</td> -->
-                        <td> 
-                          <a href="">
-                            <i class="fas fa-edit"></i>
-                          </a>&nbsp;&nbsp;
-                          <a href="add-holiday.html">
-                            <i class="fas fa-trash"></i>
-                          </a>
-                         </td>
+                        
+                        <td>
+                          <span class="pull-right">
+                            <a [routerLink]="['/edit-user-view/'+id]" title="Edit">
+                              <i class="fa fa-edit" style="color:rgb(7, 136, 241)"></i></a>
+                            &nbsp;
+                            <a title="Delete" (click)="deletecmpny(id)">
+                              <i class="fa fa-trash" style="color:rgb(7, 136, 241)"></i></a>
+                          </span>
+                        </td>
                       </tr>
                  
                     </tbody>

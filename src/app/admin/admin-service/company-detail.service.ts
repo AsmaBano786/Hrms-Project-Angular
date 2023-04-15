@@ -24,6 +24,7 @@ export class CompanyDetailService {
   }
 
   getDetails(company_id:any): Observable<any> {
+  console.log(`${this.apiUrl2}/company/`+company_id);
   
     return this.httpClient.get(`${this.apiUrl2}/company/`+company_id);
   }
@@ -33,4 +34,29 @@ export class CompanyDetailService {
     
     return this.httpClient.put(`${this.apiUrl2}/`+email,data);
   }
+
+  //////
+
+
+
+  
+  getbycmpnyid(id:any): Observable<any> {
+    // console.log(`${this.apiUrl2}/company/`+company_id);
+    
+      return this.httpClient.get(`${this.apiUrl2}/getbyid/`+id);
+    }
+
+
+    updateuser(id:any,data:any){
+      console.log(`${this.apiUrl2}/`+id,data);
+      
+      return this.httpClient.put(`${this.apiUrl2}/edit/`+id,data);
+    }
+
+
+    Deleteusers(id:any):Observable<any>{
+      console.log("Deleting Notes from the server")
+      return this.httpClient.delete(`${this.apiUrl2}/del/`+id);
+      
+    }
 }

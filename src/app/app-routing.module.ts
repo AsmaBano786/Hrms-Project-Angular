@@ -82,12 +82,17 @@ import { NewLeaveTypeComponent } from './hr/leave/new-leave-type/new-leave-type.
 import { EditNewLeaveTypeComponent } from './hr/leave/edit-new-leave-type/edit-new-leave-type.component';
 import { UserViewComponent } from './hr/user-view/user-view.component';
 import { SettingComponent } from './Setting/setting/setting.component';
+import { EditUserViewComponent } from './hr/edit-user-view/edit-user-view.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login-Onboarding', pathMatch: 'full' },
 
   {
     path: 'user-view',
     component: UserViewComponent,
+  },
+  {
+    path: 'edit-user-view/:id',
+    component: EditUserViewComponent,
   },
   {
     path: 'setting',

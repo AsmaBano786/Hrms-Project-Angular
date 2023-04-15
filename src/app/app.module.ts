@@ -108,6 +108,9 @@ import { NewLeaveTypeComponent } from './hr/leave/new-leave-type/new-leave-type.
 import {Ng2TelInputModule} from 'ng2-tel-input';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
+import { PortalModule } from '@angular/cdk/portal';
+import { EditUserViewComponent } from './hr/edit-user-view/edit-user-view.component';
+
 @NgModule({
   declarations: [
     AddScheduleComponent,
@@ -203,11 +206,13 @@ UserViewComponent,
     SettingComponent,
     ResetPassComponent,
     EditNewLeaveTypeComponent,
-    NewLeaveTypeComponent
+    NewLeaveTypeComponent,
+    EditUserViewComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    PortalModule,
     Ng2TelInputModule,
     AppRoutingModule,
     HttpClientModule,
