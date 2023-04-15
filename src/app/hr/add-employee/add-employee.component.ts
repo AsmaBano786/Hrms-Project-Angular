@@ -59,6 +59,8 @@ export class AddEmployeeComponent implements OnInit {
   getEmail:any;
   getFname:any;
   getLname:any
+  allemployeedata:any;
+  alldata:any;
   documenttype:any='Company documents';
   // @ViewChild('notesForm') notesForm:NgForm;
   Document:any;
@@ -222,7 +224,7 @@ noteValid:boolean=false;
 attachmentValid:boolean=false;
 usermailid1:any;
 pass1:any
-company_id:any;
+CompanyId:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -250,14 +252,14 @@ company_id:any;
       let roll =sessiondata[i].roll_id;
           //  console.log("company_id..........",sessiondata[i].company_id);
 
-      this.company_id=sessiondata[i].company_id;
+      this.CompanyId=sessiondata[i].company_id;
       }
     //  console.log("company_id..........",this.company_id);
     
     this.btndisable=false;
 
-   
-    
+    this.getdetail()
+    this.getEmployeeName();
    
     this.getCountries();
 
@@ -571,7 +573,7 @@ console.log("......IN.......",this.usermailid1);
 
           official_email:this.registerForm.value.official_email,
           password:this.registerForm.value.password,
-
+          company_id:this.CompanyId,
           // ...this.documentForm.value,
           ...this.addressForm.value,
           ...this.pAddressForm.value,
@@ -597,6 +599,7 @@ console.log("......IN.......",this.usermailid1);
               
               // console.log('CandidateDetails...saved...........', result);
               console.log(result.message);
+             
               this.credentialObj={
                 usermailid:this.usermailid1,
                 pass:this.pass1,
@@ -612,33 +615,36 @@ console.log("......IN.......",this.usermailid1);
                 phone_number:this.registerForm.value.phone,
                 checkbox: 0,
                 personal_email_id:this.registerForm.value.email,
-                created_by:'Admin'
+                created_by:'Admin',
+                company_id:this.CompanyId,
                }
           
-          console.log("onboarding.............",this.credentialObj);
+          console.log("onboarding......body.......",this.credentialObj);
           
                   this.authServiceOnbaording.onboarding_registeration(this.credentialObj).subscribe(async (result:any) => {
                     console.log(this.credentialObj);
-                      if(result) {
-                         this.ngxService.stop();
+                      
+                  
                     console.log(result);
                     console.log(result.message);
+                    
                     console.log("onboarding called");
-                    alert("Employee Details Added Successfully")
+                   
+                    setTimeout(() => {
+                      this.router
+                        .navigateByUrl('/', { skipLocationChange: true })
+                        .then(() => this.router.navigate(['/employees-info']));
+                    }, 2000);
+        
 
-                    }
-                    else{
-                      console.log("error");
-                     
-                       
-                  
-                    }
                   })
               // console.log(result.data);
               // this.alert=true;
               // this.reqBody.reset({});
               // document.getElementById("ModalClose")?.click();
               // this.router.navigateByUrl('/preonboarding_complete');
+              this.ngxService.stop();
+              alert("Employee Details Added Successfully");
             } 
             else {
               // console.log(result);
@@ -1755,5 +1761,25 @@ console.log(this.registerForm.value.official_email);
     this.officialPassword=e.target.value;
     console.log(this.officialPassword)
     console.log(this.registerForm.value.password);
+  }
+  getdetail() {
+    this.dashServ.Designations(this.CompanyId).subscribe((data: any): void => {
+      this.alldata = data;
+
+     ;
+      console.log("getdetail", this.alldata);
+
+    });
+
+  }
+
+
+  getEmployeeName() {
+    this.authService.getAllJoiners(this.CompanyId).subscribe((data: any): void => {
+      this.allemployeedata = data;
+    
+      console.log("getdetail.............", this.allemployeedata);
+      
+    });
   }
 }

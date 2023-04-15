@@ -45,7 +45,7 @@ this.company_id =this.sessiondata[i].company_id;
     this.DesignationDetails = this.formBuilder.group({
 
       designation_name: ['', [Validators.required]],
-      mail_alias:  ['', [Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      mail_alias:  ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       added_by:this.roll+'-'+this.emp_name
     });
   }
@@ -72,7 +72,7 @@ this.company_id =this.sessiondata[i].company_id;
         ...this.DesignationDetails.value,
         company_id:this.company_id
       }
-      console.log('valid data', reqBody)
+      console.log('DesignationDetails.......', reqBody)
      
       this.dashService.DesignationDetails(reqBody).subscribe(result => {
    

@@ -58,7 +58,7 @@
 
                         <label class="col-md-2">Department Name <span class="text-danger">*</span></label>
                         <div class="col-md-4">
-                        <select class="form-select" id="Department" formControlName="departmentName" placeholder="Enter department name" [ngClass]="{ 'is-invalid': submitted && f.departmentName.errors }">
+                        <!-- <select class="form-select" id="Department" formControlName="departmentName" placeholder="Enter department name" [ngClass]="{ 'is-invalid': submitted && f.departmentName.errors }">
 
                             <option value="" disabled [selected]="true" >Select Department Name</option>
 
@@ -74,9 +74,10 @@
 
                             <option value="Marketing">Marketing</option>
 
-                        </select>
+                        </select> -->
 
-                        
+                        <input type="text" class="form-control" formControlName="departmentName" placeholder="Enter department name" [ngClass]="{ 'is-invalid': submitted && f.departmentName.errors }">
+
                         <div *ngIf="f.departmentName.touched && f.departmentName.invalid"
                             class="invalid-feedback">
                             <div *ngIf="f.departmentName.errors.required">Department name is
@@ -88,7 +89,7 @@
 
                     <div class="form-group row ">
 
-                        <label class="col-md-2 ">Mail Alias <span class="text-danger">*</span></label>
+                        <label class="col-md-2 ">Mail Alias </label>
                         <div class="col-md-4">
                         <input type="text" class="form-control" placeholder="Enter Mail Alias" id="fn" formControlName="MailAlias" [ngClass]="{ 'is-invalid': submitted && f.MailAlias.errors }">
                         <div *ngIf="f.MailAlias.touched && f.MailAlias.invalid"
@@ -107,33 +108,18 @@
 
                     <div class="form-group row ">
 
-                        <label class="col-md-2 ">Department Lead <span class="text-danger">*</span></label>
+                        <label class="col-md-2 ">Department Lead 
+                            <!-- <span class="text-danger">*</span> -->
+                        </label>
                         <div class="col-md-4">
                         <select class="form-select" id="Department Lead" formControlName="DepartmentLead" [ngClass]="{ 'is-invalid': submitted && f.DepartmentLead.errors }">
 
                             <option value="" disabled [selected]="true">Select Department Lead</option>
 
-                            <option value="Sayali Ashish Anande 1 "> Sayali Ashish Anande 1 </option>
-
-                            <option value="Allan Francis S1">Allan Francis S1 </option>
-
-                            <option value="Aleo Kirb S2">Aleo Kirb S2 </option>
-
-                            <option value="Austin Mayer S3 ">Austin Mayer S3 </option>
-
-                            <option value="Charles Mavric S4">Charles Mavric S4</option>
-
-                            <option value="Dave Duken S5">Dave Duken S5</option>
-
-                            <option value="George Dwell S6">George Dwell S6</option>
-
-                            <option value="Jennifer Jackson S7">Jennifer Jackson S7</option>
-
-                            <option value="Morgan Finely S8">Morgan Finely S8 </option>
-
-                            <option value="Ruby Richerds S9">Ruby Richerds S9</option>
-
-                            <option value="Tia Burmen S10">Tia Burmen S10</option>
+                         
+                            <option *ngFor="let i of allemployeedata">
+                                {{i.first_name}} {{i.last_name}}
+                              </option>
 
                         </select>
 
@@ -148,38 +134,18 @@
 
                     <div class="form-group row ">
 
-                        <label class="col-md-2">Parent Department <span class="text-danger">*</span></label>
+                        <label class="col-md-2">Parent Department 
+                            <!-- <span class="text-danger">*</span> -->
+                        </label>
                         <div class="col-md-4">
                         <!-- <select class=" col-md-4 form-select" id="Parent Department" formControlName="ParentDepartment" [ngClass]="{ 'is-invalid': submitted && f.ParentDepartment.errors }"> -->
                             <select class="form-select" formControlName="ParentDepartment"
                             [ngClass]="{ 'is-invalid': submitted && f.ParentDepartment.errors }"
                             id="Parent Department">
                             <option value="" disabled [selected]="true">Select Parent Department</option>
-                            <option value="IT services">IT services </option>
-
-                            <option value="Infrastructures">Infrastructures </option>
-
-                            <option value="Sales and marketing (Business development)">Sales and marketing (Business development) </option>
-
-                            <option value="sales Department">sales Department </option>
-
-                            <option value="Information Technology Department">Information Technology Department </option>
-
-                            <option value="Research & Development Department">Research & Development Department</option>
-
-                            <option value="Account Department">Account Department </option>
-
-                            <option value="Dispatch Department">Dispatch Department </option>
-
-                            <option value="Finance Department">Finance Department</option>
-
-                            <option value="Packaging Department">Packaging Department</option>
-                            
-                            <option value="Inspection departmen">Inspection departmen </option>
-
-                            <option value="Quality Department">Quality Department </option>
-
-                            <option value="Procurement Department">Procurement Department </option>
+                            <option *ngFor="let i of alldata">
+                                {{i.departmentName}}
+                              </option>
                         </select>
 
                         

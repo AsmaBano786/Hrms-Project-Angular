@@ -23,6 +23,7 @@ export class LeaveTrackerOnboardingComponent implements OnInit {
   lName:any;
   objAll:any;
   filteredData:any;
+  company_id:any;
   constructor(private LeaveService: LeaveService, private ngxService: NgxUiLoaderService, private router: Router) {
 
 
@@ -33,12 +34,12 @@ export class LeaveTrackerOnboardingComponent implements OnInit {
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
-
+this.company_id=this.sessiondata[i].company_id;
 
       }
       
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
-    this.LeaveService.getById(this.emp_id).subscribe((data) => {
+    this.LeaveService.getById(this.emp_id,this.company_id).subscribe((data) => {
 
       this.all_leave = data;
 

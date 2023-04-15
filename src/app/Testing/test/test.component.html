@@ -1,169 +1,54 @@
-
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="margin: 50px">
-  <h1>Test International Telephone Input Form</h1>
-  <h2>Angular 12</h2>
-  <br />
-  <div class="wrapper">
-    <i
-      ><b style="color: orange"
-        >And yes, flags are not visible here. It's a Stackblitz only issue.</b
-      ></i
-    >
-  </div>
-  <div class="wrapper">
-    <button (click)="changePreferredCountries()">
-      Change Preferred Countries
-    </button>
-  </div>
-  <div class="wrapper">
-    <input type="checkbox" [(ngModel)]="separateDialCode" />
-    <label>&nbsp;Separate Dial Code?</label>
-  </div>
-  <form #f="ngForm" [formGroup]="phoneForm">
-    <div class="wrapper">
-      <ngx-intl-tel-input
-        [cssClass]="'custom'"
-        [preferredCountries]="preferredCountries"
-        [enableAutoCountrySelect]="true"
-        [enablePlaceholder]="true"
-        [searchCountryFlag]="true"
-        [searchCountryField]="[
-          SearchCountryField.Iso2,
-          SearchCountryField.Name
-        ]"
-        [selectFirstCountry]="false"
-        [selectedCountryISO]="CountryISO.India"
-        [maxLength]="15"
-        [phoneValidation]="true"
-        [separateDialCode]="separateDialCode"
-        [numberFormat]="PhoneNumberFormat.National"
-        name="phone"
-        formControlName="phone"
+<span class="badge bg-primary"
+  data-toggle="modal"
+  data-target="#exampleModal"
+  style="cursor: pointer"
+ >Contact</span>
+  <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="false"
+>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">
+      Department
+        Detail
+      </h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
       >
-      </ngx-intl-tel-input>
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-    <div class="wrapper">
-      <button (click)="f.reset()">Reset</button>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-3">
+        <a align="left" style="cursor: pointer;" routerLink="/setting">
+          Past Data
+        </a></div>
+        <div class="col-md-3">
+        <a class="text-left" style="cursor: pointer;" routerLink="/login-Onboarding">
+          Default Data  
+        </a></div>
+       
+      </div>
     </div>
-  </form>
-  <br />
-  <div>
-    <strong>Is input valid:</strong>
-    <pre>{{ !f.form.controls['phone'].invalid }}</pre>
-  </div>
-  <div>
-    <strong>Is input touched:</strong>
-    <pre>{{ f.form.controls['phone'].touched }}</pre>
-  </div>
-  <div>
-    <strong>Is form valid:</strong>
-    <pre>{{ f.form.valid }}</pre>
-  </div>
-  <div>
-    <strong>Form value:</strong>
-    <pre>{{ f.form.value | json }}</pre>
-  </div>
-  <div>
-    <strong>Form validation errors:</strong>
-    <pre>{{ f.form.controls['phone'].errors | json }}</pre>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-dismiss="modal"
+      >
+        Close
+      </button>
+      <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+    </div>
   </div>
 </div>
-
-
-
-<!-- 
-
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-  
-  
-  
-      
-      <div class="content-wrapper"style="height: auto; background-color:#F2EDF3" >
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col-sm-12">
-                <h1 class="m-0">User Details</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        <section class="content">
-          <div class="container-fluid">
-            <div class="card card-default">
-              
-              <div class="card-body">
-                <form method="post" [formGroup]="registerForm" (ngSubmit)="fillDetails()">
-                <div class="form-group row">
-                  <label for="" class="col-md-2 pl-5">First Name <span class="" style="color:red;">*</span>
-                  </label>
-                  <div class="col-md-6">
-                  <input type="text" (keypress)="keyPressAlphabetOnly($event)"  class="form-control col-md-8"  id="floatingInput"placeholder="First Name"formControlName="fName"[ngClass]="{ 'is-invalid': submitted && f.fName.errors }" id="inputfName4">
-                  <div   *ngIf="submitted && f.fName.errors" class="invalid-feedback col-md-6">
-                    <div *ngIf="f.fName.errors.required"  >First Name is required</div>
-                 </div></div>
-                </div>
-                <div class="form-group row">
-                  <label for="" class="col-md-2 pl-5">Last Name <span class="" style="color:red;">*</span>
-                  </label>
-                  <div class="col-md-6">
-                  <input type="text" (keypress)="keyPressAlphabetOnly($event)"  class="form-control col-md-8"  id="floatingInput"placeholder="Last Name"formControlName="lName"[ngClass]="{ 'is-invalid': submitted && f.lName.errors }" id="inputlName4">
-                  <div   *ngIf="submitted && f.lName.errors" class="invalid-feedback col-md-6">
-                    <div *ngIf="f.lName.errors.required"  >Last Name is required</div>
-                 </div></div>
-                </div>
-                <div class="form-group row">
-                  <label for="" class="col-md-2 pl-5">Designation <span class="" style="color:red;">*</span>
-                  </label>
-                  <div class="col-md-6">
-                  <input type="text"  (keypress)="keyPressAlphabet($event)" class="form-control col-md-8"   id="floatingInput" placeholder="Designation"formControlName="Designation"[ngClass]="{ 'is-invalid': submitted && f.Designation.errors }" id="inputDesignation4">
-                  <div *ngIf="submitted && f.Designation.errors" class="invalid-feedback col-md-6">
-                    <div *ngIf="f.Designation.errors.required">Designation is required</div>
-                 </div>
-                </div></div>
-                <div class="form-group row">
-                  <label for="" class="col-md-2 pl-5">Email <span class="" style="color:red;">*</span>
-                  </label>
-                  <div class="col-md-6">
-                  <input type="email" class="form-control col-md-8"  id="floatingInput" placeholder="Email"  formControlName="Email"  [ngClass]="{ 'is-invalid': submitted && f.Email.errors }"  id="inputEmail4">
-                  <div *ngIf="submitted && f.Email.errors" class="invalid-feedback col-md-6">
-                    <div *ngIf="f.Email.errors.required">Email is required</div>
-                    <!-- <div *ngIf="f.Email.errors.email">Email must be a valid email address</div> -->
-                    <!-- <div *ngIf="f.Email.errors.pattern">Please enter valid email address</div>
-  
-                  </div></div>
-               
-                </div>
-                <div class="form-group row">
-                    <label for="" class="col-md-2 pl-5">Phone <span class="" style="color:red;">*</span>
-                    </label>
-                    <div class="col-md-6">
-                    <input type="text"  maxlength="12" (keypress)="keyPressNumbers($event)" class="form-control col-md-8"   id="floatingInput" placeholder="Phone"formControlName="Phone"[ngClass]="{ 'is-invalid': submitted && f.Phone.errors }" id="inputPhone4">
-                    <div *ngIf="submitted && f.Phone.errors" class="invalid-feedback col-md-6">
-                      <div *ngIf="f.Phone.errors.required">Phone is required</div>
-                      <div *ngIf="f.Phone.errors.pattern">Please enter valid phone number</div>
-  
-                   </div>
-                  </div></div> -->
-                <!-- <button style="background-color: rgb(84, 84, 224)" >invite user</button> -->
-                <!-- <div class="row">
-                  <div class="form-group col-md-2 pl-5 "> -->
-                    <!-- <a href="invitation-done.html" class="btn btn-primary btn-block">Submit</a> -->
-                    <!-- <button type="submit"      class="btn btn-primary btn-block">Submit</button>
-                  </div>
-                </div>
-                </form>
-              </div>
-            </div>
-          </div>
-     
-      </section>
-        -->
-    <!-- </div> 
-    <div><app-footer></app-footer></div>
-   </div>
-    
-  </body> -->
-   

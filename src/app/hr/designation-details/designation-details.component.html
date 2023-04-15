@@ -33,7 +33,7 @@
               </div>
               <div class="col-md-4">
                 <!-- <input type="text" name=""    id="" class="form-control" placeholder="Enter Designation Name" formControlName="designation_name" [ngClass]="{ 'is-invalid': submitted && f.designation_name.errors }"> -->
-                <select class="form-select" (keypress)="keyPressAlphaNumeric($event)" id="Department" formControlName="designation_name" placeholder="Enter designation name" [ngClass]="{ 'is-invalid': submitted && f.designation_name.errors }">
+                <!-- <select class="form-select" (keypress)="keyPressAlphaNumeric($event)" id="Department" formControlName="designation_name" placeholder="Enter designation name" [ngClass]="{ 'is-invalid': submitted && f.designation_name.errors }">
 
                   <option value="" disabled [selected]="true" >Select Designation Name</option>
 
@@ -55,7 +55,9 @@
 
                   <option value="Software Developer">Software Developer</option>
 
-              </select>
+              </select> -->
+              <input type="text" class="form-control" formControlName="designation_name" placeholder="Enter designation name" [ngClass]="{ 'is-invalid': submitted && f.designation_name.errors }">
+
               <div *ngIf="submitted && f.designation_name.errors" class="invalid-feedback">
                                 <div *ngIf="f.designation_name.errors.required">Designation name is
                                     required.</div>
@@ -65,14 +67,15 @@
             <br>
             <div class="row">
               <div class="col-md-2 pl-3">
-                <label for="">Mail Alias <span class="text-danger">*</span>
+                <label for="">Mail Alias 
+                  <!-- <span class="text-danger">*</span> -->
                 </label>
               </div>
               <div class="col-md-4">
                 <input type="text" name="" id="" class="form-control" placeholder="Enter Mail Alias" formControlName="mail_alias" [ngClass]="{ 'is-invalid': submitted && f.mail_alias.errors }">
                 <div *ngIf="submitted && f.mail_alias.errors" class="invalid-feedback">
-                <div *ngIf="f.mail_alias.errors.required"> Email is
-                    required.</div>
+                <!-- <div *ngIf="f.mail_alias.errors.required"> Email is
+                    required.</div> -->
                     <div *ngIf="f.mail_alias.errors?.['pattern']">
                       please enter valid email address.
                     </div>

@@ -63,7 +63,7 @@ export class ApplyLeaveComponent implements OnInit {
   roll: any;
   Applyleave: any = FormGroup;
   submitted = false;
-
+  company_id:any;
   constructor(private formBuilder: FormBuilder, private dashService: DashboardService, private LeaveService: LeaveService, private router: Router, private ngxService: NgxUiLoaderService, private httpClient: HttpClient,) {
 
 
@@ -84,11 +84,11 @@ export class ApplyLeaveComponent implements OnInit {
       this.emp_name = this.sessiondata[i].emp_name;
       this.roll = this.sessiondata[i].roll_id;
       this.company_email_id = this.sessiondata[i].company_email_id;
-
+      this.company_id= this.sessiondata[i].company_id;
     }
 
 
-    this.LeaveService.getById(this.emp_id).subscribe((data) => {
+    this.LeaveService.getById(this.emp_id,this.company_id).subscribe((data) => {
 
       this.all_leave = data;
 
@@ -113,6 +113,7 @@ export class ApplyLeaveComponent implements OnInit {
       // poc_employee: ['', [Validators.required]],
       // poc_mobile: ['', [ Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), Validators.maxLength(10)]],
       // poc_email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      company_id:this.company_id
     });
 
     //........................attachment
@@ -157,7 +158,7 @@ export class ApplyLeaveComponent implements OnInit {
 
     console.log("FindAll", this.emp_id);
 
-    this.LeaveService.getById(this.emp_id).subscribe((data) => {
+    this.LeaveService.getById(this.emp_id,this.company_id).subscribe((data) => {
 
       this.all_leave = data;
 

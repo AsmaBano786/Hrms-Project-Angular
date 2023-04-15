@@ -130,11 +130,11 @@
                                 <thead>
                                   <tr>
                                     <th>Employee Id</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Employee Name</th>
+                                    <!-- <th>Last Name</th> -->
                                     <th>
-                                      Designation<span style="font-size: small">
-                                        (Apply for)</span
+                                      Role<span style="font-size: small">
+                                       </span
                                       >
                                     </th>
                                     <th>Email address</th>
@@ -143,16 +143,17 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr *ngFor="let item of sessiondata1 || sessiondata " >
+                                  <tr *ngFor="let item of sessiondata1 || sessiondataD1 " >
                                     <td>
                                       <a href="" (click)="switchtabinfo('info', $event)">{{emp_idD1}}
                                       </a>
                                     </td>
-                                    <td>{{ item.first_name }}</td>
-                                    <td>{{ item.last_name }}</td>
-                                    <td>{{ item.designation }}</td>
-                                    <td>{{ item.email }}</td>
-                                    <td>{{ item.phone }}</td>
+                                    <td>{{emp_nameD1}}</td>
+                                    <!-- <td>{{ item.last_name }}</td> -->
+                                    <td>{{rollD1}}</td>
+                                    <td>{{data}}</td>
+                                    <td>{{item.phone_number}}</td>
+                                  
                                     <td>
                                       <span class="pull-right">
                                         <!-- <a title="Edit" style="color: rgb(7, 11, 241); "><i class="fa fa-edit" (click)="updateNotes(i.Id)" ></i></a> -->

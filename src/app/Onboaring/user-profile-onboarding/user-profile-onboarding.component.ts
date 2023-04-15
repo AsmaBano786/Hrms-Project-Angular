@@ -234,9 +234,12 @@ attachmentValid:boolean=false;
         this.emp_idD1= this.sessiondataD1[i].emp_id;
         this.emp_nameD1=this.sessiondataD1[i].emp_name;
 this.rollD1=this.sessiondataD1[i].roll_id;
+this.data =this.sessiondataD1[i].personal_email_id;
 
       }
       
+      this.email1 = this.data;
+      console.log("session email",this.data);
       console.log("hr session data..",this.emp_idD1,this.emp_nameD1,this.rollD1);
 
 
@@ -251,8 +254,7 @@ this.rollD1=this.sessiondataD1[i].roll_id;
         
         
       }
-      this.email1 = this.data;
-      console.log("session email",this.data);
+      
 
    
       this.getCountries();
