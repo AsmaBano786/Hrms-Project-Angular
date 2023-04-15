@@ -571,7 +571,7 @@ console.log("......IN.......",this.usermailid1);
 
           official_email:this.registerForm.value.official_email,
           password:this.registerForm.value.password,
-
+          company_id:this.registerForm.value.company_id,
           // ...this.documentForm.value,
           ...this.addressForm.value,
           ...this.pAddressForm.value,

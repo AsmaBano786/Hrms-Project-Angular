@@ -109,6 +109,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 import { PortalModule } from '@angular/cdk/portal';
+import { EditUserViewComponent } from './hr/edit-user-view/edit-user-view.component';
 
 @NgModule({
   declarations: [
@@ -205,7 +206,8 @@ UserViewComponent,
     SettingComponent,
     ResetPassComponent,
     EditNewLeaveTypeComponent,
-    NewLeaveTypeComponent
+    NewLeaveTypeComponent,
+    EditUserViewComponent
   ],
   imports: [
     CommonModule,

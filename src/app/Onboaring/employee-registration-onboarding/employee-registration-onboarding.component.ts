@@ -48,9 +48,7 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
   PhoneNumberFormat = PhoneNumberFormat;
 	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
   // CustomValidators:any
-
-
-
+  
   constructor(
     private formBuilder: FormBuilder,
     private ngxService: NgxUiLoaderService,
@@ -86,7 +84,7 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
             usermailid: this.usermailid1,
             pass: this.pass1,
             emp_name: ['', [Validators.required]],
-            emp_id: ['null'],
+            emp_id:[1],
             joining_date: [''],
             location: ['null'],
             roll_id: ['Admin'],
@@ -98,17 +96,16 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
                 Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
               ],
             ],
-            password: ['', [Validators.required, Validators.minLength(6)]],
+            password: ['', [Validators.required, ]],
             confirm_password: [
               '',
-              [Validators.required, Validators.minLength(6)],
+              [Validators.required, ],
             ],
 
             phone_number: [
               '',
               [
-                Validators.required,
-                Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
+                Validators.required              
               ],
             ],
             checkbox: [1, [Validators.required]],
@@ -208,8 +205,13 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
 
     this.submitted = true;
     // stop here if form is invalid
+    
+ 
+    
     if (this.registerForm.invalid) {
-      return console.log('Invalid Details');
+      console.log(this.registerForm.value);
+      
+      return alert('Invalid Details');
     }
     //True if all the fields are filled
     if (this.submitted && this.registerForm.valid) {
@@ -224,11 +226,17 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
         console.log('function', this.registerForm.value);
 
         this.ngxService.start();
+
+let req={
+  ...this.registerForm.value,
+  phone_number:this.registerForm.value.phone_number.internationalNumber
+}
+
         this.authService
-          .onboarding_registeration(this.registerForm.value)
+          .onboarding_registeration(req)
           .subscribe(async (result: any) => {
             // console.log(this.registerForm.value);
-            console.log('function1', this.registerForm.value);
+            console.log('function1', req);
 
             if (result) {
               console.log(result);

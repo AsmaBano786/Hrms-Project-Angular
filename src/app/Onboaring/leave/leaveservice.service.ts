@@ -30,8 +30,9 @@ export class LeaveService {
     return this.http.get(`${this.apiUrl}/api/v1/leaves/`+employee_id);
   }
   
-  getById(ApplyLeaveId:any) {
-    return this.http.get(`${this.apiUrl}/api/v1/leaves/`+ApplyLeaveId);
+  getById(ApplyLeaveId:any,company_id:any) {
+    console.log("leave",`${this.apiUrl}/api/v1/leaves/`+ApplyLeaveId+`/`+company_id);
+    return this.http.get(`${this.apiUrl}/api/v1/leaves/`+ApplyLeaveId+`/`+company_id);
   }
 
   getEmployees(){

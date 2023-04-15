@@ -303,9 +303,7 @@ this.roll=this.sessiondata[i].roll_id;
     
     let departData = {
       company_id : this.company_id,
-      // designation_name : this.companyDtailForm.value.designation_name,
-      // mail_alias : this.companyDtailForm.value.mail_alias,
-      // modified_by:this.roll+'-'+this.emp_name,
+
       company_name: this.companyDtailForm.value.company_name,
       company_email: this.companyDtailForm.value.company_email,
       
@@ -341,7 +339,7 @@ console.log(this.company_id,this.companyDtailForm.value);
     this.companyService.updateCompanyDetails(this.company_id,this.companyDtailForm.value).subscribe((data) => {
       console.log("getdepart" , departData);
       alert("Company details updated successfully");
-      this.router.navigate(['company-detail']);
+      setTimeout(() => { this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate(['/company-detail'])); }, 1000);
     });
   }
   }
@@ -356,7 +354,7 @@ console.log(this.company_id,this.companyDtailForm.value);
     console.log("this.company_id",this.company_id)
     this.companyService.getDetails(this.company_id).subscribe((data:any) => {    
       
-      console.log(data);
+      console.log("data",data);
       for(let i of data){
         console.log(i.company_name);
         this.companyDtailForm.patchValue({
