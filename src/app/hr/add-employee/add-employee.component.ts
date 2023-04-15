@@ -225,7 +225,7 @@ attachmentValid:boolean=false;
 usermailid1:any;
 pass1:any
 CompanyId:any;
-
+employee_name:any;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthServiceService,
@@ -250,6 +250,8 @@ CompanyId:any;
       let emp_id= sessiondata[i].emp_id;
       let emp_name =sessiondata[i].emp_name;
       let roll =sessiondata[i].roll_id;
+
+      this.employee_name=emp_name;
           //  console.log("company_id..........",sessiondata[i].company_id);
 
       this.CompanyId=sessiondata[i].company_id;
