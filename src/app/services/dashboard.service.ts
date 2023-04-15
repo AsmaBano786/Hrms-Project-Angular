@@ -26,12 +26,12 @@ export class DashboardService {
     return this.http.get(`${this.apiUrl}/api/v1/dashboard/birthday`);
   }
 
-  newHire() {
-    return this.http.get(`${this.apiUrl}/api/v1/dashboard/newHire`);
+  newHire( company_id:any) {
+    return this.http.get(`${this.apiUrl}/api/v1/dashboard/newHire/`+company_id);
   }
 
-  knowledgecenter() {
-    return this.http.get(`${this.apiUrl}/api/v1/Knowledgecenter/getAll`);
+  knowledgecenter( company_id:any) {
+    return this.http.get(`${this.apiUrl}/api/v1/Knowledgecenter/getAll/`+company_id);
   }
 
   approvForReq(Action: any) {
@@ -53,8 +53,12 @@ export class DashboardService {
     );
   }
 
-  UpcmgHoliday() {
-    return this.http.get(`${this.apiUrl}/api/v1/dashboard/upcomingHolidays`);
+  UpcmgHoliday(company_id:any) {
+    return this.http.get(`${this.apiUrl}/api/v1/dashboard/upcomingHolidays/`+company_id);
+  }
+
+  getEmp_byId(id:any){
+    return this.http.get(`${this.apiUrl}/api/v1/getbyid/`+id);
   }
 
   timesheetbyempid(empid: any) {
@@ -64,8 +68,8 @@ export class DashboardService {
     return this.http.get(`${this.apiUrl}/api/v1/Timesheet/getAll`);
   }
 
-  announcement() {
-    return this.http.get(`${this.apiUrl}/api/v1/announcement/getAll`);
+  announcement(company_id:any) {
+    return this.http.get(`${this.apiUrl}/api/v1/announcement/getAll/`+company_id);
   }
 
   GetPReport() {

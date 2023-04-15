@@ -46,7 +46,7 @@ export class OnboardingDashboardComponent implements OnInit {
   redblue = "btn btn-info btn-sm";
 
   startTimer: boolean = false;
-
+company_id:any;
   timer = 0; // seconds
   intervalId : any = 0;
   ticks =0;
@@ -67,12 +67,12 @@ export class OnboardingDashboardComponent implements OnInit {
       console.log(this.birthday);
     });
 
-    this.dashServ.newHire().subscribe((data) => {
+    this.dashServ.newHire(this.company_id).subscribe((data) => {
       this.newHire = data;
       console.log("new hire....", data);
     });
 
-    this.dashServ.knowledgecenter().subscribe((item:any) => {
+    this.dashServ.knowledgecenter(this.company_id).subscribe((item:any) => {
       // console.log('item..................',JSON.stringify(item?.data));
       
       this.knCenter = item?.data;
@@ -81,7 +81,7 @@ export class OnboardingDashboardComponent implements OnInit {
 
     
    
-    this.dashServ.UpcmgHoliday().subscribe((data) => {
+    this.dashServ.UpcmgHoliday(this.company_id).subscribe((data) => {
       this.upHday = data;
       console.log("holiday", data);
     });
@@ -89,7 +89,7 @@ export class OnboardingDashboardComponent implements OnInit {
    
 
 
-    this.dashServ.announcement().subscribe((data) => {
+    this.dashServ.announcement(this.company_id).subscribe((data) => {
       this.announce = data;
       console.log("announcement", data);
     });

@@ -122,8 +122,7 @@ console.log("roll............",this.roll);
 
   if(this.companyId==="null")
   {
-  this.router.navigate(['/add-company']) //session send
-  
+  this.router.navigate(['/dashboard']) //session send
   }
   else{
     this.router.navigate(['/dashboard']) //session send
