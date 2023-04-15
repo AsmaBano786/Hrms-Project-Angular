@@ -16,12 +16,11 @@
      </div>
    </div>
  </div> -->
-
   <div class="login-logo">
-    <a style="cursor:pointer"
-    ><img src="../../../assets/dist/img/logo.png" />Cylsys
-    <span class="small">HRMS</span></a
-  >
+    <a href="index2.html">
+      <img src="../../../assets/dist/img/logo.png" />Cylsys
+      <span class="small">HRMS</span>
+    </a>
   </div>
   <!-- /.login-logo -->
 
@@ -40,7 +39,7 @@
             class="form-control col-md-8"
             id=""
             (keypress)="keyPressAlphabet($event)"
-           
+            id="floatingInput"
             placeholder="Full Name"
             formControlName="emp_name"
             [ngClass]="{ 'is-invalid': submitted && f.emp_name.errors }"
@@ -133,7 +132,7 @@
           </label>
 
           <ngx-intl-tel-input
-          style="width: 50%;border: none;"
+          style="width: 50%;"
         [cssClass]="'custom'"
         [preferredCountries]="preferredCountries"
         [enableAutoCountrySelect]="true"
@@ -152,7 +151,6 @@
         name="phone"
         formControlName="phone_number"
         class="col-md-8"
-        [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"
       >
       </ngx-intl-tel-input>
           <!-- <input
@@ -168,17 +166,17 @@
             placeholder="Phone Number"
             [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"
           /> -->
-           <div
+          <div
             *ngIf="submitted && f.phone_number.errors"
             class="invalid-feedback"
           >
             <div *ngIf="phone_number.errors?.['required']">
               Mobile number is required.
             </div>
-            <!-- <div *ngIf="phone_number.errors?.['pattern']">
+            <div *ngIf="phone_number.errors?.['pattern']">
               Please enter10digit mobilenumber.
-            </div> -->
-          </div> 
+            </div>
+          </div>
         </div>
         <div class="form-group row">
           <div class="col-md-1">
@@ -213,6 +211,7 @@
         <!-- <button style="background-color: rgb(84, 84, 224)" >invite user</button> -->
         <div class="row">
           <div class="form-group col-md-12">
+           
             <button
               type="submit"
               class="btn btn-primary col-md-12"
@@ -221,6 +220,7 @@
             >
               SIGN UP
             </button>
+           
           </div>
         </div>
         <div class="form-group row">
@@ -238,5 +238,4 @@
       </div>
     </form>
   </div>
-
 </body>

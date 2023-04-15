@@ -133,30 +133,6 @@ export class DesignationComponent implements OnInit {
 
   }
 
-  // search1(evt: any) {
-  //   console.log("Evt", evt.target.value);
-  //   this.designation_name = evt.target.value;
-
-  // }
-
-  // search() {
-
-  //   console.log(this.designation_name);
-
-  //   let designation_name_val = {
-  //     designation_name: this.designation_name
-  //   }
-
-  //   console.log(designation_name_val);
-
-  //   this.dash.findBySearchdesignation(designation_name_val).subscribe((data) => {
-  //     this.filteredData = data
-  //     console.log(data);
-  //   });
-
-  // }
-
-
 
 
   search1(evt: any) {
