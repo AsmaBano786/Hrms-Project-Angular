@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 import { saveAs } from 'file-saver';
 import { LeaveService } from '../leave/leaveservice.service';
 import { DatePipe } from '@angular/common';
-
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 @Component({
   selector: 'app-apply-leave-onboarding',
   templateUrl: './apply-leave-onboarding.component.html',
@@ -42,7 +42,7 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
   file!: File;
   private apiUrl = environment.apiUrl;
 
-
+  allemployeedata:any;
   notesForm: any = FormGroup;
   editMode: boolean = false;
   fetchNotes: any;
@@ -66,7 +66,7 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
   company_id:any;
 
   myDate = new Date();
-  constructor(private datePipe: DatePipe, private formBuilder: FormBuilder, private dashService: DashboardService, private LeaveService: LeaveService, private router: Router, private ngxService: NgxUiLoaderService, private httpClient: HttpClient,) {
+  constructor(private datePipe: DatePipe, private formBuilder: FormBuilder, private dashService: DashboardService,   private authService: AuthServiceService, private LeaveService: LeaveService, private router: Router, private ngxService: NgxUiLoaderService, private httpClient: HttpClient,) {
     this.current_date =this.datePipe.transform(this.myDate, 'mm/dd/yyyy');
     
     console.log("current "+ this.current_date);
@@ -91,15 +91,17 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
       this.company_id=this.sessiondata[i].company_id;
     }
 
-    
-    this.LeaveService.getById_emp(this.emp_id).subscribe((data) => {
+  console.log("check...",this.emp_id,this.company_id);
+
+    this.LeaveService.getById(this.emp_id,this.company_id).subscribe((data) => {
 
       this.all_leave = data;
 
-      console.log(this.all_leave);
+
+      console.log("leave.....",this.all_leave);
 
     });
-
+    this.getdetail() 
     // this.LeaveService.getById(this.emp_id).subscribe((data) => {
 
     //   this.all_leave = data;
@@ -593,6 +595,13 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
 
 
   }
-
+  getdetail() {
+    this.authService.getAllJoiners(this.company_id).subscribe((data: any): void => {
+      this.allemployeedata = data;
+    
+      console.log("getdetail.............", this.allemployeedata);
+      
+    });
+  }
 
 }

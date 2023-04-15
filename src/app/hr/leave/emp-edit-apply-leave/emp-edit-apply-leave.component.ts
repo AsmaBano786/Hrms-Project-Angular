@@ -53,52 +53,14 @@ export class EmpEditApplyLeaveComponent implements OnInit {
     //   console.log("allEmployees", data);
     // });
   
-    this.LeaveService.getleave(this.company_id).subscribe((data) => {
-      this.allleave = data;
-      console.log("allEmployees", data);
-    });
-  
+    
   
     this.activatedRoute.paramMap.subscribe(x => {
       this.ApplyLeaveId = x.get('ApplyLeaveId');
       console.log(this.ApplyLeaveId);
     });
   
-    this.LeaveService.getleave(this.company_id).subscribe((data: any) => {
-      // console.log(data);
-      this.leaveData = data;
-     
-      console.log("arr length", data.length);
-      let n = data.length;
-      let limit = 1;
-  
-      for (let i in data) {
-        if (limit <= n && data[i].ApplyLeaveId == this.ApplyLeaveId) {
-          console.log("check data", data[i].ApplyLeaveId);
-          this.leaveData = data[i];
-        }
-        limit++;
-      }
-  
-      this.editApplyleave.patchValue({
-        'ApplyLeaveId': this.ApplyLeaveId,
-        'employee_id': this.leaveData.employee_id,
-        'emp_name': this.leaveData.emp_name,
-        'leave_type': this.leaveData.leave_type,
-        'date_from': this.datepipe.transform(this.leaveData.date_from, 'yyyy-MM-dd'),
-        'date_to': this.datepipe.transform(this.leaveData.date_to, 'yyyy-MM-dd'),
-        'reporting_manager': this.leaveData.reporting_manager,
-        'email': this.leaveData.email,
-        'additional_email': this.leaveData.additional_email,
-        'reason_for_leave': this.leaveData.reason_for_leave,
-        'poc_employee': this.leaveData.poc_employee,
-        'poc_mobile': this.leaveData.poc_mobile,
-        'poc_email': this.leaveData.poc_email,
-        'Action': this.leaveData.Action,
-        'describe_reason': this.leaveData.describe_reason,
-      });
-  
-    });
+   
   
   
   
@@ -144,6 +106,8 @@ export class EmpEditApplyLeaveComponent implements OnInit {
   this.company_id= this.sessiondata[i].company_id;
     }
   
+  
+    this.getleave();
     // this.LeaveService.getById_emp(this.emp_id).subscribe((data: any) => {
     //   this.leaveData = data[0];
   
@@ -175,7 +139,7 @@ export class EmpEditApplyLeaveComponent implements OnInit {
   }
   
   updateLeave() {
-    console.log("addProject", this.editApplyleave
+    console.log("updating leave.........", this.editApplyleave
       .value);
     // let team = this.editApplyleave.value.team_member?.toString()
     let leaveData = {
@@ -217,7 +181,43 @@ export class EmpEditApplyLeaveComponent implements OnInit {
     }
   }
   
+  getleave(){
+    this.LeaveService.getleave(this.company_id).subscribe((data: any) => {
+      // console.log(data);
+      this.leaveData = data;
+     
+      console.log("arr length", data.length);
+      let n = data.length;
+      let limit = 1;
   
+      for (let i in data) {
+        if (limit <= n && data[i].ApplyLeaveId == this.ApplyLeaveId) {
+          console.log("check data", data[i].ApplyLeaveId);
+          this.leaveData = data[i];
+        }
+        limit++;
+      }
+  
+      this.editApplyleave.patchValue({
+        'ApplyLeaveId': this.ApplyLeaveId,
+        'employee_id': this.leaveData.employee_id,
+        'emp_name': this.leaveData.emp_name,
+        'leave_type': this.leaveData.leave_type,
+        'date_from': this.datepipe.transform(this.leaveData.date_from, 'yyyy-MM-dd'),
+        'date_to': this.datepipe.transform(this.leaveData.date_to, 'yyyy-MM-dd'),
+        'reporting_manager': this.leaveData.reporting_manager,
+        'email': this.leaveData.email,
+        'additional_email': this.leaveData.additional_email,
+        'reason_for_leave': this.leaveData.reason_for_leave,
+        'poc_employee': this.leaveData.poc_employee,
+        'poc_mobile': this.leaveData.poc_mobile,
+        'poc_email': this.leaveData.poc_email,
+        'Action': this.leaveData.Action,
+        'describe_reason': this.leaveData.describe_reason,
+      });
+  
+    });
+  }
   
   
   

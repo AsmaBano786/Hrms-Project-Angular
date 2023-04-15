@@ -629,8 +629,12 @@ console.log("......IN.......",this.usermailid1);
                     console.log(result.message);
                     
                     console.log("onboarding called");
-                    alert("Employee Details Added Successfully")
-                    
+                   
+                    setTimeout(() => {
+                      this.router
+                        .navigateByUrl('/', { skipLocationChange: true })
+                        .then(() => this.router.navigate(['/employees-info']));
+                    }, 2000);
         
 
                   })
@@ -640,6 +644,7 @@ console.log("......IN.......",this.usermailid1);
               // document.getElementById("ModalClose")?.click();
               // this.router.navigateByUrl('/preonboarding_complete');
               this.ngxService.stop();
+              alert("Employee Details Added Successfully");
             } 
             else {
               // console.log(result);

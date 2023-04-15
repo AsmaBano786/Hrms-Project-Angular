@@ -222,6 +222,7 @@ attachmentValid:boolean=false;
 roll:any;
 emp_id:any;
 emp_name:any;
+phoneD:any;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthServiceService,
@@ -246,12 +247,14 @@ emp_name:any;
         this.emp_idD1= this.sessiondataD1[i].emp_id;
         this.emp_nameD1=this.sessiondataD1[i].emp_name;
 this.rollD1=this.sessiondataD1[i].roll_id;
-
+this.data=this.sessiondataD1[i].company_email_id;
+this.phoneD=this.sessiondataD1[i].phone_number;
       }
-      
+      this.email1 = this.data;
+      console.log("session email",this.data);
       console.log("hr session data..",this.emp_idD1,this.emp_nameD1,this.rollD1);
 
-
+     
 // ..........................................
 
     this.sessiondata=JSON.parse(sessionStorage.getItem('session')|| "[]");  //recieve
@@ -260,8 +263,7 @@ this.rollD1=this.sessiondataD1[i].roll_id;
       for(let i in this.sessiondata){
         this.data= this.sessiondata[i].email;
       }
-      this.email1 = this.data;
-      console.log("session email",this.data);
+      
 
    
       this.getCountries();

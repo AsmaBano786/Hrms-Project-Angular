@@ -240,10 +240,16 @@
                                                     <select class="form-select" formControlName="reporting_manager"
                                                         [ngClass]="{ 'is-invalid': submitted && f.reporting_manager.errors }"
                                                         id="inputreporting_manager4">
-                                                        <option value="">Select here</option>
+                                                        <!-- <option value="">Select here</option>
                                                         <option value="Pawas Goyal">Pawas Goyal</option>
-                                                        <option value="Jagarti Thakur">Jagarti Thakur</option>
-                                                    </select>
+                                                        <option value="Jagarti Thakur">Jagarti Thakur</option>-->
+                                                        <option selected="selected" value="">Select here
+                                                        </option>
+                                                        <option *ngFor="let i of allemployeedata">
+                                                          {{i.first_name}} {{i.last_name}}
+                                                        </option>
+                                                    </select> 
+
                                                     <div *ngIf="submitted && f.reporting_manager.errors"
                                                         class="invalid-feedback">
                                                         <div *ngIf="f.reporting_manager.errors.required">Reporting

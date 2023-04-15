@@ -45,12 +45,7 @@ export class LeaveApplicationComponent implements OnInit {
 
     });
 
-    this.LeaveService.getleave(this.company_id).subscribe((data) => {
-
-      this.all_leave = data;
-      console.log("leave applications",this.all_leave)
-
-    });
+   
 
   }
   ngOnInit(): void {
@@ -66,6 +61,12 @@ this.company_id=this.sessiondata[i].company_id;
     }
 
     console.log("hr session data..", this.emp_id, this.emp_name, this.roll);
+    this.LeaveService.getleave(this.company_id).subscribe((data) => {
+
+      this.all_leave = data;
+      console.log("leave applications",this.all_leave)
+
+    });
   }
 
   search1(evt: any) {

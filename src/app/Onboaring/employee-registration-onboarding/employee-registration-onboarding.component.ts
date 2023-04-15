@@ -197,14 +197,14 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
         //  this.getcompanyMainlingInfo();
         console.log('function', this.registerForm.value);
 
-        this.ngxService.start();
+    
 
 let req={
   ...this.registerForm.value,
   company_id:"null",
   phone_number:this.registerForm.value.phone_number.internationalNumber
 }
-
+this.ngxService.start();
         this.authService
           .onboarding_registeration(req)
           .subscribe(async (result: any) => {
