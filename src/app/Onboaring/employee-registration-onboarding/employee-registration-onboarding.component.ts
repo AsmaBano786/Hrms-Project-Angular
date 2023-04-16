@@ -96,10 +96,10 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
                 Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
               ],
             ],
-            password: ['', [Validators.required, ]],
+            password: ['', [Validators.required]],
             confirm_password: [
               '',
-              [Validators.required, ],
+              [Validators.required],
             ],
 
             phone_number: [
@@ -116,18 +116,18 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
         }
       });
 
-      this.registerForm = window.open('', '', 'width=400,height=600,left=-200,top=200');
+      // this.registerForm = window.open('', '', 'width=400,height=600,left=-200,top=200');
 
-      // STEP 5: create a PortalHost with the body of the new window document    
-      const host = new DomPortalHost(
-        this.registerForm.document.body,
-        this.componentFactoryResolver,
-        this.applicationRef,
-        this.injector
-        );
+      // // STEP 5: create a PortalHost with the body of the new window document    
+      // const host = new DomPortalHost(
+      //   this.registerForm.document.body,
+      //   this.componentFactoryResolver,
+      //   this.applicationRef,
+      //   this.injector
+      //   );
   
       // STEP 6: Attach the portal
-      host.attach(this.portal);
+      // host.attach(this.portal);
   }
 
   changePreferredCountries() {
@@ -206,7 +206,8 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     
- 
+    console.log(this.registerForm.value);
+
     
     if (this.registerForm.invalid) {
       console.log(this.registerForm.value);
