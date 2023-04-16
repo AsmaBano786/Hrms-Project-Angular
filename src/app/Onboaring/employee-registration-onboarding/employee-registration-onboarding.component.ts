@@ -367,8 +367,5 @@ this.ngxService.start();
 
 
 
-  ngOnDestroy(){
-    // STEP 7: close the window when this component destroyed
-    this.registerForm.close()
-  }
+ 
 }
