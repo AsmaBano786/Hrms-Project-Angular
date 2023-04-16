@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
 
   // @ViewChild('closeModel')closemodal: Element | any;
   // @ViewChild('closeModel', { static: true }) closemodal: Element | undefined;
-
+  CompanyDomain:any;
   action: any = 'Pending';
   sessiondata: any;
   emp_name: any;
@@ -72,6 +72,7 @@ export class DashboardComponent implements OnInit {
   submitted: any;
   emailId: any;
   id: any;
+  
   constructor(
     private dashServ: DashboardService,
     private formBuilder: FormBuilder,
@@ -230,7 +231,7 @@ export class DashboardComponent implements OnInit {
 
     this.companyinfo = new FormGroup({
       company_name: new FormControl('', [Validators.required]),
-
+      company_email:new FormControl('', [Validators.required]),
       portal: new FormControl('', [Validators.required]),
       industry: new FormControl('', [Validators.required]),
       number_of_employee: new FormControl('', [Validators.required]),
@@ -262,16 +263,22 @@ getCompany_id(){
     this.CompanyId = abc.toUpperCase();
     console.log(this.CompanyId);
 
+// let companyName=this.companyinfo.value.company_email;
+
+
     console.log('data company', this.companyinfo.value);
     this.submitted = true;
 
     if (this.companyinfo.invalid) {
       console.log('Invalid Details');
     }
+
+
     if (this.submitted && this.companyinfo.valid) {
       let reqBody = {
         ...this.companyinfo.value,
         company_id: this.CompanyId,
+        // company_domain:
       };
 
       console.log('valid data', reqBody);

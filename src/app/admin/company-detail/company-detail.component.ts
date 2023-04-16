@@ -43,6 +43,7 @@ export class CompanyDetailComponent implements OnInit {
   sessiondata:any;
   emp_name:any;
   emp_id:any;
+  alldata:any;
   roll:any;
   nik:any
   id:any
@@ -127,21 +128,21 @@ export class CompanyDetailComponent implements OnInit {
 
   get f() { return this.companyDtailForm.controls; }
   ngOnInit(): void {
-
-
+   
+  
     this.sessiondata=JSON.parse(sessionStorage.getItem('local_storage')|| "[]");  //recieve
     console.log("local_storage data",this.sessiondata);
     
       for(let i in this.sessiondata){
-        this.company_id= this.sessiondata[i].company_id;
+      this.id= this.sessiondata[i].id;
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
 
       }
-      
+      this.getdetailCid();
 
-      this.getData();
+     
     this.getCountries();
 
     this.x;
@@ -339,22 +340,24 @@ console.log(this.company_id,this.companyDtailForm.value);
     this.companyService.updateCompanyDetails(this.company_id,this.companyDtailForm.value).subscribe((data) => {
       console.log("getdepart" , departData);
       alert("Company details updated successfully");
-      setTimeout(() => { this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate(['/company-detail'])); }, 1000);
+      setTimeout(() => { this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate(['/dashboard'])); }, 1000);
     });
   }
   }
 
 
   getData(){
-    this.companyService.getDetails( this.company_id).subscribe((data) => {
-      this.allEmployees = data;
-      console.log("allEmployees", data);
-    });
+   
+    
+    // this.companyService.getDetails(this.company_id).subscribe((data) => {
+    //   this.allEmployees = data;
+    //   // console.log("allEmployees", data);
+    // });
 
     console.log("this.company_id",this.company_id)
     this.companyService.getDetails(this.company_id).subscribe((data:any) => {    
       
-      console.log("data",data);
+      // console.log("data",data);
       for(let i of data){
         console.log(i.company_name);
         this.companyDtailForm.patchValue({
@@ -384,4 +387,25 @@ console.log(this.company_id,this.companyDtailForm.value);
 
 
   }
+
+
+  getdetailCid() {
+    this.companyService.getbycmpnyid(this.id).subscribe((data: any): void => {
+      this.alldata = data;
+
+      console.log("getPR+++", data);
+  
+      
+      // for(let i of data){
+      //   console.log(i.company_id)
+      //   console.log("data.company_id",i.company_id);
+      // }
+      console.log(data.data);
+      this.company_id=data.data.company_id;
+      console.log(this.company_id);
+    
+      this.getData();
+    });
+    
+}
 }
