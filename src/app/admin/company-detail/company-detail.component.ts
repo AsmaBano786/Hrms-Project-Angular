@@ -349,6 +349,9 @@ console.log(this.company_id,this.companyDtailForm.value);
   getData(){
    
     
+
+
+    
     // this.companyService.getDetails(this.company_id).subscribe((data) => {
     //   this.allEmployees = data;
     //   // console.log("allEmployees", data);

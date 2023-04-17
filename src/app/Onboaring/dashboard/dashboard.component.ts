@@ -72,7 +72,10 @@ export class DashboardComponent implements OnInit {
   submitted: any;
   emailId: any;
   id: any;
-  
+  SendEmailDomain:any;
+  EmailId:any;
+  DomainBroke:any;
+  gotCdomain:any;
   constructor(
     private dashServ: DashboardService,
     private formBuilder: FormBuilder,
@@ -176,6 +179,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.sessiondata = JSON.parse(
       sessionStorage.getItem('local_storage') || '[]'
     ); //recieve
@@ -240,12 +244,48 @@ export class DashboardComponent implements OnInit {
 getCompany_id(){
   this.dashServ.getEmp_byId(this.id).subscribe((data: any) => {
     this.company_id = data.data.company_id;
-    console.log("this.company_id",this.company_id);
-    if (this.company_id === 'null') {
-      console.log("this.company_id==='null'");
+    this.EmailId=data.data.company_email_id;
+    console.log("this.company_id",this.company_id,this.EmailId);
 
-      document.getElementById('MybtnPreventHTML')?.click();
+
+    let Esplit=this.EmailId;
+  let splitdomainname=Esplit.split("@");
+  // console.log(splitdomainname)
+  // console.log("index",splitdomainname[1]);
+  let breakdot=splitdomainname[1].split('.')
+  // console.log("check.",breakdot);
+  // console.log("check.",breakdot[0]);
+  this.DomainBroke=breakdot[0];
+  console.log("DomainBroke",this.DomainBroke);
+
+  this.companyService.getDomain(this.DomainBroke).subscribe((data:any) => {    
+      
+    console.log("data",data);
+    for(let i of data){
+      console.log(i.company_domain);
+      this.gotCdomain=i.company_domain;
     }
+    console.log("admin",this.DomainBroke,"their comapny status",this.gotCdomain);
+
+
+    if(this.DomainBroke!=this.gotCdomain)  //both have different domain
+{
+  document.getElementById('MybtnPreventHTML')?.click();
+
+}
+    })
+
+    
+// if(this.DomainBroke===this.gotCdomain) //both have same domain
+// {
+// console.log("dont show popup this time");
+// }
+
+    // if (this.company_id==='null') {
+    //   console.log("this.company_id==='null'");
+
+    //   document.getElementById('MybtnPreventHTML')?.click();
+    // }
   });
 }
 
@@ -263,10 +303,10 @@ getCompany_id(){
     this.CompanyId = abc.toUpperCase();
     console.log(this.CompanyId);
 
-// let companyName=this.companyinfo.value.company_email;
-
-
     console.log('data company', this.companyinfo.value);
+    this.domain();
+
+
     this.submitted = true;
 
     if (this.companyinfo.invalid) {
@@ -278,7 +318,7 @@ getCompany_id(){
       let reqBody = {
         ...this.companyinfo.value,
         company_id: this.CompanyId,
-        // company_domain:
+        company_domain:this.SendEmailDomain
       };
 
       console.log('valid data', reqBody);
@@ -349,5 +389,19 @@ getCompany_id(){
         console.log('error', result);
       }
     });
+  }
+
+
+  domain(){
+    // let CEmail="abc@gmail.com";
+    let CEmail=this.companyinfo.value.company_email;
+  let splitdomain=CEmail.split("@");
+  // console.log(splitdomain)
+  // console.log("index",splitdomain[1]);
+  let breakdot=splitdomain[1].split('.')
+  // console.log("check.",breakdot);
+  // console.log("check.",breakdot[0]);
+  this.SendEmailDomain=breakdot[0];
+  console.log("sendingthisdomain",this.SendEmailDomain);
   }
 }

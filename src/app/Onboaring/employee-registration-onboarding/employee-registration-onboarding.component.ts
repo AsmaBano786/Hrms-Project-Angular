@@ -95,10 +95,10 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
                 Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
               ],
             ],
-            password: ['', [Validators.required, ]],
+            password: ['', [Validators.required]],
             confirm_password: [
               '',
-              [Validators.required, ],
+              [Validators.required],
             ],
 
             phone_number: [
@@ -194,7 +194,8 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     
- 
+    console.log(this.registerForm.value);
+
     
     if (this.registerForm.invalid) {
       console.log(this.registerForm.value);

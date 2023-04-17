@@ -17,7 +17,7 @@
    </div>
  </div> -->
   <div class="login-logo">
-    <a href="index2.html">
+    <a >
       <img src="../../../assets/dist/img/logo.png" />Cylsys
       <span class="small">HRMS</span>
     </a>
@@ -46,7 +46,7 @@
           />
 
           <div *ngIf="submitted && f.emp_name.errors" class="invalid-feedback">
-            <div *ngIf="emp_name.errors?.['required']">
+            <div *ngIf="emp_name.errors.required">
               Full name is required.
             </div>
           </div>
@@ -72,12 +72,12 @@
             *ngIf="submitted && f.company_email_id.errors"
             class="invalid-feedback"
           >
-            <div *ngIf="company_email_id.errors?.['required']">
+            <div *ngIf="company_email_id.errors.required">
               Email is required.
             </div>
 
-            <div *ngIf="company_email_id.errors?.['pattern']">
-              Please entervalid email address.
+            <div *ngIf="company_email_id.errors.pattern">
+              Please enter valid email address.
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
           />
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="password.errors?.['required']">
+            <div *ngIf="password.errors.required">
               Password is required.
             </div>
           </div>
@@ -121,7 +121,7 @@
             *ngIf="submitted && f.confirm_password.errors"
             class="invalid-feedback"
           >
-            <div *ngIf="confirm_password.errors?.['required']">
+            <div *ngIf="confirm_password.errors.required">
               Confirm password is required.
             </div>
           </div>
@@ -171,12 +171,10 @@
             *ngIf="submitted && f.phone_number.errors"
             class="invalid-feedback"
           >
-            <div *ngIf="phone_number.errors?.['required']">
+            <div *ngIf="phone_number.errors.required">
               Mobile number is required.
             </div>
-            <div *ngIf="phone_number.errors?.['pattern']">
-              Please enter10digit mobilenumber.
-            </div>
+           
           </div>
         </div>
         <div class="form-group row">
