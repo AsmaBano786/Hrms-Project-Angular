@@ -151,6 +151,7 @@
         name="phone"
         formControlName="phone_number"
         class="col-md-8"
+        [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"
       >
       </ngx-intl-tel-input>
           <!-- <input
@@ -201,7 +202,7 @@
                 *ngIf="submitted && f.checkbox.errors"
                 class="invalid-feedback"
               >
-                <div *ngIf="checkbox.errors.required">
+                <div *ngIf="checkbox.errors?.['required']">
                   Please select the checkbox
                 </div>
               </div>
@@ -230,11 +231,7 @@
             >
           </p>
         </div>
-        <!-- <div class="form-group row">
-               <label for="" class="col-md-4 "> or sign in using <span class=""><a href="https://www.facebook.com/cylsyssoftwaresolutionpvtltd" target="_blank"><i class="fab fa-facebook social mr-2"></i></a> <a href="https://www.linkedin.com/company/2310187" target="_blank"><i class="fab fa-linkedin-in social mr-2"></i></a>  <a href="https://www.skype.com/pawasgoyal" target="_blank"><i class="fab fa-skype social mr-2"></i></a> </span>
-               </label>
-             
-             </div> -->
+      
       </div>
     </form>
   </div>

@@ -23,11 +23,10 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
 
   
 
-  // STEP 1: get a reference to the portal
-  @ViewChild(CdkPortal) portal: CdkPortal | undefined;
  
-  // STEP 2: save a reference to the window so we can close it
-  private externalWindow = null;
+ 
+
+ 
 
   pass1: any;
   usermailid1: any;
@@ -116,18 +115,7 @@ export class EmployeeRegistrationOnboardingComponent implements OnInit {
         }
       });
 
-      this.registerForm = window.open('', '', 'width=400,height=600,left=-200,top=200');
-
-      // STEP 5: create a PortalHost with the body of the new window document    
-      const host = new DomPortalHost(
-        this.registerForm.document.body,
-        this.componentFactoryResolver,
-        this.applicationRef,
-        this.injector
-        );
-  
-      // STEP 6: Attach the portal
-      host.attach(this.portal);
+     
   }
 
   changePreferredCountries() {
@@ -240,6 +228,7 @@ this.ngxService.start();
             console.log('function1', req);
 
             if (result) {
+              this.ngxService.stop();
               console.log(result);
               console.log(result.message);
 
@@ -249,16 +238,16 @@ this.ngxService.start();
                 this.router.navigate(['employee-registration']);
                 return alert('This Email is already exist');
               } else {
-                this.ngxService.stop();
+              
                 this.router.navigate(['login-Onboarding']);
                 return alert('You have registered successfully');
               }
             }
           });
       } else {
-        // alert ("Confirm password did not match")
-        this.original_Password = this.registerForm.value.password;
-        this.confirm_Password = this.registerForm.value.confirm_password;
+        alert ("Confirm password did not match")
+        // this.original_Password = this.registerForm.value.password;
+        // this.confirm_Password = this.registerForm.value.confirm_password;
       }
       // this.router.navigateByUrl('login-Onboarding');
     }
