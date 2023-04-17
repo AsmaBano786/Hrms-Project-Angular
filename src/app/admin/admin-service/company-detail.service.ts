@@ -29,6 +29,12 @@ export class CompanyDetailService {
     return this.httpClient.get(`${this.apiUrl2}/company/`+company_id);
   }
 
+  
+  getDomain(company_domain:any): Observable<any> {
+    console.log(`${this.apiUrl2}/company/dm/`+company_domain);
+    
+      return this.httpClient.get(`${this.apiUrl2}/company/dm/`+company_domain);
+    }
   updateCredentials(email:any,data:any){
     console.log(`${this.apiUrl2}/`+email,data);
     

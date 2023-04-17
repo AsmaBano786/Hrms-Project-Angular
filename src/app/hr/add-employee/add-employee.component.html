@@ -103,10 +103,11 @@
                 >
                   <div class="card card-default">
                     <div class="card-header">
-                      <h3 class="card-title">
-                        Add Employee<span class="required"
-                        style="color: red;">*</span>
-                      </h3>
+                      <!-- <h3 class="card-title"> -->
+                        <!-- Add Employee -->
+                        <!-- <span class="required"
+                        style="color: red;">*</span> -->
+                      <!-- </h3> -->
                       <div class="card-tools">
                         <button
                           type="button"
@@ -362,8 +363,9 @@
                         </div>
                         
                         <div class="form-group col-md-6">
-                          <label for="">Reporting Manager</label><span class="required"
-                          style="color: red;">*</span>
+                          <label for="">Reporting Manager</label>
+                          <!-- <span class="required"
+                          style="color: red;">*</span> -->
                           <select
                           
                             class="form-control"
@@ -377,6 +379,7 @@
                             >
                               Select here
                             </option>
+                            <option value="{{employee_name}}">{{employee_name}}</option>
                             <option *ngFor="let i of allemployeedata">
                               {{i.first_name}} {{i.last_name}}
                             </option>

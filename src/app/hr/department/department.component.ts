@@ -68,10 +68,17 @@ company_id:any;
           //  console.log("company_id..........",sessiondata[i].company_id);
 
       this.company_id=sessiondata[i].company_id;
+      
       }
       this.getdetail();
   }
   getdetail() {
+
+
+
+
+
+
     console.log(this.company_id);
     
     this.dash.Department(this.company_id).subscribe((data: any): void => {
