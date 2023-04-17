@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
   // @ViewChild('closeModel')closemodal: Element | any;
   // @ViewChild('closeModel', { static: true }) closemodal: Element | undefined;
   CompanyDomain:any;
+  gotcomId:any;
   action: any = 'Pending';
   sessiondata: any;
   emp_name: any;
@@ -264,6 +265,7 @@ getCompany_id(){
     for(let i of data){
       console.log(i.company_domain);
       this.gotCdomain=i.company_domain;
+      this.gotcomId=i.company_id;
     }
     console.log("admin",this.DomainBroke,"their comapny status",this.gotCdomain);
 
@@ -273,6 +275,26 @@ getCompany_id(){
   document.getElementById('MybtnPreventHTML')?.click();
 
 }
+else{
+
+  let reqbody={
+    company_id: this.gotcomId,
+  }
+  console.log("popup donot open",this.emailId, reqbody);
+  
+  this.companyService
+  .updateCredentials(this.emailId, reqbody)
+  .subscribe((res: any) => {
+    console.log(res);
+    console.log(res.message);
+       
+  });
+}
+
+
+
+
+
     })
 
     
