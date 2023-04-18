@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormControlName, FormBuilder, Validators } from
 import { Router } from '@angular/router';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-designation-details',
@@ -10,7 +11,8 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   styleUrls: [ './designation-details.component.css']
 })
 export class DesignationDetailsComponent implements OnInit {
-
+  compid:any;
+  getid:any;
   DesignationDetails: any = FormGroup;
   submitted = false;
   Employee:any
@@ -20,7 +22,7 @@ export class DesignationDetailsComponent implements OnInit {
   emp_id:any;
   roll:any;
   company_id: any;
-  constructor(private formBuilder: FormBuilder, private dashService: DashboardService, private router: Router) {
+  constructor(private formBuilder: FormBuilder,private ngxService:NgxUiLoaderService, private dashService: DashboardService, private router: Router) {
       
 
 
@@ -38,10 +40,12 @@ export class DesignationDetailsComponent implements OnInit {
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
-this.company_id =this.sessiondata[i].company_id;
+// this.company_id =this.sessiondata[i].company_id;
+this.getid=this.sessiondata[i].id;
       }
       
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
+      this.getComid();
     this.DesignationDetails = this.formBuilder.group({
 
       designation_name: ['', [Validators.required]],
@@ -70,15 +74,16 @@ this.company_id =this.sessiondata[i].company_id;
 
       let reqBody = {
         ...this.DesignationDetails.value,
-        company_id:this.company_id
+        company_id:this.compid
       }
       console.log('DesignationDetails.......', reqBody)
-     
+      this.ngxService.start();
       this.dashService.DesignationDetails(reqBody).subscribe(result => {
    
   
      
         if (result) {
+          this.ngxService.stop();
           console.log(result);
           console.log(result.message);
 
@@ -86,7 +91,7 @@ this.company_id =this.sessiondata[i].company_id;
           if(result.message==="Designation already exist with this user!")
           {
             this.router.navigate(['designation-details']);
-            return alert("Designation already exist with this user!");
+            return alert("Designation name already exist!");
           
         
         }
@@ -130,5 +135,16 @@ this.company_id =this.sessiondata[i].company_id;
     return false;
      }
     }
-  
+    getComid(){
+
+      console.log("checking",this.getid);
+      
+      this.dashService.getEmp_byId(this.getid).subscribe((data: any) => {
+        this.compid = data.data.company_id;
+     
+        console.log("this.company_id",this.compid);
+        sessionStorage.setItem('session',this.compid)
+      })
+     
+    }
 }

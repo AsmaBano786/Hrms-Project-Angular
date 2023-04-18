@@ -4,6 +4,7 @@ import { getDate } from 'date-fns';
 import { LeaveService } from '../leaveservice.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Router } from '@angular/router';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class LeaveApplicationComponent implements OnInit {
     Days: new FormControl('', [Validators.required]),
 
   });
-
+  compid:any;
+  getid:any;
   leave_type: any;
   filteredData: any;
   status:boolean=false;
@@ -36,7 +38,7 @@ export class LeaveApplicationComponent implements OnInit {
   emp_id: any;
   roll: any;
   company_id:any;
-  constructor(private LeaveService: LeaveService, private ngxService: NgxUiLoaderService, private router: Router) {
+  constructor(private LeaveService: LeaveService,  private dash: DashboardService, private ngxService: NgxUiLoaderService, private router: Router) {
 
     this.LeaveService.Totalleave().subscribe((data: any) => {
 
@@ -56,17 +58,14 @@ export class LeaveApplicationComponent implements OnInit {
       this.emp_id = this.sessiondata[i].emp_id;
       this.emp_name = this.sessiondata[i].emp_name;
       this.roll = this.sessiondata[i].roll_id;
-this.company_id=this.sessiondata[i].company_id;
+// this.company_id=this.sessiondata[i].company_id;
+this.getid=this.sessiondata[i].id;
 
     }
 
     console.log("hr session data..", this.emp_id, this.emp_name, this.roll);
-    this.LeaveService.getleave(this.company_id).subscribe((data) => {
-
-      this.all_leave = data;
-      console.log("leave applications",this.all_leave)
-
-    });
+    this.getComid();
+   
   }
 
   search1(evt: any) {
@@ -139,7 +138,25 @@ this.company_id=this.sessiondata[i].company_id;
     });
 
   }
+  getComid(){
 
+    console.log("checking",this.getid);
+    
+    this.dash.getEmp_byId(this.getid).subscribe((data: any) => {
+      this.compid = data.data.company_id;
+   
+      console.log("this.company_id",this.compid);
+       
+
+       this.LeaveService.getleave(this.compid).subscribe((data) => {
+
+        this.all_leave = data;
+        console.log("leave applications",this.all_leave)
+  
+      });
+    })
+    
+  }
 }
 
 

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormControlName, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from "src/app/services/dashboard.service";
+import { NgxUiLoaderService } from 'ngx-ui-loader';
+
 @Component({
   selector: 'app-edit-designation',
   templateUrl: './edit-designation.component.html',
@@ -22,7 +24,8 @@ export class EditDesignationComponent implements OnInit {
   EditDesignationForm:any;
   submitted:any
   company_id:any;
-  constructor(private activatedRoute: ActivatedRoute, 
+  constructor(private activatedRoute: ActivatedRoute,  private ngxService: NgxUiLoaderService,
+
     private datePipe:DatePipe,private dashService:DashboardService, private router: Router) {
 
     
@@ -31,15 +34,6 @@ export class EditDesignationComponent implements OnInit {
     //   this.allEmployees = data;
     //   console.log("allEmployees", data);
     // });
-
-    this.activatedRoute.paramMap.subscribe(x => {
-      this.departId = x.get('id');
-      console.log("x",x);
-      console.log("x",x.get('id'));
-     
-      console.log("..........idk",this.departId);
-    });
-    
 
 }
 
@@ -57,7 +51,7 @@ get f() { return this.EditDesignationForm.controls; }
 this.roll=this.sessiondata[i].roll_id;
 this.company_id=this.sessiondata[i].company_id;
       }
-      this.getdesig();
+      
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
       this.EditDesignationForm = new FormGroup({
         // id:new FormControl(''),
@@ -68,6 +62,20 @@ this.company_id=this.sessiondata[i].company_id;
     
     
       });
+
+
+
+      
+    this.activatedRoute.paramMap.subscribe(x => {
+      this.departId = x.get('id');
+      console.log("x",x);
+      console.log("x",x.get('id'));
+     
+      console.log("..........idk",this.departId);
+      this.getdesig();
+    });
+    
+   
   }
 
   updateDesignation(){
@@ -99,9 +107,10 @@ this.company_id=this.sessiondata[i].company_id;
 
 
     if (this.submitted && this.EditDesignationForm.valid) {
-
+      this.ngxService.start();
     this.dashService.updateDesignations(departData).subscribe((data) => {
       console.log("getdepart" , departData);
+      this.ngxService.stop();
       alert("Designation Successfully Updated.");
       this.router.navigate(['designation']);
     });
@@ -125,8 +134,8 @@ this.company_id=this.sessiondata[i].company_id;
 
 
     getdesig(){
-      console.log(this.company_id);
-    this.dashService.Designations(this.company_id).subscribe((data:any) => {    
+      console.log(this.departId);
+    this.dashService.DesignationsId(this.departId).subscribe((data:any) => {    
 
       console.log("desig data",data);
       

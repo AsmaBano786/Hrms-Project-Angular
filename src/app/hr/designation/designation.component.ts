@@ -15,7 +15,8 @@ export class DesignationComponent implements OnInit {
   filteredData: any;
   designation_name:any;
 
-
+  compid:any;
+  getid:any;
   // filteredData: any;
   objAll: any;
   status: boolean=false;
@@ -63,14 +64,16 @@ export class DesignationComponent implements OnInit {
       let roll =sessiondata[i].roll_id;
           //  console.log("company_id..........",sessiondata[i].company_id);
 
-      this.company_id=sessiondata[i].company_id;
+      // this.company_id=sessiondata[i].company_id;
+      this.getid=sessiondata[i].id;
       }
 
 
-    this.getdetail();
+      this.getComid();
   }
   getdetail() {
-    this.dash.Designations(this.company_id).subscribe((data: any): void => {
+    console.log(this.compid);
+    this.dash.Designations(this.compid).subscribe((data: any): void => {
       this.alldata = data;
 
       this.getpenrepo = data;
@@ -181,5 +184,19 @@ if(this.status==false) {
 
       console.log('true', this.status, this.filteredData);
     });
+  }
+
+
+  getComid(){
+
+    console.log("checking",this.getid);
+    
+    this.dash.getEmp_byId(this.getid).subscribe((data: any) => {
+      this.compid = data.data.company_id;
+   
+      console.log("this.company_id",this.compid);
+      this.getdetail();
+    })
+    
   }
 }

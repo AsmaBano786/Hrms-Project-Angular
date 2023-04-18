@@ -356,8 +356,8 @@
                             >
                               Select here
                             </option>
-                            <option>Team Member</option>
-                            <option>Team Lead</option>
+                            <option value="Team Member">Team Member</option>
+                            <option value="Team Lead">Team Lead</option>
 
                           </select>
                         </div>
@@ -390,7 +390,7 @@
                         <div class="form-group col-md-6">
                           <label for="">Work Location</label><span class="required"
                           style="color: red;">*</span>
-                          <input
+                          <!-- <input
                             type="text"
                             class="form-control"
                             id="floatingInput"
@@ -398,7 +398,25 @@
                             formControlName="work_location"
                         
                             
-                          />
+                          /> -->
+
+                          <select
+                         
+                            class="form-control"
+                            style="width: 100%"
+                            formControlName="work_location"
+                          >
+                            <option
+                              selected="selected"
+                              value=""
+                              disabled
+                            >
+                              Select here
+                            </option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Gadarwada">Gadarwada</option>
+
+                          </select>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="">Employee Type</label>
@@ -415,8 +433,8 @@
                             >
                               Select here
                             </option>
-                            <option>Temporary</option>
-                            <option>Parmanent</option>
+                            <option value="Temporary">Temporary</option>
+                            <option value="Parmanent">Parmanent</option>
                           </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -435,8 +453,8 @@
                             >
                               Select here
                             </option>
-                            <option>Active</option>
-                            <option>InActive</option>
+                            <option value="Active">Active</option>
+                            <option value="InActive">InActive</option>
                           </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -454,8 +472,8 @@
                           >
                             Select here
                           </option>
-                          <option>Male</option>
-                          <option>Female</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
                         </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -473,8 +491,8 @@
                             >
                               Select here
                             </option>
-                            <option>Single</option>
-                            <option>Married</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
                           </select>
                           </div>
                       </div>

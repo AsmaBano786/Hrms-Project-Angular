@@ -58,6 +58,7 @@ export class DashboardService {
   }
 
   getEmp_byId(id:any){
+    console.log(`${this.apiUrl}/api/v1/getbyid/`+id)
     return this.http.get(`${this.apiUrl}/api/v1/getbyid/`+id);
   }
 
@@ -103,6 +104,15 @@ export class DashboardService {
 
   }
 
+  
+  DepartmentiD(id:any) {
+    console.log("service",`${this.apiUrl}/api/v1/departmentdetails/`+id);
+    
+    return this.http.get(`${this.apiUrl}/api/v1/departmentdetails/`+id);
+
+  }
+
+
   DepartmentDetails(cdata: any): Observable<any> {
     console.log('check', cdata);
     return this.http.post(
@@ -126,6 +136,9 @@ export class DashboardService {
 
   Designations(company_id:any) {
     return this.http.get(`${this.apiUrl}/api/v1/designation/getAll/`+company_id);
+  }
+DesignationsId(id:any) {
+    return this.http.get(`${this.apiUrl}/api/v1/designation/`+id);
   }
 
   DesignationDetails(Fdata: any): Observable<any> {

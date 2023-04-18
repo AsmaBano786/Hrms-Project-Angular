@@ -247,8 +247,9 @@
                                     <!-- <th>Action</th> -->
                                   </tr>
                                 </thead>
-                                <tbody>
-                                  <tr *ngFor="let item of searchedata||allemployeedata" >
+                                <tbody *ngFor="let item of searchedata||allemployeedata">
+                                  <tr  >
+                                   
                                     <td (click)="link(item.email);switchtabinfo('info', $event);switchtabinfo('info', $event);">
                                       <a href="">{{item.employee_id}}
                                       </a>

@@ -237,7 +237,7 @@
                                                 <div class="form-group col-md-4">
                                                     <label for="">Reporting Manager<span
                                                             class="text-danger">*</span></label>
-                                                    <select class="form-select" formControlName="reporting_manager"
+                                                    <select class="form-select" formControlName="reporting_manager" 
                                                         [ngClass]="{ 'is-invalid': submitted && f.reporting_manager.errors }"
                                                         id="inputreporting_manager4">
                                                         <!-- <option value="">Select here</option>
@@ -245,9 +245,10 @@
                                                         <option value="Jagarti Thakur">Jagarti Thakur</option>-->
                                                         <option selected="selected" value="">Select here
                                                         </option>
-                                                        <option *ngFor="let i of allemployeedata">
-                                                          {{i.first_name}} {{i.last_name}}
+                                                        <option *ngFor="let i of allemployeedata" (click)="ac()">
+                                                          {{i.reporting_manager}}
                                                         </option>
+                                                    
                                                     </select> 
 
                                                     <div *ngIf="submitted && f.reporting_manager.errors"

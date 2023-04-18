@@ -43,6 +43,7 @@ import { environment } from '../../../environments/environment';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { delay } from 'rxjs/operators';
 import { ServicesService } from 'src/app/Onboaring/onboarding-services/services.service';
+import { DashboardService } from 'src/app/services/dashboard.service'
 
 var $: any;
 
@@ -54,6 +55,8 @@ var $: any;
 })
 export class EmployeeComponent implements OnInit {
   objAll:any;
+  compid:any;
+  getid:any;
   credentialObj:any;
   usermailid1:any;
   pass1:any;
@@ -232,7 +235,9 @@ attachmentValid:boolean=false;
     private httpClient: HttpClient,
     private ngxService: NgxUiLoaderService,
     private datePipe:DatePipe,
-    private authServiceOnbaording:ServicesService
+    private authServiceOnbaording:ServicesService,
+    private dashServ:DashboardService,
+
   ) {
     this.switchsummary('summary')
 
@@ -249,12 +254,12 @@ attachmentValid:boolean=false;
         this.emp_nameD1=this.sessiondataD1[i].emp_name;
 this.rollD1=this.sessiondataD1[i].roll_id;
 this.company_id=this.sessiondataD1[i].company_id;
-
+this.getid=this.sessiondataD1[i].id;
       }
       
-      console.log("hr session data..",this.emp_idD1,this.emp_nameD1,this.rollD1);
+      console.log("hr session data..",this.getid,this.emp_idD1,this.emp_nameD1,this.rollD1);
 
-
+      this.getComid();
   //...............................
     
     
@@ -273,7 +278,7 @@ this.company_id=this.sessiondataD1[i].company_id;
       //...................
 
 
-      this.getdetail(); 
+      
       this.link(this.CEmail);
       this.Getnotes();
       this.GetAttachments();
@@ -1982,7 +1987,8 @@ switchattach(activeTab: string, $event: MouseEvent): void{
 }
 
 getdetail() {
-  this.authService.getAllJoiners(this.company_id).subscribe((data: any): void => {
+  console.log(this.compid)
+  this.authService.getAllJoiners(this.compid).subscribe((data: any): void => {
     this.allemployeedata = data;
   
     console.log("getdetail.............", this.allemployeedata);
@@ -2397,4 +2403,18 @@ notvalid(){
       
      
     }
+
+
+    getComid(){
+
+    console.log("checking",this.getid);
+    
+    this.dashServ.getEmp_byId(this.getid).subscribe((data: any) => {
+      this.compid = data.data.company_id;
+   
+      console.log("this.company_id",this.compid);
+      this.getdetail(); 
+    })
+    
+  }
 }

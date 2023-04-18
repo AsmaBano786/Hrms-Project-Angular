@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DashboardService } from 'src/app/services/dashboard.service';
 
 import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 
 
@@ -21,6 +22,8 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 export class DepartmentDetailsComponent implements OnInit {
   alldata:any;
+  compid:any;
+  getid:any;
   allemployeedata:any;
   sessiondata:any;
   emp_name:any;
@@ -33,7 +36,7 @@ export class DepartmentDetailsComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder, private dashService: DashboardService, private router: Router,    private authService: AuthServiceService,
+  constructor(private formBuilder: FormBuilder, private ngxService:NgxUiLoaderService,private dashService: DashboardService, private router: Router,    private authService: AuthServiceService,
     ) { }
 
   //Add user form actions
@@ -55,13 +58,15 @@ export class DepartmentDetailsComponent implements OnInit {
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
-this.company_id =this.sessiondata[i].company_id;
+// this.company_id =this.sessiondata[i].company_id;
+this.getid=this.sessiondata[i].id;
 
       }
       
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
       
-  this.getdetail()
+
+  this.getComid();
     this.DepartmentDetails = this.formBuilder.group({
 
 
@@ -124,23 +129,24 @@ this.company_id =this.sessiondata[i].company_id;
 
 let reqBody = {
   ...this.DepartmentDetails.value,
-  company_id:this.company_id
+  company_id:this.compid
 }
 console.log("DepartmentDetails......",reqBody)
-      
+      this.ngxService.start();
         this.dashService.DepartmentDetails(reqBody).subscribe(result => {
 
           
           // this.router.navigate(['/department']);
           if (result) {
+            this.ngxService.stop();
             console.log(result);
             console.log(result.message);
   
-           
+            
             if(result.message==="Department already exist with this user!")
             {
               this.router.navigate(['department-details']);
-              return alert("Department name already exist with this email!");
+              return alert("Department name already exist!");
             
           
           }
@@ -191,19 +197,19 @@ keyPressAlphabet(event:any){
 
 
   getdetail() {
-    this.authService.getAllJoiners(this.company_id).subscribe((data: any): void => {
+    this.authService.getAllJoiners(this.compid).subscribe((data: any): void => {
       this.allemployeedata = data;
     
-      console.log("getdetail.............", this.allemployeedata);
+      console.log("getdetail......employee.......", this.allemployeedata);
       
     });
 }
 
 
 getdetailDepartment() {
-  console.log(this.company_id);
+  console.log(this.compid);
   
-  this.dashService.Department(this.company_id).subscribe((data: any): void => {
+  this.dashService.Department(this.compid).subscribe((data: any): void => {
     this.alldata = data;
 
    
@@ -213,4 +219,20 @@ getdetailDepartment() {
   });
 }
 
+
+
+
+getComid(){
+
+  console.log("checking",this.getid);
+  
+  this.dashService.getEmp_byId(this.getid).subscribe((data: any) => {
+    this.compid = data.data.company_id;
+    sessionStorage.setItem('session',this.compid)
+    console.log("this.company_id",this.compid);
+    this.getdetail();
+    this.getdetailDepartment();
+  })
+  
+}
 }

@@ -18,6 +18,8 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class DepartmentComponent implements OnInit {
   departmentName: any;
+  compid:any;
+  getid:any;
   filteredData: any;
   objAll: any;
   status: boolean=false;
@@ -66,11 +68,11 @@ company_id:any;
       let emp_name =sessiondata[i].emp_name;
       let roll =sessiondata[i].roll_id;
           //  console.log("company_id..........",sessiondata[i].company_id);
-
-      this.company_id=sessiondata[i].company_id;
+      this.getid=sessiondata[i].id;
+      // this.company_id=sessiondata[i].company_id;
       
       }
-      this.getdetail();
+      this.getComid();
   }
   getdetail() {
 
@@ -79,9 +81,9 @@ company_id:any;
 
 
 
-    console.log(this.company_id);
+    console.log(this.compid);
     
-    this.dash.Department(this.company_id).subscribe((data: any): void => {
+    this.dash.Department(this.compid).subscribe((data: any): void => {
       this.alldata = data;
 
       this.getpenrepo = data;
@@ -191,5 +193,20 @@ if(this.status==false) {
 
       console.log('true', this.status, this.filteredData);
     });
+  }
+
+
+
+  getComid(){
+
+    console.log("checking",this.getid);
+    
+    this.dash.getEmp_byId(this.getid).subscribe((data: any) => {
+      this.compid = data.data.company_id;
+   
+      console.log("this.company_id",this.compid);
+       this.getdetail();
+    })
+    
   }
 }

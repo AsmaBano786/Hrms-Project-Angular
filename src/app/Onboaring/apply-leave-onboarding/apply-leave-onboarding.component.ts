@@ -23,7 +23,8 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
   lName: any;
   filteredData: any;
   objAll: any;
-
+  compid:any;
+  getid:any;
   note: any;
   data: any;
   reqBody2: any;
@@ -88,20 +89,13 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
       this.emp_name = this.sessiondata[i].emp_name;
       this.roll = this.sessiondata[i].roll_id;
       this.company_email_id = this.sessiondata[i].company_email_id;
-      this.company_id=this.sessiondata[i].company_id;
+      // this.company_id=this.sessiondata[i].company_id;
+      this.getid=this.sessiondata[i].id;
     }
 
-  console.log("check...",this.emp_id,this.company_id);
+  console.log("check...",this.getid,this.emp_id);
 
-    this.LeaveService.getById(this.emp_id,this.company_id).subscribe((data) => {
-
-      this.all_leave = data;
-
-
-      console.log("leave.....",this.all_leave);
-
-    });
-    this.getdetail() 
+    this.getComid()
     // this.LeaveService.getById(this.emp_id).subscribe((data) => {
 
     //   this.all_leave = data;
@@ -110,7 +104,7 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
 
     // });
 
-    this.FindAll();
+    
 
     console.log("hr session data..", this.emp_id, this.emp_name, this.roll);
     this.Applyleave = this.formBuilder.group({
@@ -127,7 +121,7 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
       poc_employee: new FormControl(''),
       poc_mobile: new FormControl(''),
       poc_email: new FormControl(''),
-      company_id:this.company_id
+     
       // poc_employee: ['', [Validators.required]],
       // poc_mobile: ['', [ Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), Validators.maxLength(10)]],
       // poc_email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
@@ -173,9 +167,10 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
   }
   FindAll() {
 
+   
     console.log("FindAll", this.emp_id);
 
-    this.LeaveService.getById(this.emp_id,this.company_id).subscribe((data) => {
+    this.LeaveService.getById(this.emp_id,this.compid ).subscribe((data) => {
 
       this.all_leave = data;
 
@@ -278,9 +273,14 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
     if (this.submitted && this.Applyleave.valid) {
       // alert("Great, You are logged in!!");
       console.log(this.Applyleave.value)
+
+      let req={
+        ...this.Applyleave.value,
+        company_id:this.compid 
+      }
       // this.ngxService.start();
       // if (confirm("You have applied Leave successfully")) {
-      this.dashService.ApplyLeave(this.Applyleave.value).subscribe(result => {
+      this.dashService.ApplyLeave(req).subscribe(result => {
 
         // alert("You have applied Leave successfully")
         // this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -596,12 +596,41 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
 
   }
   getdetail() {
-    this.authService.getAllJoiners(this.company_id).subscribe((data: any): void => {
+    this.authService.getAllJoiners(this.compid).subscribe((data: any): void => {
       this.allemployeedata = data;
     
-      console.log("getdetail.............", this.allemployeedata);
-      
+      console.log("getdetail.............",  this.compid ,this.allemployeedata);
+     
     });
   }
 
+  getComid(){
+
+    console.log("checking",this.getid);
+    this.dashService.getEmp_byId(this.getid).subscribe((data: any) => {
+      console.log("data...",data);
+      this.compid = data.data.company_id;
+      
+
+      console.log("this.company_id",this.compid);
+      this.getdetail();
+
+      
+    this.LeaveService.getById(this.emp_id,this.compid).subscribe((data) => {
+
+      this.all_leave = data;
+
+
+      console.log("leave.....",this.all_leave);
+
+    });
+
+    this.FindAll();
+    })
+    
+  }  
+ac(){
+  console.log("..........................................",this.Applyleave.value.reporting_manager);
+  
+}
 }

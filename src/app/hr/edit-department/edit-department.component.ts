@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoginComponent } from 'src/app/Pre-Onboarding/login/login.component';
 import { DashboardService } from "src/app/services/dashboard.service";
 import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-edit-department',
@@ -13,23 +14,24 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
 export class EditDepartmentComponent implements OnInit {
   allemployeedata:any;
   alldata:any;
+  getid:any;
+  compid:any;
+
   sessiondata:any;
   emp_name:any;
   emp_id:any;
   roll:any;
   nik:any
   departData: any;
-  allEmployees: any;
+
   departId:any;
   EditDepartmentForm:any;
   submitted:any
   company_id: any;
-  constructor(private activatedRoute: ActivatedRoute,   private authService: AuthServiceService,private dashService:DashboardService, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute,    private ngxService: NgxUiLoaderService,
+    private authService: AuthServiceService,private dashService:DashboardService, private router: Router) {
     
-    this.dashService.Department(this.company_id).subscribe((data) => {
-      this.allEmployees = data;
-      // console.log("allEmployees", data);
-    });
+    
 
     this.activatedRoute.paramMap.subscribe(x => {
       this.departId = x.get('departmentId');
@@ -39,7 +41,7 @@ export class EditDepartmentComponent implements OnInit {
       console.log("..........id",this.departId);
     });
     
-
+    
 }
 
 
@@ -53,12 +55,14 @@ get f() { return this.EditDepartmentForm.controls; }
         this.emp_id= this.sessiondata[i].emp_id;
         this.emp_name=this.sessiondata[i].emp_name;
 this.roll=this.sessiondata[i].roll_id;
-this.company_id = this.sessiondata[i].company_id;
+// this.company_id = this.sessiondata[i].company_id;
+this.getid=this.sessiondata[i].id;
       }
       
+      this.getComid();
       console.log("hr session data..",this.emp_id,this.emp_name,this.roll);
-      this.getdetail();
-      this.getdetailDepartment();
+     
+      
       this.EditDepartmentForm = new FormGroup({
         // departmentId:new FormControl(''),
         departmentName: new FormControl('',[Validators.required]),
@@ -104,15 +108,17 @@ this.company_id = this.sessiondata[i].company_id;
 
 
     if (this.submitted && this.EditDepartmentForm.valid) {
+      this.ngxService.start();
     this.dashService.updateDepartment(departData).subscribe((data) => {
       console.log("getdepart" , departData);
+      this.ngxService.stop();
       alert("Department Successfully Updated.");
       this.router.navigate(['department']);
     });
   }
   }
   getdetail() {
-    this.authService.getAllJoiners(this.company_id).subscribe((data: any): void => {
+    this.authService.getAllJoiners(this.compid).subscribe((data: any): void => {
       this.allemployeedata = data;
     
       console.log("getdetail........employee name.....", this.allemployeedata);
@@ -122,22 +128,27 @@ this.company_id = this.sessiondata[i].company_id;
 
 
 getdetailDepartment() {
-  console.log(this.company_id);
+  console.log(this.departId);
   
-  this.dashService.Department(this.company_id).subscribe((data: any): void => {
+  this.dashService.DepartmentiD(this.departId).subscribe((data: any): void => {
     this.alldata = data;
 
    
     console.log('depart',this.alldata);
 
     for(let d of data)
-    this.EditDepartmentForm.patchValue({
-      // 'departmentId': this.departId,  
-      'departmentName': d.departmentName,
-      'MailAlias': d.MailAlias,  
-      'DepartmentLead':d.DepartmentLead,
-      'ParentDepartment':d.ParentDepartment,
-    });
+    {
+      console.log();
+      
+      this.EditDepartmentForm.patchValue({
+        // 'departmentId': this.departId,  
+        'departmentName': d.departmentName,
+        'MailAlias': d.MailAlias,  
+        'DepartmentLead':d.DepartmentLead,
+        'ParentDepartment':d.ParentDepartment,
+      });
+    }
+    
    
   });
 
@@ -165,5 +176,21 @@ getdetailDepartment() {
   // });
    
 // });
+}
+
+
+getComid(){
+
+  console.log("checking",this.getid);
+  
+  this.dashService.getEmp_byId(this.getid).subscribe((data: any) => {
+    this.compid = data.data.company_id;
+    
+    console.log("this.company_id",this.compid);
+    this.getdetail();
+    this.getdetailDepartment();
+    
+  })
+  
 }
 }

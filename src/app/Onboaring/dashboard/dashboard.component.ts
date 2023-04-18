@@ -426,4 +426,10 @@ else{
   this.SendEmailDomain=breakdot[0];
   console.log("sendingthisdomain",this.SendEmailDomain);
   }
+
+
+
+
+
+  
 }

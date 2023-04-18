@@ -51,6 +51,8 @@ var $: any;
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.css']
 })
+
+
 export class AddEmployeeComponent implements OnInit {
   activeTab:any;
   credentialObj:any;
@@ -59,6 +61,8 @@ export class AddEmployeeComponent implements OnInit {
   getEmail:any;
   getFname:any;
   getLname:any
+  getid:any;
+  compid:any;
   allemployeedata:any;
   alldata:any;
   documenttype:any='Company documents';
@@ -250,18 +254,22 @@ employee_name:any;
       let emp_id= sessiondata[i].emp_id;
       let emp_name =sessiondata[i].emp_name;
       let roll =sessiondata[i].roll_id;
-
+      this.getid=sessiondata[i].id;
       this.employee_name=emp_name;
           //  console.log("company_id..........",sessiondata[i].company_id);
 
       this.CompanyId=sessiondata[i].company_id;
+      console.log(this.getid);
+      
       }
+console.log("value....",this.getid);
+
+      
     //  console.log("company_id..........",this.company_id);
     
     this.btndisable=false;
-
-    this.getdetail()
-    this.getEmployeeName();
+    this.getComid();
+   
    
     this.getCountries();
 
@@ -364,7 +372,8 @@ console.log("......IN.......",this.usermailid1);
       gender:[''],
       official_email:[''],
     password:[''],
-    reporting_manager:['']
+    reporting_manager:[''],
+ 
     });
 
   
@@ -378,6 +387,7 @@ console.log("......IN.......",this.usermailid1);
           field_of_study: new FormControl(''),
           date_of_completion: new FormControl(''),
           email: new FormControl(this.getEmail),
+          // company_id:new FormControl(this.compid),
         }),
       ]),
     });
@@ -391,8 +401,8 @@ console.log("......IN.......",this.usermailid1);
           toDate:new FormControl(''),
           duration: new FormControl(),
           email: new FormControl(this.getEmail),
-          currently_work_here: new FormControl('')      
-         
+          currently_work_here: new FormControl(''),      
+          // company_id:new FormControl(this.compid),
         }),
       ]),
     });
@@ -416,7 +426,7 @@ console.log("......IN.......",this.usermailid1);
           email: new FormControl(this.getEmail),
           address_type:new FormControl('present address'),
           same_as_current_address: new FormControl('Null'),
-
+          // company_id:new FormControl(this.compid),
         }),
       ]),
     });
@@ -440,7 +450,8 @@ console.log("......IN.......",this.usermailid1);
    
       email: new FormControl(this.getEmail),
       address_type:new FormControl('permanent address'),
-      same_as_current_address: new FormControl('same as present address')
+      same_as_current_address: new FormControl('same as present address'),
+      // company_id:new FormControl(this.compid),
 
     }),
   ]),
@@ -575,7 +586,7 @@ console.log("......IN.......",this.usermailid1);
 
           official_email:this.registerForm.value.official_email,
           password:this.registerForm.value.password,
-          company_id:this.CompanyId,
+          company_id:this.compid,
           // ...this.documentForm.value,
           ...this.addressForm.value,
           ...this.pAddressForm.value,
@@ -618,7 +629,7 @@ console.log("......IN.......",this.usermailid1);
                 checkbox: 0,
                 personal_email_id:this.registerForm.value.email,
                 created_by:'Admin',
-                company_id:this.CompanyId,
+                company_id:this.compid,
                }
           
           console.log("onboarding......body.......",this.credentialObj);
@@ -631,7 +642,8 @@ console.log("......IN.......",this.usermailid1);
                     console.log(result.message);
                     
                     console.log("onboarding called");
-                   
+                    this.ngxService.stop();
+                    alert("Employee Details Added Successfully");
                     setTimeout(() => {
                       this.router
                         .navigateByUrl('/', { skipLocationChange: true })
@@ -645,8 +657,8 @@ console.log("......IN.......",this.usermailid1);
               // this.reqBody.reset({});
               // document.getElementById("ModalClose")?.click();
               // this.router.navigateByUrl('/preonboarding_complete');
-              this.ngxService.stop();
-              alert("Employee Details Added Successfully");
+              // this.ngxService.stop();
+             
             } 
             else {
               // console.log(result);
@@ -1173,6 +1185,7 @@ addpAddress() {
       pStreet_address: new FormControl(''),
      
       pEmail: new FormControl(this.getEmail),
+
     })
   );
 }
@@ -1765,7 +1778,7 @@ console.log(this.registerForm.value.official_email);
     console.log(this.registerForm.value.password);
   }
   getdetail() {
-    this.dashServ.Designations(this.CompanyId).subscribe((data: any): void => {
+    this.dashServ.Designations(this.compid).subscribe((data: any): void => {
       this.alldata = data;
 
      ;
@@ -1777,11 +1790,25 @@ console.log(this.registerForm.value.official_email);
 
 
   getEmployeeName() {
-    this.authService.getAllJoiners(this.CompanyId).subscribe((data: any): void => {
+    this.authService.getAllJoiners(this.compid).subscribe((data: any): void => {
       this.allemployeedata = data;
     
       console.log("getdetail.............", this.allemployeedata);
       
     });
+  }
+
+
+  getComid(){
+
+    console.log("checking",this.getid);
+    
+    this.dashServ.getEmp_byId(this.getid).subscribe((data: any) => {
+      this.compid = data.data.company_id;
+   
+      console.log("this.company_id",this.compid);
+      this.getdetail();
+      this.getEmployeeName();
+    })
   }
 }

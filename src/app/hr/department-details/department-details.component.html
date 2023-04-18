@@ -113,7 +113,7 @@
                             <select class="form-select" id="Department Lead" formControlName="DepartmentLead" [ngClass]="{ 'is-invalid': submitted && f.DepartmentLead.errors }">
 
                                 <option value="" disabled [selected]="true">Select Department Lead</option>
-
+<option>{{emp_name}}</option>
                                 <option *ngFor="let i of allemployeedata">
                                     {{i.first_name}} {{i.last_name}}
                                   </option>
@@ -139,6 +139,7 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.ParentDepartment.errors }"
                                 id="Parent Department">
                                 <option value="" disabled [selected]="true">Select Parent Department</option>
+                              
                                 <option *ngFor="let i of alldata">
                                     {{i.departmentName}}
                                   </option>
