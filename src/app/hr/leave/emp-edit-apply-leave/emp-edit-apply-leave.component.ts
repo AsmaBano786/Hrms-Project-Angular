@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LeaveService } from '../leaveservice.service';
 import { DatePipe } from '@angular/common';
 
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 
 @Component({
@@ -46,7 +47,7 @@ export class EmpEditApplyLeaveComponent implements OnInit {
   //   poc_email: new FormControl(''),
   // });
   
-  constructor(private activatedRoute: ActivatedRoute, private LeaveService: LeaveService, private router: Router, private datepipe: DatePipe) {
+  constructor(private activatedRoute: ActivatedRoute, private ngxService: NgxUiLoaderService,private LeaveService: LeaveService, private router: Router, private datepipe: DatePipe) {
   
     // this.LeaveService.getEmployees().subscribe((data) => {
     //   this.allEmployees = data;
@@ -171,10 +172,11 @@ export class EmpEditApplyLeaveComponent implements OnInit {
     }
   
     if (this.submitted && this.editApplyleave.valid) {
-  
+      this.ngxService.start();
       this.LeaveService.updateApplyLeave(leaveData).subscribe((data) => {
         console.log("getApplyLeave", leaveData);
         console.log("getApplyLeave", data);
+        this.ngxService.stop();
         alert("Leave Updated Successfully.");
         this.router.navigate(['leave-application']);
       });

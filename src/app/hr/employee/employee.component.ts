@@ -253,7 +253,7 @@ attachmentValid:boolean=false;
         this.emp_idD1= this.sessiondataD1[i].emp_id;
         this.emp_nameD1=this.sessiondataD1[i].emp_name;
 this.rollD1=this.sessiondataD1[i].roll_id;
-this.company_id=this.sessiondataD1[i].company_id;
+// this.company_id=this.sessiondataD1[i].company_id;
 this.getid=this.sessiondataD1[i].id;
       }
       
@@ -280,8 +280,7 @@ this.getid=this.sessiondataD1[i].id;
 
       
       this.link(this.CEmail);
-      this.Getnotes();
-      this.GetAttachments();
+     
 
 
       this.getCountries();
@@ -730,14 +729,16 @@ console.log("evalue",this.CEmail);
       } else {
         let reqBody2 = {
           ...this.notesForm.value,
-          email: this.email1,
+          email: this.CEmail,
+          company_id:this.compid
+
         };
         // console.log(reqBody2);
         // console.log(this.email1);
         this.ngxService.start();
         this.authService.CandidateNotes(reqBody2).subscribe(async (result) => {
           this.ngxService.stop();
-          this.Getnotes();
+
           
           this.notesForm.get('add_notes').clearValidators(); 
           this.notesForm.reset();
@@ -745,13 +746,13 @@ console.log("evalue",this.CEmail);
           
           this.noteValid=true;
 
-          if (result.success) {
+          if (result) {
             // console.log('CandidateNotes...saved...........', result);
-            console.log(result.message);
-          } else {
-            // console.log(result);
-            console.log(result.message);
-          }
+         alert("Notes added successfully");
+         
+         this.Getnotes();
+
+          } 
         });
       }
     } else {
@@ -761,7 +762,7 @@ console.log("evalue",this.CEmail);
 
   Getnotes() {
   
-    this.authService.GetAllNotes(this.CEmail).subscribe(async (result) => {
+    this.authService.GetAllNotesCID(this.CEmail,this.compid).subscribe(async (result) => {
       // console.log(this.CEmail);
 
       this.fetchNotes = result;
@@ -920,14 +921,20 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
       this.ngxService.start();
       // formData.append('profile',this.attachmentForm.get('fileSource').value);
       formData.append('profile', this.attachmentForm.get('fileSource').value);
-      formData.append('email', this.attachmentForm.get('email').value);
+      formData.append('email',this.CEmail);
+      formData.append('company_id',this.compid);
+      formData.append('document_name',this.selectedattach);
       this.httpClient
         .post(`${this.apiUrl}/api/v1/file/document`, formData)
         .subscribe((result) => {
           this.ngxService.stop();
           // console.log(result);
           // console.log('successfully uploaded');
-          this.GetAttachments();
+          if(result){
+           this.GetAttachments();
+            alert("Attachment successfully uploaded")
+          }
+          
           this.resetattach();
           // this.attachmentForm.get('profile').clearValidators();  
           // this.attachmentForm.get('select').clearValidators(); 
@@ -964,7 +971,7 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
 
   GetAttachments() {
    
-    this.authService.GetAllAttachment(this.CEmail).subscribe(async (result) => {
+    this.authService.GetAllAttachmentCid(this.CEmail,this.compid).subscribe(async (result) => {
       console.log(this.CEmail);
       this.fetchAttachment = result.data;
       
@@ -1993,6 +2000,12 @@ getdetail() {
   
     console.log("getdetail.............", this.allemployeedata);
     
+
+    for(let i of this.allemployeedata)
+    {
+      console.log(i.email);
+      
+    }
   });
 }
 
@@ -2283,9 +2296,9 @@ this.authService.GetAllNotes(this.CEmail).subscribe(async (result) => {
 
 
 value1event(evt:any){
-  console.log("Evt", evt.target.value);
+  console.log("Evt1", evt.target.value);
   this.obj={
-    "company_id":this.company_id,
+    "company_id":this.compid,
     "employee_id":evt.target.value,
     "first_name":""||undefined||null,
     "last_name":""||undefined||null
@@ -2297,7 +2310,8 @@ value1event(evt:any){
     }
 }
 value2event(evt:any){
-  console.log("Evt", evt.target.value);
+  console.log("Evt2", evt.target.value);
+  console.log("company id",this.compid)
 
 
 
@@ -2308,7 +2322,7 @@ var fullName = evt.target.value.split(' ')
 //     console.log(firstName);
 //     console.log(lastName);
   this.obj={
-    "company_id":this.company_id,
+    "company_id":this.compid,
     "employee_id":""||undefined||null,
     "first_name":this.firstName,
     "last_name":this.lastName
@@ -2320,13 +2334,14 @@ var fullName = evt.target.value.split(' ')
    }
 }
 searchData(){
+ console.log(this.obj,"cid",this.compid);
  
   if(this.searchstatus==false)
   {
   this.authService.employee_idAndName(this.obj).subscribe((data1: any): void => {
       this.searchedata = data1;
     
-      console.log("getdetail.............",this.searchedata);
+      console.log("getdetail.......aac......",this.searchedata);
   })
 }
 else{
@@ -2338,7 +2353,7 @@ SearchALLData(){
 
 
   this.objAll={
-    "company_id":this.company_id,
+    "company_id":this.compid,
     "employee_id":this.eId,
     "first_name":this.eName,
     "last_name":this.eName
@@ -2414,6 +2429,9 @@ notvalid(){
    
       console.log("this.company_id",this.compid);
       this.getdetail(); 
+      this.GetAttachments();
+      this.Getnotes();
+   
     })
     
   }

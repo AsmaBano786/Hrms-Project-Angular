@@ -53,6 +53,11 @@ export class AuthServiceService {
     return this.httpClient.get(`${this.apiUrl}/api/v1/notes/`+email).pipe(delay(1000));
     
   }
+  GetAllNotesCID(email:any,comid:any):Observable<any>{
+    console.log("Fetching Notes from the server")
+    return this.httpClient.get(`${this.apiUrl}/api/v1/notes/`+email+`/`+comid).pipe(delay(1000));
+    
+  }
 
   DeleteNotes(id:any):Observable<any>{
     console.log("Deleting Notes from the server")
@@ -72,7 +77,10 @@ return this.httpClient.put(`${this.apiUrl}/api/v1/notes/`+id,body);
       console.log("Fetching Attachments from the server")
       return this.httpClient.get(`${this.apiUrl}/api/v1/file/`+email);
     }
-
+    GetAllAttachmentCid(email:any,cid:any):Observable<any>{
+      console.log("Fetching Attachments from the server")
+      return this.httpClient.get(`${this.apiUrl}/api/v1/file/`+email+`/`+cid);
+    }
 
     DeleteAttachment(id:any):Observable<any>{
       console.log("Deleting Notes from the server")
@@ -148,7 +156,11 @@ updateCandidate(email:any,body:any){
   getAllJoiners(company_id:any){
 console.log(`${this.apiUrl}/api/v1/employees/getAll/`+company_id);
 
-    return this.httpClient.get(`${this.apiUrl}/api/v1/employees/getAll/`+company_id);
+
+    return this.httpClient.get(`${this.apiUrl}/api/v1/employees/getAll/`+company_id
+    
+    
+    );
   }
 
 

@@ -182,7 +182,7 @@
                             id="floatingInput"
                             placeholder="Email"
                             
-                          (keyup)="clickEventEmail($event)"
+                         
                             formControlName="email"
                             class="form-control"
                             
@@ -317,15 +317,35 @@
                           <!--  -->
                         </div>
                       
-                      
                         <div class="form-group col-md-6">
-                          <label for="">Employee Designation</label><span class="required"
+                          <label for="">Department</label><span class="required"
+                          style="color: red;">*</span>
+                          <select
+                         
+                            class="form-control"
+                            style="width: 100%"
+                            formControlName="department"
+                          >
+                            <option
+                              selected="selected"
+                              value=""
+                              disabled
+                            >
+                              Select here
+                            </option>
+                            <option *ngFor="let department of alldatadepartment">{{department.departmentName}}</option>
+                           
+
+                          </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="">Designation</label><span class="required"
                           style="color: red;">*</span>
                           <select
                           (change)="notvalid()"
                             class="form-control"
                             style="width: 100%"
-                            formControlName="employee_role"
+                            formControlName="Title"
                           >
                             <option
                               selected="selected"
@@ -1873,7 +1893,7 @@
                       <div class="form-group col-md-12">
                         <!-- <a  class="btn btn-primary">Save and Add</a></div> -->
                         <!-- <button class="btn btn-primary" (click)="attachment();GetAttachments();"   >Save and Add</button></div> -->
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-primary" type="submit" [disabled]="this.btndisable==true">
                           Save and Add
                         </button>
                       </div>
@@ -1980,7 +2000,7 @@
                         </div>
                       </div>
                       <!-- <a class="btn btn-primary mt-1" (click)="notes()">Save and Add</a> -->
-                      <button type="submit" class="btn btn-primary mt-1">
+                      <button type="submit" class="btn btn-primary mt-1" [disabled]="this.btndisable==true">
                         {{ editMode ? "Update Notes" : "Save and Add" }}
 
                         <!-- {{editMode! "Save and Add"}} -->

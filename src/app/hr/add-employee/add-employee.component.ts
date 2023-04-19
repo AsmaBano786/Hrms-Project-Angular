@@ -65,10 +65,12 @@ export class AddEmployeeComponent implements OnInit {
   compid:any;
   allemployeedata:any;
   alldata:any;
+  alldatadepartment:any;
   documenttype:any='Company documents';
   // @ViewChild('notesForm') notesForm:NgForm;
   Document:any;
   btndisable:boolean=false;
+  btnsaveAdd:boolean=false;
   indexduration:any;
   other_source:any;
   date_duration:any;
@@ -258,7 +260,7 @@ employee_name:any;
       this.employee_name=emp_name;
           //  console.log("company_id..........",sessiondata[i].company_id);
 
-      this.CompanyId=sessiondata[i].company_id;
+      
       console.log(this.getid);
       
       }
@@ -268,6 +270,7 @@ console.log("value....",this.getid);
     //  console.log("company_id..........",this.company_id);
     
     this.btndisable=false;
+    this.btnsaveAdd=false;
     this.getComid();
    
    
@@ -296,8 +299,7 @@ console.log("value....",this.getid);
 
      
     //............................started
-    this.Getnotes();
-      this.GetAttachments();
+ 
       this.get();
   
     //  .......................
@@ -361,7 +363,9 @@ console.log("......IN.......",this.usermailid1);
       tentative_joining_date: ['', Validators.required],
       highest_qualification: ['', Validators.required],
       additional_information: [''],
-      designation: [''],
+      designation: ['', Validators.required],
+      department:['', Validators.required],
+      Title:['', Validators.required],
       organization: ['cylsys'],
       employee_type:[''],
       employee_status:[''],
@@ -387,7 +391,7 @@ console.log("......IN.......",this.usermailid1);
           field_of_study: new FormControl(''),
           date_of_completion: new FormControl(''),
           email: new FormControl(this.getEmail),
-          // company_id:new FormControl(this.compid),
+          company_id:new FormControl(this.compid),
         }),
       ]),
     });
@@ -402,7 +406,7 @@ console.log("......IN.......",this.usermailid1);
           duration: new FormControl(),
           email: new FormControl(this.getEmail),
           currently_work_here: new FormControl(''),      
-          // company_id:new FormControl(this.compid),
+          company_id:new FormControl(this.compid),
         }),
       ]),
     });
@@ -426,7 +430,7 @@ console.log("......IN.......",this.usermailid1);
           email: new FormControl(this.getEmail),
           address_type:new FormControl('present address'),
           same_as_current_address: new FormControl('Null'),
-          // company_id:new FormControl(this.compid),
+          company_id:new FormControl(this.compid),
         }),
       ]),
     });
@@ -451,7 +455,7 @@ console.log("......IN.......",this.usermailid1);
       email: new FormControl(this.getEmail),
       address_type:new FormControl('permanent address'),
       same_as_current_address: new FormControl('same as present address'),
-      // company_id:new FormControl(this.compid),
+      company_id:new FormControl(this.compid),
 
     }),
   ]),
@@ -476,7 +480,8 @@ console.log("......IN.......",this.usermailid1);
   
   
   
-    this.notvalid()
+    this.notvalid();
+    
  
   }
 
@@ -565,8 +570,8 @@ console.log("......IN.......",this.usermailid1);
       const { value, valid} =
       this.registerForm ;
     
-      const at = this.attachmentValid
-        const note= this.noteValid;
+      // const at = this.attachmentValid
+      //   const note= this.noteValid;
         // this.registerForm && this.attachmentForm && this.notesForm;
 
     
@@ -574,8 +579,8 @@ console.log("......IN.......",this.usermailid1);
      
         this.age_error = 'invalid age';
       }
-
-      if (valid&&at&&note) {
+      // if (valid&&at&&note)
+      if (valid) {
       //   this.open_Modal = false;
       // document.getElementById("ModalClose")?.click();
       this.GetAttachments();
@@ -586,13 +591,14 @@ console.log("......IN.......",this.usermailid1);
 
           official_email:this.registerForm.value.official_email,
           password:this.registerForm.value.password,
-          company_id:this.compid,
+         
           // ...this.documentForm.value,
           ...this.addressForm.value,
           ...this.pAddressForm.value,
         //  ...this.permanent_address_arr[0],
           ...this.educationForm.value,
           ...this.experienceForm.value,
+          company_id:this.compid,
         };
 
        
@@ -621,7 +627,7 @@ console.log("......IN.......",this.usermailid1);
                 joining_date:this.registerForm.value.Date_of_joining,
                 location:this.registerForm.value.work_location,
                 roll_id:'Employee',
-                designation:'null',
+                designation:this.registerForm.value.designation,
                 company_email_id:this.registerForm.value.official_email,
                 password:this.registerForm.value.password,
                 confirm_password:this.registerForm.value.password,
@@ -630,6 +636,7 @@ console.log("......IN.......",this.usermailid1);
                 personal_email_id:this.registerForm.value.email,
                 created_by:'Admin',
                 company_id:this.compid,
+                department:this.registerForm.value.department
                }
           
           console.log("onboarding......body.......",this.credentialObj);
@@ -687,6 +694,7 @@ console.log("......IN.......",this.usermailid1);
   //..........candidate notes
 
   notes(data: any) {
+    this.clickEventEmail();
     // console.log('notes clicked');
     // console.log(this.editMode);
     const { value, valid } = this.notesForm;
@@ -695,6 +703,7 @@ console.log("......IN.......",this.usermailid1);
     // console.log(valid);
 
     if (valid) {
+      console.log("notes................cid",this.compid);
       if (this.editMode) {
         let note = { add_notes: value.add_notes };
         this.ngxService.start();
@@ -716,6 +725,8 @@ console.log("......IN.......",this.usermailid1);
         let reqBody2 = {
           ...this.notesForm.value,
           email:this.getEmail,
+          company_id:this.compid
+    
         };
         // console.log(reqBody2);
         // console.log(this.email1);
@@ -747,7 +758,7 @@ console.log("......IN.......",this.usermailid1);
 
   Getnotes() {
   
-    this.authService.GetAllNotes(this.getEmail).subscribe(async (result) => {
+    this.authService.GetAllNotesCID(this.getEmail,this.compid).subscribe(async (result) => {
       // console.log(this.getEmail);
 
       this.fetchNotes = result;
@@ -796,6 +807,7 @@ console.log("......IN.......",this.usermailid1);
   this.selectedattach=e.value;
   }
   onChange(event: any) {
+    this.clickEventEmail();
     this.file = event.target.files[0];
 console.log(this.file.type);
 if(this.selectedattach=="Resume")
@@ -899,6 +911,8 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
   // OnClick of button
 
   attachment() {
+    console.log("attachment................cid",this.compid);
+    
     const { value, valid } = this.attachmentForm;
     // console.log('testing', this.attachmentForm.value.email);
     // console.log('testing', this.attachmentForm.value.fileSource);
@@ -908,6 +922,7 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
       // formData.append('profile',this.attachmentForm.get('fileSource').value);
       formData.append('profile', this.attachmentForm.get('fileSource').value);
       formData.append('email',this.getEmail);
+      formData.append('company_id',this.compid);
       // formData.append('select', this.attachmentForm.get('select').value);
       formData.append('document_name',this.selectedattach);
       console.log("formData",formData);
@@ -957,7 +972,7 @@ if(this.selectedattach=="Resignation letter / screenshot of resignation mail sen
 
   GetAttachments() {
    
-    this.authService.GetAllAttachment(this.getEmail).subscribe(async (result) => {
+    this.authService.GetAllAttachmentCid(this.getEmail,this.compid).subscribe(async (result) => {
       console.log(this.getEmail);
       this.fetchAttachment = result.data;
       
@@ -1091,6 +1106,7 @@ console.log(this.stateInfo)
         field_of_study: new FormControl(''),
         date_of_completion: new FormControl(''),
         email: new FormControl(this.getEmail),
+        company_id:new FormControl(this.compid),
       })
     );
 
@@ -1118,6 +1134,7 @@ console.log(this.stateInfo)
         duration: new FormControl(''),
         currently_work_here: new FormControl(''),
         email: new FormControl(this.getEmail),
+        company_id:new FormControl(this.compid),
       })
     );
     // console.log('hii');
@@ -1160,6 +1177,7 @@ console.log(this.stateInfo)
         street_address: new FormControl(''),
         address: new FormControl('same as previous'),
         email: new FormControl(this.getEmail),
+        company_id:new FormControl(this.compid),
       })
     );
 
@@ -1185,7 +1203,7 @@ addpAddress() {
       pStreet_address: new FormControl(''),
      
       pEmail: new FormControl(this.getEmail),
-
+      company_id:new FormControl(this.compid),
     })
   );
 }
@@ -1708,8 +1726,6 @@ this.experience.at(this.indexduration).patchValue({duration:this.date_duration})
 
 notvalid(){
 
-
-
 let valuenotvalid=!this.registerForm.valid && !this.addressForm.valid &&!this.pAddressForm.valid &&!this.experience.value.valid &&!this.education.value.valid;
 
   if(valuenotvalid)
@@ -1725,6 +1741,7 @@ let valuenotvalid=!this.registerForm.valid && !this.addressForm.valid &&!this.pA
  
 }
 
+
   
 get(){
   this.dashServ.getbyIdDocument(this.documenttype).subscribe((data) => {
@@ -1736,11 +1753,10 @@ get(){
 
   }
 
-  clickEventEmail(evnt:any) {
-   let e=evnt.target.value
+  clickEventEmail() {
+  
     this.getEmail = this.registerForm.value.email
-    console.log("event",e);
-    
+   
     console.log(this.getEmail);
     
   }
@@ -1787,6 +1803,16 @@ console.log(this.registerForm.value.official_email);
     });
 
   }
+  getdetailDepartment() {
+    this.dashServ.Department(this.compid).subscribe((data: any): void => {
+      this.alldatadepartment = data;
+
+     ;
+      console.log("getdetail", this.alldatadepartment);
+
+    });
+
+  }
 
 
   getEmployeeName() {
@@ -1807,8 +1833,12 @@ console.log(this.registerForm.value.official_email);
       this.compid = data.data.company_id;
    
       console.log("this.company_id",this.compid);
+      this.getdetailDepartment();
       this.getdetail();
+
       this.getEmployeeName();
+      this.Getnotes();
+      this.GetAttachments();
     })
   }
 }

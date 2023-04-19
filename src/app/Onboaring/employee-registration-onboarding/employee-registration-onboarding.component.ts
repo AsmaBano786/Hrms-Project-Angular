@@ -227,9 +227,9 @@ this.ngxService.start();
           .subscribe(async (result: any) => {
             // console.log(this.registerForm.value);
             console.log('function1', req);
-
+            this.ngxService.stop();
             if (result) {
-              this.ngxService.stop();
+             
               console.log(result);
               console.log(result.message);
 

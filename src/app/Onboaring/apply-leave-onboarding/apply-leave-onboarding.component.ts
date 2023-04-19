@@ -230,9 +230,10 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
   }
 
   deleteleave(ApplyLeaveId: any) {
-
+    this.ngxService.start();
     this.LeaveService.deleteleave(ApplyLeaveId).subscribe(res => {
       console.log("Res", res);
+      this.ngxService.stop();
       alert("Leave Successfully Deleted");
       setTimeout(() => {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate(['/employee-apply-leave']));
@@ -278,7 +279,7 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
         ...this.Applyleave.value,
         company_id:this.compid 
       }
-      // this.ngxService.start();
+      this.ngxService.start();
       // if (confirm("You have applied Leave successfully")) {
       this.dashService.ApplyLeave(req).subscribe(result => {
 
@@ -288,9 +289,9 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
         // });
 
         console.log('test-data', result);
-
+        this.ngxService.stop();
         if (result) {
-
+          
           console.log(result);
 
           console.log(result.message);
@@ -322,7 +323,7 @@ export class ApplyLeaveOnboardingComponent implements OnInit {
 
         // }
         // window.location.reload();
-        // this.ngxService.stop();
+        
       });
       // alert("You have applied Leave successfully")
       // alert("Great, You are Apple Leave successfully");

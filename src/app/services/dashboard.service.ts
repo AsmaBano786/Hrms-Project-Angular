@@ -59,7 +59,13 @@ export class DashboardService {
 
   getEmp_byId(id:any){
     console.log(`${this.apiUrl}/api/v1/getbyid/`+id)
-    return this.http.get(`${this.apiUrl}/api/v1/getbyid/`+id);
+    // console.log(`http://localhost:5000/api/v1/getbyid/`+id);
+    
+    return this.http.get(`${this.apiUrl}/api/v1/getbyid/`+id
+
+    // return this.http.get(`http://localhost:5000/api/v1/getbyid/`+id
+    
+    );
   }
 
   timesheetbyempid(empid: any) {
