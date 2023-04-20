@@ -213,7 +213,7 @@ inum:any;
   Vcountry: any;
   Vstate: any;
   Vcity: any;
-
+  compid:any;
   //.......................................................
   DateofCompletion: any;
   data: any;
@@ -248,6 +248,7 @@ attachmentValid:boolean=false;
     
       for(let i in this.sessiondata){
         this.data= this.sessiondata[i].email;
+        this.compid=this.sessiondata[i].company_id
       }
       this.email1 = this.data;
       console.log("session email",this.data);
@@ -1648,7 +1649,7 @@ this.registerForm.get('source_of_hire').disable()
 
 //api education
 
-this.authService.GetCandidateEducationArray(this.data).subscribe(async (result1) => {
+this.authService.GetCandidateEducationArray(this.data,this.compid).subscribe(async (result1) => {
  
   console.log("education.............",result1);
 let n=result1.length;
@@ -1703,7 +1704,7 @@ if (n) {
 
 });  
 
-this.authService.GetCandidateExperienceArray(this.data).subscribe((result2:any) => {
+this.authService.GetCandidateExperienceArray(this.data,this.compid).subscribe((result2:any) => {
  
   console.log("experience..........",result2);
  
@@ -1764,7 +1765,7 @@ if (n) {
 
 //api
 
-this.authService.GetCandidateEducation(this.data).subscribe(async (result) => {
+this.authService.GetCandidateEducation(this.data,this.compid).subscribe(async (result) => {
  
 console.log("present address",result);
 
@@ -1790,7 +1791,7 @@ for(let i in result){
  } ])
 
 //api 
- this.authService.GetCandidatePcountry(this.data).subscribe(async (Presult) => {
+ this.authService.GetCandidatePcountry(this.data,this.compid).subscribe(async (Presult) => {
  
   console.log("permanent address",Presult);
   

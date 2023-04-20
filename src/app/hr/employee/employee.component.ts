@@ -279,7 +279,6 @@ this.getid=this.sessiondataD1[i].id;
 
 
       
-      this.link(this.CEmail);
      
 
 
@@ -1937,7 +1936,7 @@ console.log("edit active");
 
 getUpdateData()
 {
-  this.authService.GetCandidateDetails(this.CEmail).subscribe((result:any) => {
+  this.authService.GetCandidateDetailsByCid(this.CEmail,this.compid).subscribe((result:any) => {
     this.sessiondata1 = result
       console.log("--------------------------",result);
      
@@ -2016,7 +2015,7 @@ link(eMAIL: any){
   console.log("CEmail",this.CEmail);
 
 //info
-  this.authService.GetCandidateDetails(this.CEmail).subscribe((result:any) => {
+  this.authService.GetCandidateDetailsByCid(this.CEmail,this.compid).subscribe((result:any) => {
       this.candidateDetails=result;
       console.log("--------------------------",this.candidateDetails);
       for(let i in this.candidateDetails){
@@ -2082,7 +2081,7 @@ link(eMAIL: any){
 
 //api education
 
-this.authService.GetCandidateEducationArray(this.CEmail).subscribe(async (result1) => {
+this.authService.GetCandidateEducationArray(this.CEmail,this.compid).subscribe(async (result1) => {
  
   console.log("education.............",result1);
 let n=result1.length;
@@ -2137,7 +2136,7 @@ if (n) {
 
 });  
 
-this.authService.GetCandidateExperienceArray(this.CEmail).subscribe(async (result2) => {
+this.authService.GetCandidateExperienceArray(this.CEmail,this.compid).subscribe(async (result2) => {
  
   console.log("experience..........",result2);
  
@@ -2198,7 +2197,7 @@ if (n) {
 
 //api
 
-this.authService.GetCandidateEducation(this.CEmail).subscribe(async (result) => {
+this.authService.GetCandidateEducation(this.CEmail,this.compid).subscribe(async (result) => {
  
 console.log("present address",result);
 
@@ -2224,7 +2223,7 @@ for(let i in result){
  } ])
 
 //api 
- this.authService.GetCandidatePcountry(this.CEmail).subscribe(async (Presult) => {
+ this.authService.GetCandidatePcountry(this.CEmail,this.compid).subscribe(async (Presult) => {
  
   console.log("permanent address",Presult);
   
@@ -2270,13 +2269,13 @@ this.pAddress.patchValue([{
 // //attachement
 
 
-this.authService.GetAllAttachment(this.CEmail).subscribe(async (result) => {
+this.authService.GetAllAttachmentCid(this.CEmail,this.compid).subscribe(async (result) => {
   console.log("attach........",this.CEmail);
   this.fetchAttachment1 = result;
 });
 // //notes
 
-this.authService.GetAllNotes(this.CEmail).subscribe(async (result) => {
+this.authService.GetAllNotesCID(this.CEmail,this.compid).subscribe(async (result) => {
   // console.log(this.CEmail);
 
   this.fetchNotes1 = result;
@@ -2428,7 +2427,10 @@ notvalid(){
       this.compid = data.data.company_id;
    
       console.log("this.company_id",this.compid);
-      this.getdetail(); 
+      this.getdetail();
+      
+      this.link(this.CEmail);
+    
       this.GetAttachments();
       this.Getnotes();
    

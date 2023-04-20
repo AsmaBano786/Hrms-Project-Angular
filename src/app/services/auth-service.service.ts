@@ -108,14 +108,19 @@ return this.httpClient.put(`${this.apiUrl}/api/v1/notes/`+id,body);
     return this.httpClient.get(`${this.apiUrl2}/employees/`+email);
   }
 
-  GetCandidateEducation(email:any):Observable<any>{
-    console.log("Fetching Candidate education, address and experience details from the server")
-    return this.httpClient.get(`${this.apiUrl2}/Candidate/`+email);
+  GetCandidateDetailsByCid(email:any,company_id:any):Observable<any>{
+    console.log("Fetching Candidate details from the server............patched value")
+    return this.httpClient.get(`${this.apiUrl2}/employees/`+email+`/`+company_id);
   }
 
-  GetCandidatePcountry(email:any):Observable<any>{
+  GetCandidateEducation(email:any,company_id:any):Observable<any>{
+    console.log("Fetching Candidate education, address and experience details from the server")
+    return this.httpClient.get(`${this.apiUrl2}/Candidate/`+email+`/`+company_id);
+  }
+
+  GetCandidatePcountry(email:any,company_id:any):Observable<any>{
     console.log("Fetching Candidate permanent address details from the server")
-    return this.httpClient.get(`${this.apiUrl2}/Candidate/address/`+email);
+    return this.httpClient.get(`${this.apiUrl2}/Candidate/address/`+email+`/`+company_id);
   }
 deleteCandidate(email:any):Observable<any>{
   console.log("deleting details from the server")
@@ -129,14 +134,14 @@ updateCandidate(email:any,body:any){
     }
      
 
-    GetCandidateExperienceArray(email:any):Observable<any>{
+    GetCandidateExperienceArray(email:any,company_id:any):Observable<any>{
       console.log("Fetching Candidate education, address and experience details from the server")
-      return this.httpClient.get(`${this.apiUrl2}/Candidate/experience/`+email);
+      return this.httpClient.get(`${this.apiUrl2}/Candidate/experience/`+email+`/`+company_id);
       // return this.httpClient.get('http://localhost:5000/api/v1/Candidate/experience/'+email);
     }
-    GetCandidateEducationArray(email:any):Observable<any>{
+    GetCandidateEducationArray(email:any,company_id:any):Observable<any>{
       console.log("Fetching Candidate education, address and experience details from the server")
-      return this.httpClient.get(`${this.apiUrl2}/Candidate/education/`+email);
+      return this.httpClient.get(`${this.apiUrl2}/Candidate/education/`+email+`/`+company_id);
       // return this.httpClient.get('http://localhost:5000/api/v1/Candidate/education/'+email);
     }
 
