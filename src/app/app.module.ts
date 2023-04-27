@@ -100,7 +100,7 @@ import { ConfigurePayPeriodViewComponent } from './hr/configure-pay-period/confi
 import { EmpEditApplyLeaveComponent } from './hr/leave/emp-edit-apply-leave/emp-edit-apply-leave.component';
 import { CompanyDetailComponent } from './admin/company-detail/company-detail.component';
 import { CompanyInfoComponent } from './admin/company-info/company-info.component';
-import { SettingComponent } from './Setting/setting/setting.component';
+
 import { UserViewComponent } from './hr/user-view/user-view.component';
 import { ResetPassComponent } from './Onboaring/reset-pass/reset-pass.component';
 import { EditNewLeaveTypeComponent } from './hr/leave/edit-new-leave-type/edit-new-leave-type.component';
@@ -110,6 +110,11 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 import { PortalModule } from '@angular/cdk/portal';
 import { EditUserViewComponent } from './hr/edit-user-view/edit-user-view.component';
+import { ViewSettingComponent } from './setting/view-setting/view-setting.component';
+import { ViewRolesComponent } from './setting/roles/component/view-roles/view-roles.component';
+import { AddRolesComponent } from './setting/roles/component/add-roles/add-roles.component';
+import { EditRolesComponent } from './setting/roles/component/edit-roles/edit-roles.component';
+
 
 @NgModule({
   declarations: [
@@ -203,11 +208,16 @@ UserViewComponent,
     EmpEditApplyLeaveComponent,
     CompanyDetailComponent,
     CompanyInfoComponent,
-    SettingComponent,
+    
     ResetPassComponent,
     EditNewLeaveTypeComponent,
     NewLeaveTypeComponent,
-    EditUserViewComponent
+    EditUserViewComponent,
+    ViewSettingComponent,
+    ViewRolesComponent,
+    AddRolesComponent,
+    EditRolesComponent,
+   
   ],
   imports: [
     CommonModule,

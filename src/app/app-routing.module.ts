@@ -81,11 +81,26 @@ import { ResetPassComponent } from './Onboaring/reset-pass/reset-pass.component'
 import { NewLeaveTypeComponent } from './hr/leave/new-leave-type/new-leave-type.component';
 import { EditNewLeaveTypeComponent } from './hr/leave/edit-new-leave-type/edit-new-leave-type.component';
 import { UserViewComponent } from './hr/user-view/user-view.component';
-import { SettingComponent } from './Setting/setting/setting.component';
+
 import { EditUserViewComponent } from './hr/edit-user-view/edit-user-view.component';
+import { ViewSettingComponent } from './setting/view-setting/view-setting.component';
+import { AddRolesComponent } from './setting/roles/component/add-roles/add-roles.component';
+import { ViewRolesComponent } from './setting/roles/component/view-roles/view-roles.component';
+
 const routes: Routes = [
+
+
   { path: '', redirectTo: 'login-Onboarding', pathMatch: 'full' },
 
+
+  {
+    path: 'roles',
+    component: ViewRolesComponent,
+  },
+  {
+    path: 'add-roles',
+    component: AddRolesComponent,
+  },
   {
     path: 'user-view',
     component: UserViewComponent,
@@ -96,7 +111,7 @@ const routes: Routes = [
   },
   {
     path: 'setting',
-    component: SettingComponent,
+    component: ViewSettingComponent,
   },
   {
 

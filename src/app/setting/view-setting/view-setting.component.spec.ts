@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SettingComponent } from './setting.component';
+import { ViewSettingComponent } from './view-setting.component';
 
-describe('SettingComponent', () => {
-  let component: SettingComponent;
-  let fixture: ComponentFixture<SettingComponent>;
+describe('ViewSettingComponent', () => {
+  let component: ViewSettingComponent;
+  let fixture: ComponentFixture<ViewSettingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SettingComponent ]
+      declarations: [ ViewSettingComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SettingComponent);
+    fixture = TestBed.createComponent(ViewSettingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
