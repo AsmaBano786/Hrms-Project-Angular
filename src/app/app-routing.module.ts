@@ -84,7 +84,6 @@ import { UserViewComponent } from './hr/user-view/user-view.component';
 
 import { EditUserViewComponent } from './hr/edit-user-view/edit-user-view.component';
 import { ViewSettingComponent } from './setting/view-setting/view-setting.component';
-import { AddRolesComponent } from './setting/roles/component/add-roles/add-roles.component';
 import { ViewRolesComponent } from './setting/roles/component/view-roles/view-roles.component';
 
 const routes: Routes = [
@@ -97,10 +96,7 @@ const routes: Routes = [
     path: 'roles',
     component: ViewRolesComponent,
   },
-  {
-    path: 'add-roles',
-    component: AddRolesComponent,
-  },
+  
   {
     path: 'user-view',
     component: UserViewComponent,

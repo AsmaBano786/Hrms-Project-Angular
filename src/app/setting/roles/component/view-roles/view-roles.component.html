@@ -6,6 +6,53 @@
         <!-- end header code here............... -->
         <!-- start leftpanel code here............... -->
         <div><app-left-panel></app-left-panel></div>
+         
+      <div class="container">
+      
+        <button type="button" id="MybtnPreventHTML" [hidden]="true" class="btn btn-primary" data-target="#MymodalPreventHTML" data-toggle="modal" data-backdrop="static" data-keyboard="false" >Open Modal</button>
+        <!-- <button id="MybtnPreventHTML" [hidden]="true" data-toggle="modal" data-target="#MymodalPreventHTML">Open Modal</button> -->
+        <!-- .modal -->
+        <div class="modal fade" id="MymodalPreventHTML">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal">×</button>  -->
+                <h4 class="modal-title">Add Role</h4>                                                             
+              </div> 
+              <div class="modal-body">
+               <form method="post" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <label><strong>Employee<span class="" style="color: red">*</span> </strong></label>
+                </div>
+                <div class="form-group">
+                  <label><strong>Role Name<span class="" style="color: red">*</span> </strong></label>
+                  <input type="text" class="form-control"  name="name"  placeholder="Role Name" formControlName="role_name" id="exampleModal1Label1"  >
+                </div>
+                <div class="form-group">
+                  <label><strong>Designation<span class="" style="color: red">*</span> </strong></label>
+                  <select name="" id="ab" class= "form-select form-control" formControlName="designation">
+                    <option selected value="" disabled [selected]="true">Select Designation </option>
+                    <option value="Director">Director</option>
+                    <option value="HR">HR</option>
+                    <option value="Team Member">Team Member</option>
+                  </select>                </div>
+              <div  class="form-group">
+                <label for="">Description</label>
+                 <textarea class="form-control" placeholder="Description" formControlName="description"></textarea>                </div>
+               
+               
+            <button type="submit" class="btn btn-primary col-md-2 " id="btnsubmit"  > Add</button>
+              <!-- ... -->
+               
+            &nbsp;&nbsp;   <button type="button" id="modalClose"  class="btn btn-default col-md-2 " data-dismiss="modal">Close</button> 
+              </form>
+              </div>
+             
+            </div>                                                                       
+          </div>                                          
+        </div>
+      </div>
+     
       <div class="content-wrapper">
         <div class="content-header">
        
@@ -22,7 +69,7 @@
                     <h5> Create different roles and assign permissions to each role to access organizational data</h5>
                   </div>
                 <div class="form-group col-md-2  ">
-                    <a routerLink="/add-roles" class="btn btn-primary btn-block">Add <i class="fa fa-angle-down"></i></a>
+                    <a (click)="open_popup()" class="btn btn-primary btn-block">Add <i class="fa fa-angle-down"></i></a>
                   </div>
                 </div>
               </div>

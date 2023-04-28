@@ -112,7 +112,6 @@ import { PortalModule } from '@angular/cdk/portal';
 import { EditUserViewComponent } from './hr/edit-user-view/edit-user-view.component';
 import { ViewSettingComponent } from './setting/view-setting/view-setting.component';
 import { ViewRolesComponent } from './setting/roles/component/view-roles/view-roles.component';
-import { AddRolesComponent } from './setting/roles/component/add-roles/add-roles.component';
 import { EditRolesComponent } from './setting/roles/component/edit-roles/edit-roles.component';
 
 
@@ -215,7 +214,6 @@ UserViewComponent,
     EditUserViewComponent,
     ViewSettingComponent,
     ViewRolesComponent,
-    AddRolesComponent,
     EditRolesComponent,
    
   ],
